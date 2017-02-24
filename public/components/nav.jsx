@@ -1,16 +1,19 @@
 import React from 'react';
 
 export default class Nav extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-      item: []
+  constructor(props) {
+    super(props);
+    this.state = {
     };
-	}
-}
+  }
 
-function nav(props) {
-  return <p>{props.item}</p>;
+  render() {
+    return (
+      <ul>
+        <li>HOME</li>
+        <li>MAPS</li>
+        <li>ABOUT</li>
+      </ul>
+    );
+  }
 }
-
-const element = <nav item="About"
