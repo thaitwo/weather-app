@@ -10473,14 +10473,20 @@ var App = function (_React$Component) {
     return _this;
   }
 
-  // Fetching data for weather CONDITIONS from Weather Channel API
+  // _.find(team, (user, index) => user.id === 1);
+
+  // Fetch data for weather CONDITIONS and FORECAST from Weather Channel API
 
 
   _createClass(App, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      // Request data from two APIs simultaneously
       _axios2.default.all([_axios2.default.get(api_url_conditions), _axios2.default.get(api_url_forecast)]).then(_axios2.default.spread(function (conditions, forecast) {
-        this.setState({
+        // Set state for React component with API data
+        _this2.setState({
           city: conditions.data.current_observation.display_location.full,
           condition: conditions.data.current_observation.weather,
           humidity: conditions.data.current_observation.relative_humidity,
@@ -10488,7 +10494,7 @@ var App = function (_React$Component) {
           temp: conditions.data.current_observation.temp_f,
           wind: conditions.data.current_observation.wind_mph
         });
-        console.log(response);
+        console.log(conditions, forecast);
       })).catch(function (error) {
         console.log(error);
       });
@@ -10508,7 +10514,7 @@ var App = function (_React$Component) {
         _react2.default.createElement(
           'p',
           null,
-          'You choose a city. Well forecast.'
+          'You choose a city. We\'ll forecast.'
         ),
         _react2.default.createElement(_weatherCard2.default, {
           city: this.state.city,
