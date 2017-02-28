@@ -8,9 +8,13 @@ class WeatherCard extends React.Component {
   render() {
     return (
       <div>
-        <h2>City: {this.props.city}</h2>
-        <h1>Temperature: {this.props.temp}</h1>
-        <p>{this.props.wind}</p>
+        <h2>{this.props.city}</h2>
+        <p>{this.props.updated_time}</p>
+        <p>{this.props.condition}</p>
+        <p>{this.props.temp}°F</p>
+        <p>Wind {this.props.wind}</p>
+        <p>Humidity {this.props.humidity}</p>
+        <p>Precipitation {this.props.precip}</p>
       </div>
     );
   }

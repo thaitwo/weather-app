@@ -10451,7 +10451,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var api_url = 'http://api.wunderground.com/api/5332856fca0fe1e7/conditions/q/CA/San_Francisco.json';
+var api_url_conditions = 'http://api.wunderground.com/api/5332856fca0fe1e7/conditions/q/CA/San_Francisco.json';
+var api_url_forecast = 'http://api.wunderground.com/api/5332856fca0fe1e7/forecast/q/CA/San_Francisco.json';
 
 var App = function (_React$Component) {
   _inherits(App, _React$Component);
@@ -10463,26 +10464,32 @@ var App = function (_React$Component) {
 
     _this.state = {
       city: '',
-      temp: ''
+      condition: '',
+      humidity: '',
+      precip: '',
+      temp: '',
+      wind: ''
     };
     return _this;
   }
 
-  // Calling Weather Channel API to fetch data
+  // Fetching data for weather CONDITIONS from Weather Channel API
 
 
   _createClass(App, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      _axios2.default.get(api_url).then(function (response) {
-        _this2.setState({
-          city: response.data.current_observation.display_location.city,
-          temp: response.data.current_observation.temp_f
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      _axios2.default.all([_axios2.default.get(api_url_conditions), _axios2.default.get(api_url_forecast)]).then(_axios2.default.spread(function (conditions, forecast) {
+        this.setState({
+          city: conditions.data.current_observation.display_location.full,
+          condition: conditions.data.current_observation.weather,
+          humidity: conditions.data.current_observation.relative_humidity,
+          precip: forecast.data.forecast.simpleforecast.forecastday[0].pop,
+          temp: conditions.data.current_observation.temp_f,
+          wind: conditions.data.current_observation.wind_mph
         });
         console.log(response);
-      }).catch(function (error) {
+      })).catch(function (error) {
         console.log(error);
       });
     }
@@ -10492,15 +10499,25 @@ var App = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(_nav2.default, null),
         _react2.default.createElement(
           'h1',
           null,
-          'Weather Forecast'
+          'weathercast'
         ),
         _react2.default.createElement(_searchBox2.default, null),
-        _react2.default.createElement(_weatherCard2.default, { city: this.state.city, temp: this.state.temp }),
-        _react2.default.createElement(_weatherCard2.default, { city: 'Alameda', temp: '72', wind: '10' })
+        _react2.default.createElement(
+          'p',
+          null,
+          'You choose a city. Well forecast.'
+        ),
+        _react2.default.createElement(_weatherCard2.default, {
+          city: this.state.city,
+          condition: this.state.condition,
+          humidity: this.state.humidity,
+          precip: this.state.precip,
+          temp: this.state.temp,
+          wind: this.state.wind
+        })
       );
     }
   }]);
@@ -11527,19 +11544,41 @@ var WeatherCard = function (_React$Component) {
         _react2.default.createElement(
           'h2',
           null,
-          'City: ',
           this.props.city
-        ),
-        _react2.default.createElement(
-          'h1',
-          null,
-          'Temperature: ',
-          this.props.temp
         ),
         _react2.default.createElement(
           'p',
           null,
+          this.props.updated_time
+        ),
+        _react2.default.createElement(
+          'p',
+          null,
+          this.props.condition
+        ),
+        _react2.default.createElement(
+          'p',
+          null,
+          this.props.temp,
+          '\xB0F'
+        ),
+        _react2.default.createElement(
+          'p',
+          null,
+          'Wind ',
           this.props.wind
+        ),
+        _react2.default.createElement(
+          'p',
+          null,
+          'Humidity ',
+          this.props.humidity
+        ),
+        _react2.default.createElement(
+          'p',
+          null,
+          'Precipitation ',
+          this.props.precip
         )
       );
     }
