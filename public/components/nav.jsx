@@ -1,5 +1,19 @@
-function nav(props) {
-  return <p>{props.item}</p>;
-}
+import React from 'react';
 
-const element = <nav item="About"
+export default class Nav extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+    };
+  }
+
+  render() {
+    return (
+      <ul>
+        <li>HOME</li>
+        <li>MAPS</li>
+        <li>ABOUT</li>
+      </ul>
+    );
+  }
+}

@@ -11,7 +11,6 @@ module.exports = {
     filename: '[name].compile.js',
   },
   resolve: {
-    modulesDirectories: ['node_modules', 'public'],
     extensions: ['.js', '.jsx', '.json']
   },
   devServer: {
