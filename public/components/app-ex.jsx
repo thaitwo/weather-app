@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Nav from './nav';
-import SearchBox from './search-box';
+import SearchBox from './search-bar';
 import WeatherCard from './weather-card';
 
 const api_url_conditions = 'http://api.wunderground.com/api/5332856fca0fe1e7/conditions/q/CA/San_Francisco.json';

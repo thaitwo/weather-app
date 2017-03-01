@@ -11330,86 +11330,7 @@ var Nav = function (_React$Component) {
 exports.default = Nav;
 
 /***/ }),
-/* 113 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(27);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactPlacesAutocomplete = __webpack_require__(271);
-
-var _reactPlacesAutocomplete2 = _interopRequireDefault(_reactPlacesAutocomplete);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-// Search box for users to input city
-var SearchBox = function (_React$Component) {
-  _inherits(SearchBox, _React$Component);
-
-  function SearchBox(props) {
-    _classCallCheck(this, SearchBox);
-
-    var _this = _possibleConstructorReturn(this, (SearchBox.__proto__ || Object.getPrototypeOf(SearchBox)).call(this, props));
-
-    _this.state = { search: '' };
-    _this.onChange = function (search) {
-      return _this.setState({ search: search });
-    };
-    return _this;
-  }
-
-  // handleFormSubmit = (event) => {
-  //   event.preventDefault()
-  //   const { search } = this.state
-
-  //   geocodeByAddress(search,  (err, { lat, lng }) => {
-  //     if (err) { console.log('Oh no!', err) }
-
-  //     console.log(`Yay! got latitude and longitude for ${search}`, { lat, lng })
-  //   })
-  // }
-
-  _createClass(SearchBox, [{
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'form',
-        { onSubmit: this.handleFormSubmit },
-        _react2.default.createElement(_reactPlacesAutocomplete2.default, {
-          value: this.state.search,
-          onChange: this.onChange
-        }),
-        _react2.default.createElement(
-          'button',
-          { type: 'submit' },
-          'Submit'
-        )
-      );
-    }
-  }]);
-
-  return SearchBox;
-}(_react2.default.Component);
-
-exports.default = SearchBox;
-
-/***/ }),
+/* 113 */,
 /* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23748,9 +23669,9 @@ var _appEx = __webpack_require__(268);
 
 var _appEx2 = _interopRequireDefault(_appEx);
 
-var _reactGeosuggest = __webpack_require__(276);
+var _searchBar = __webpack_require__(285);
 
-var _reactGeosuggest2 = _interopRequireDefault(_reactGeosuggest);
+var _searchBar2 = _interopRequireDefault(_searchBar);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23810,11 +23731,13 @@ var Home = function (_React$Component2) {
         _react2.default.createElement(
           'h1',
           null,
-          'weathercast'
+          _react2.default.createElement(
+            _reactRouter.Link,
+            { to: '/' },
+            'weathercast'
+          )
         ),
-        _react2.default.createElement(_reactGeosuggest2.default, {
-          queryDelay: '100',
-          placeholder: 'Search city' }),
+        _react2.default.createElement(_searchBar2.default, null),
         _react2.default.createElement(
           'p',
           null,
@@ -28803,9 +28726,9 @@ var _nav = __webpack_require__(112);
 
 var _nav2 = _interopRequireDefault(_nav);
 
-var _searchBox = __webpack_require__(113);
+var _searchBar = __webpack_require__(285);
 
-var _searchBox2 = _interopRequireDefault(_searchBox);
+var _searchBar2 = _interopRequireDefault(_searchBar);
 
 var _weatherCard = __webpack_require__(114);
 
@@ -28878,7 +28801,7 @@ var Appp = function (_React$Component) {
           null,
           'weathercast'
         ),
-        _react2.default.createElement(_searchBox2.default, null),
+        _react2.default.createElement(_searchBar2.default, null),
         _react2.default.createElement(
           'p',
           null,
@@ -28902,470 +28825,10 @@ var Appp = function (_React$Component) {
 exports.default = Appp;
 
 /***/ }),
-/* 269 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(27);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _defaultStyles = __webpack_require__(270);
-
-var _defaultStyles2 = _interopRequireDefault(_defaultStyles);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /*
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * Copyright (c) 2017 Ken Hibino.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * Licensed under the MIT License (MIT).
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * See https://kenny-hibino.github.io/react-places-autocomplete
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
-
-var PlacesAutocomplete = function (_React$Component) {
-  _inherits(PlacesAutocomplete, _React$Component);
-
-  function PlacesAutocomplete(props) {
-    _classCallCheck(this, PlacesAutocomplete);
-
-    var _this = _possibleConstructorReturn(this, (PlacesAutocomplete.__proto__ || Object.getPrototypeOf(PlacesAutocomplete)).call(this, props));
-
-    _this.state = { autocompleteItems: [] };
-
-    _this.autocompleteCallback = _this.autocompleteCallback.bind(_this);
-    _this.handleInputKeyDown = _this.handleInputKeyDown.bind(_this);
-    _this.handleInputChange = _this.handleInputChange.bind(_this);
-    return _this;
-  }
-
-  _createClass(PlacesAutocomplete, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.autocompleteService = new google.maps.places.AutocompleteService();
-      this.autocompleteOK = google.maps.places.PlacesServiceStatus.OK;
-    }
-  }, {
-    key: 'autocompleteCallback',
-    value: function autocompleteCallback(predictions, status) {
-      var _this2 = this;
-
-      if (status != this.autocompleteOK) {
-        this.props.onError(status);
-        if (this.props.clearItemsOnError) {
-          this.clearAutocomplete();
-        }
-        return;
-      }
-
-      this.setState({
-        autocompleteItems: predictions.map(function (p, idx) {
-          return {
-            suggestion: p.description,
-            placeId: p.place_id,
-            active: false,
-            index: idx,
-            formattedSuggestion: _this2._formattedSuggestion(p.structured_formatting)
-          };
-        })
-      });
-    }
-  }, {
-    key: '_formattedSuggestion',
-    value: function _formattedSuggestion(structured_formatting) {
-      return { mainText: structured_formatting.main_text, secondaryText: structured_formatting.secondary_text };
-    }
-  }, {
-    key: 'clearAutocomplete',
-    value: function clearAutocomplete() {
-      this.setState({ autocompleteItems: [] });
-    }
-  }, {
-    key: 'selectAddress',
-    value: function selectAddress(address, placeId) {
-      this.clearAutocomplete();
-      this._handleSelect(address, placeId);
-    }
-  }, {
-    key: '_handleSelect',
-    value: function _handleSelect(address, placeId) {
-      this.props.onSelect ? this.props.onSelect(address, placeId) : this.props.onChange(address);
-    }
-  }, {
-    key: '_getActiveItem',
-    value: function _getActiveItem() {
-      return this.state.autocompleteItems.find(function (item) {
-        return item.active;
-      });
-    }
-  }, {
-    key: '_selectActiveItemAtIndex',
-    value: function _selectActiveItemAtIndex(index) {
-      var activeName = this.state.autocompleteItems.find(function (item) {
-        return item.index === index;
-      }).suggestion;
-      this._setActiveItemAtIndex(index);
-      this.props.onChange(activeName);
-    }
-  }, {
-    key: '_handleEnterKey',
-    value: function _handleEnterKey() {
-      var activeItem = this._getActiveItem();
-      if (activeItem === undefined) {
-        this._handleEnterKeyWithoutActiveItem();
-      } else {
-        this.selectAddress(activeItem.suggestion, activeItem.placeId);
-      }
-    }
-  }, {
-    key: '_handleEnterKeyWithoutActiveItem',
-    value: function _handleEnterKeyWithoutActiveItem() {
-      if (this.props.onEnterKeyDown) {
-        this.props.onEnterKeyDown(this.props.value);
-        this.clearAutocomplete();
-      } else {
-        return; //noop
-      }
-    }
-  }, {
-    key: '_handleDownKey',
-    value: function _handleDownKey() {
-      var activeItem = this._getActiveItem();
-      if (activeItem === undefined) {
-        this._selectActiveItemAtIndex(0);
-      } else {
-        var nextIndex = (activeItem.index + 1) % this.state.autocompleteItems.length;
-        this._selectActiveItemAtIndex(nextIndex);
-      }
-    }
-  }, {
-    key: '_handleUpKey',
-    value: function _handleUpKey() {
-      var activeItem = this._getActiveItem();
-      if (activeItem === undefined) {
-        this._selectActiveItemAtIndex(this.state.autocompleteItems.length - 1);
-      } else {
-        var prevIndex = void 0;
-        if (activeItem.index === 0) {
-          prevIndex = this.state.autocompleteItems.length - 1;
-        } else {
-          prevIndex = (activeItem.index - 1) % this.state.autocompleteItems.length;
-        }
-        this._selectActiveItemAtIndex(prevIndex);
-      }
-    }
-  }, {
-    key: 'handleInputKeyDown',
-    value: function handleInputKeyDown(event) {
-      var ARROW_UP = 38;
-      var ARROW_DOWN = 40;
-      var ENTER_KEY = 13;
-      var ESC_KEY = 27;
-
-      switch (event.keyCode) {
-        case ENTER_KEY:
-          event.preventDefault();
-          this._handleEnterKey();
-          break;
-        case ARROW_DOWN:
-          this._handleDownKey();
-          break;
-        case ARROW_UP:
-          this._handleUpKey();
-          break;
-        case ESC_KEY:
-          this.clearAutocomplete();
-          break;
-      }
-    }
-  }, {
-    key: '_setActiveItemAtIndex',
-    value: function _setActiveItemAtIndex(index) {
-      this.setState({
-        autocompleteItems: this.state.autocompleteItems.map(function (item, idx) {
-          if (idx === index) {
-            return _extends({}, item, { active: true });
-          } else {
-            return _extends({}, item, { active: false });
-          }
-        })
-      });
-    }
-  }, {
-    key: 'handleInputChange',
-    value: function handleInputChange(event) {
-      this.props.onChange(event.target.value);
-      if (!event.target.value) {
-        this.clearAutocomplete();
-        return;
-      }
-      this.autocompleteService.getPlacePredictions(_extends({}, this.props.options, { input: event.target.value }), this.autocompleteCallback);
-    }
-  }, {
-    key: 'autocompleteItemStyle',
-    value: function autocompleteItemStyle(active) {
-      if (active) {
-        return _extends({}, _defaultStyles2.default.autocompleteItemActive, this.props.styles.autocompleteItemActive);
-      } else {
-        return {};
-      }
-    }
-  }, {
-    key: 'renderAutocomplete',
-    value: function renderAutocomplete() {
-      var _this3 = this;
-
-      var autocompleteItems = this.state.autocompleteItems;
-      var styles = this.props.styles;
-
-      if (autocompleteItems.length === 0) {
-        return null;
-      }
-      return _react2.default.createElement(
-        'div',
-        {
-          id: 'PlacesAutocomplete__autocomplete-container',
-          className: this.props.classNames.autocompleteContainer || '',
-          style: _extends({}, _defaultStyles2.default.autocompleteContainer, styles.autocompleteContainer) },
-        autocompleteItems.map(function (p, idx) {
-          return _react2.default.createElement(
-            'div',
-            {
-              key: p.placeId,
-              onMouseOver: function onMouseOver() {
-                return _this3._setActiveItemAtIndex(p.index);
-              },
-              onMouseDown: function onMouseDown() {
-                return _this3.selectAddress(p.suggestion, p.placeId);
-              },
-              style: _extends({}, _defaultStyles2.default.autocompleteItem, styles.autocompleteItem, _this3.autocompleteItemStyle(p.active)) },
-            _this3.props.autocompleteItem({ suggestion: p.suggestion, formattedSuggestion: p.formattedSuggestion })
-          );
-        })
-      );
-    }
-  }, {
-    key: 'renderInput',
-    value: function renderInput() {
-      var _this4 = this;
-
-      var _props = this.props,
-          classNames = _props.classNames,
-          placeholder = _props.placeholder,
-          styles = _props.styles,
-          value = _props.value,
-          autoFocus = _props.autoFocus;
-
-      return _react2.default.createElement('input', {
-        type: 'text',
-        placeholder: placeholder,
-        className: classNames.input || '',
-        value: value,
-        onChange: this.handleInputChange,
-        onKeyDown: this.handleInputKeyDown,
-        onBlur: function onBlur() {
-          return _this4.clearAutocomplete();
-        },
-        style: styles.input,
-        autoFocus: autoFocus
-      });
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _props2 = this.props,
-          classNames = _props2.classNames,
-          styles = _props2.styles;
-
-      return _react2.default.createElement(
-        'div',
-        {
-          style: _extends({}, _defaultStyles2.default.root, styles.root),
-          className: classNames.root || '' },
-        this.renderInput(),
-        this.renderAutocomplete()
-      );
-    }
-  }]);
-
-  return PlacesAutocomplete;
-}(_react2.default.Component);
-
-PlacesAutocomplete.propTypes = {
-  value: _react2.default.PropTypes.string.isRequired,
-  onChange: _react2.default.PropTypes.func.isRequired,
-  onError: _react2.default.PropTypes.func,
-  clearItemsOnError: _react2.default.PropTypes.bool,
-  onSelect: _react2.default.PropTypes.func,
-  placeholder: _react2.default.PropTypes.string,
-  autoFocus: _react2.default.PropTypes.bool,
-  autocompleteItem: _react2.default.PropTypes.func,
-  classNames: _react2.default.PropTypes.shape({
-    root: _react2.default.PropTypes.string,
-    input: _react2.default.PropTypes.string,
-    autocompleteContainer: _react2.default.PropTypes.string
-  }),
-  styles: _react2.default.PropTypes.shape({
-    root: _react2.default.PropTypes.object,
-    input: _react2.default.PropTypes.object,
-    autocompleteContainer: _react2.default.PropTypes.object,
-    autocompleteItem: _react2.default.PropTypes.object,
-    autocompleteItemActive: _react2.default.PropTypes.object
-  }),
-  options: _react2.default.PropTypes.shape({
-    bounds: _react2.default.PropTypes.object,
-    componentRestrictions: _react2.default.PropTypes.object,
-    location: _react2.default.PropTypes.object,
-    offset: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.number, _react2.default.PropTypes.string]),
-    radius: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.number, _react2.default.PropTypes.string]),
-    types: _react2.default.PropTypes.array
-  })
-};
-
-PlacesAutocomplete.defaultProps = {
-  clearItemsOnError: false,
-  onError: function onError(status) {
-    return console.error('[react-places-autocomplete]: error happened when fetching data from Google Maps API.\nPlease check the docs here (https://developers.google.com/maps/documentation/javascript/places#place_details_responses)\nStatus: ', status);
-  },
-  placeholder: 'Address',
-  autoFocus: false,
-  classNames: {},
-  autocompleteItem: function autocompleteItem(_ref) {
-    var suggestion = _ref.suggestion;
-    return _react2.default.createElement(
-      'div',
-      null,
-      suggestion
-    );
-  },
-  styles: {},
-  options: {}
-};
-
-exports.default = PlacesAutocomplete;
-
-/***/ }),
-/* 270 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var defaultStyles = {
-  root: {
-    position: 'relative',
-    paddingBottom: '0px'
-  },
-  autocompleteContainer: {
-    position: 'absolute',
-    top: '100%',
-    backgroundColor: 'white',
-    border: '1px solid #555',
-    width: '100%',
-    zIndex: 9999
-  },
-  autocompleteItem: {
-    backgroundColor: '#ffffff',
-    padding: '10px',
-    color: '#555',
-    cursor: 'pointer'
-  },
-  autocompleteItemActive: {
-    backgroundColor: '#fafafa'
-  }
-};
-
-exports.default = defaultStyles;
-
-/***/ }),
-/* 271 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.geocodeByPlaceId = exports.geocodeByAddress = undefined;
-
-var _PlacesAutocomplete = __webpack_require__(269);
-
-var _PlacesAutocomplete2 = _interopRequireDefault(_PlacesAutocomplete);
-
-var _utils = __webpack_require__(272);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.geocodeByAddress = _utils.geocodeByAddress;
-exports.geocodeByPlaceId = _utils.geocodeByPlaceId;
-exports.default = _PlacesAutocomplete2.default;
-
-/***/ }),
-/* 272 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var geocodeByAddress = exports.geocodeByAddress = function geocodeByAddress(address, callback) {
-  var geocoder = new google.maps.Geocoder();
-  var OK = google.maps.GeocoderStatus.OK;
-
-  geocoder.geocode({ address: address }, function (results, status) {
-    if (status !== OK) {
-      callback({ status: status }, null, results);
-      return;
-    }
-
-    var latLng = {
-      lat: results[0].geometry.location.lat(),
-      lng: results[0].geometry.location.lng()
-    };
-
-    callback(null, latLng, results);
-  });
-};
-
-var geocodeByPlaceId = exports.geocodeByPlaceId = function geocodeByPlaceId(placeId, callback) {
-  var geocoder = new google.maps.Geocoder();
-  var OK = google.maps.GeocoderStatus.OK;
-
-  geocoder.geocode({ placeId: placeId }, function (results, status) {
-    if (status !== OK) {
-      callback({ status: status }, null, null);
-      return;
-    }
-
-    var latLng = {
-      lat: results[0].geometry.location.lat(),
-      lng: results[0].geometry.location.lng()
-    };
-
-    callback(null, latLng, results);
-  });
-};
-
-/***/ }),
+/* 269 */,
+/* 270 */,
+/* 271 */,
+/* 272 */,
 /* 273 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -31105,6 +30568,93 @@ try {
 
 module.exports = g;
 
+
+/***/ }),
+/* 285 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(27);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactGeosuggest = __webpack_require__(276);
+
+var _reactGeosuggest2 = _interopRequireDefault(_reactGeosuggest);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+// Search box for users to input city
+var SearchBar = function (_React$Component) {
+  _inherits(SearchBar, _React$Component);
+
+  function SearchBar(props) {
+    _classCallCheck(this, SearchBar);
+
+    var _this = _possibleConstructorReturn(this, (SearchBar.__proto__ || Object.getPrototypeOf(SearchBar)).call(this, props));
+
+    _this.state = { city: '' };
+
+    _this.handleSubmit = _this.handleSubmit.bind(_this);
+    return _this;
+  }
+
+  _createClass(SearchBar, [{
+    key: 'handleSubmit',
+    value: function handleSubmit(event) {
+      alert('City: ' + this.state.city);
+      event.preventDefault();
+    }
+  }, {
+    key: 'handKeyPress',
+    value: function handKeyPress(event) {
+      if (event.key = 'Enter') {
+        this.handleSubmit;
+      }
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'form',
+        { onSubmit: this.handleSubmit },
+        _react2.default.createElement(_reactGeosuggest2.default, {
+          placeholder: 'Search city',
+          types: ['(cities)'],
+          value: this.state.city,
+          onKeyPress: this.handleKeyPress,
+          onChange: this.handleChange,
+          onSuggestSelect: this.onSuggestSelect.bind(this)
+        }),
+        _react2.default.createElement('input', { type: 'submit', value: 'Search' })
+      );
+    }
+  }, {
+    key: 'onSuggestSelect',
+    value: function onSuggestSelect(suggest) {
+      console.log(suggest.label);
+      this.setState({ city: suggest.label });
+    }
+  }]);
+
+  return SearchBar;
+}(_react2.default.Component);
+
+exports.default = SearchBar;
 
 /***/ })
 /******/ ]);

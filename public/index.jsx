@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Router, Route, IndexRoute, Link, browserHistory } from 'react-router';
 import Appp from './components/app-ex';
-import Geosuggest from 'react-geosuggest';
+import SearchBar from './components/search-bar';
 
 class App extends React.Component {
   render() {
@@ -19,10 +19,8 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        <h1>weathercast</h1>
-        <Geosuggest
-        queryDelay="100"
-        placeholder="Search city" />
+        <h1><Link to="/">weathercast</Link></h1>
+        <SearchBar />
         <p>You choose the city. We forecast.</p>
       </div>
     )
