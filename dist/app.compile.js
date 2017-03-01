@@ -11346,6 +11346,10 @@ var _react = __webpack_require__(27);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactPlacesAutocomplete = __webpack_require__(271);
+
+var _reactPlacesAutocomplete2 = _interopRequireDefault(_reactPlacesAutocomplete);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11358,23 +11362,43 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var SearchBox = function (_React$Component) {
   _inherits(SearchBox, _React$Component);
 
-  function SearchBox() {
+  function SearchBox(props) {
     _classCallCheck(this, SearchBox);
 
-    return _possibleConstructorReturn(this, (SearchBox.__proto__ || Object.getPrototypeOf(SearchBox)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (SearchBox.__proto__ || Object.getPrototypeOf(SearchBox)).call(this, props));
+
+    _this.state = { search: '' };
+    _this.onChange = function (search) {
+      return _this.setState({ search: search });
+    };
+    return _this;
   }
 
+  // handleFormSubmit = (event) => {
+  //   event.preventDefault()
+  //   const { search } = this.state
+
+  //   geocodeByAddress(search,  (err, { lat, lng }) => {
+  //     if (err) { console.log('Oh no!', err) }
+
+  //     console.log(`Yay! got latitude and longitude for ${search}`, { lat, lng })
+  //   })
+  // }
+
   _createClass(SearchBox, [{
-    key: "render",
+    key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        "form",
-        null,
-        _react2.default.createElement("input", { type: "text", placeholder: "Search City" }),
+        'form',
+        { onSubmit: this.handleFormSubmit },
+        _react2.default.createElement(_reactPlacesAutocomplete2.default, {
+          value: this.state.search,
+          onChange: this.onChange
+        }),
         _react2.default.createElement(
-          "button",
-          null,
-          "Search"
+          'button',
+          { type: 'submit' },
+          'Submit'
         )
       );
     }
@@ -23724,6 +23748,10 @@ var _appEx = __webpack_require__(268);
 
 var _appEx2 = _interopRequireDefault(_appEx);
 
+var _reactGeosuggest = __webpack_require__(276);
+
+var _reactGeosuggest2 = _interopRequireDefault(_reactGeosuggest);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -23784,16 +23812,9 @@ var Home = function (_React$Component2) {
           null,
           'weathercast'
         ),
-        _react2.default.createElement(
-          'form',
-          null,
-          _react2.default.createElement('input', { type: 'text', placeholder: 'Search City' }),
-          _react2.default.createElement(
-            'button',
-            null,
-            'Search'
-          )
-        ),
+        _react2.default.createElement(_reactGeosuggest2.default, {
+          queryDelay: '100',
+          placeholder: 'Search city' }),
         _react2.default.createElement(
           'p',
           null,
@@ -28879,6 +28900,2211 @@ var Appp = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = Appp;
+
+/***/ }),
+/* 269 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(27);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _defaultStyles = __webpack_require__(270);
+
+var _defaultStyles2 = _interopRequireDefault(_defaultStyles);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /*
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * Copyright (c) 2017 Ken Hibino.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * Licensed under the MIT License (MIT).
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * See https://kenny-hibino.github.io/react-places-autocomplete
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
+
+var PlacesAutocomplete = function (_React$Component) {
+  _inherits(PlacesAutocomplete, _React$Component);
+
+  function PlacesAutocomplete(props) {
+    _classCallCheck(this, PlacesAutocomplete);
+
+    var _this = _possibleConstructorReturn(this, (PlacesAutocomplete.__proto__ || Object.getPrototypeOf(PlacesAutocomplete)).call(this, props));
+
+    _this.state = { autocompleteItems: [] };
+
+    _this.autocompleteCallback = _this.autocompleteCallback.bind(_this);
+    _this.handleInputKeyDown = _this.handleInputKeyDown.bind(_this);
+    _this.handleInputChange = _this.handleInputChange.bind(_this);
+    return _this;
+  }
+
+  _createClass(PlacesAutocomplete, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.autocompleteService = new google.maps.places.AutocompleteService();
+      this.autocompleteOK = google.maps.places.PlacesServiceStatus.OK;
+    }
+  }, {
+    key: 'autocompleteCallback',
+    value: function autocompleteCallback(predictions, status) {
+      var _this2 = this;
+
+      if (status != this.autocompleteOK) {
+        this.props.onError(status);
+        if (this.props.clearItemsOnError) {
+          this.clearAutocomplete();
+        }
+        return;
+      }
+
+      this.setState({
+        autocompleteItems: predictions.map(function (p, idx) {
+          return {
+            suggestion: p.description,
+            placeId: p.place_id,
+            active: false,
+            index: idx,
+            formattedSuggestion: _this2._formattedSuggestion(p.structured_formatting)
+          };
+        })
+      });
+    }
+  }, {
+    key: '_formattedSuggestion',
+    value: function _formattedSuggestion(structured_formatting) {
+      return { mainText: structured_formatting.main_text, secondaryText: structured_formatting.secondary_text };
+    }
+  }, {
+    key: 'clearAutocomplete',
+    value: function clearAutocomplete() {
+      this.setState({ autocompleteItems: [] });
+    }
+  }, {
+    key: 'selectAddress',
+    value: function selectAddress(address, placeId) {
+      this.clearAutocomplete();
+      this._handleSelect(address, placeId);
+    }
+  }, {
+    key: '_handleSelect',
+    value: function _handleSelect(address, placeId) {
+      this.props.onSelect ? this.props.onSelect(address, placeId) : this.props.onChange(address);
+    }
+  }, {
+    key: '_getActiveItem',
+    value: function _getActiveItem() {
+      return this.state.autocompleteItems.find(function (item) {
+        return item.active;
+      });
+    }
+  }, {
+    key: '_selectActiveItemAtIndex',
+    value: function _selectActiveItemAtIndex(index) {
+      var activeName = this.state.autocompleteItems.find(function (item) {
+        return item.index === index;
+      }).suggestion;
+      this._setActiveItemAtIndex(index);
+      this.props.onChange(activeName);
+    }
+  }, {
+    key: '_handleEnterKey',
+    value: function _handleEnterKey() {
+      var activeItem = this._getActiveItem();
+      if (activeItem === undefined) {
+        this._handleEnterKeyWithoutActiveItem();
+      } else {
+        this.selectAddress(activeItem.suggestion, activeItem.placeId);
+      }
+    }
+  }, {
+    key: '_handleEnterKeyWithoutActiveItem',
+    value: function _handleEnterKeyWithoutActiveItem() {
+      if (this.props.onEnterKeyDown) {
+        this.props.onEnterKeyDown(this.props.value);
+        this.clearAutocomplete();
+      } else {
+        return; //noop
+      }
+    }
+  }, {
+    key: '_handleDownKey',
+    value: function _handleDownKey() {
+      var activeItem = this._getActiveItem();
+      if (activeItem === undefined) {
+        this._selectActiveItemAtIndex(0);
+      } else {
+        var nextIndex = (activeItem.index + 1) % this.state.autocompleteItems.length;
+        this._selectActiveItemAtIndex(nextIndex);
+      }
+    }
+  }, {
+    key: '_handleUpKey',
+    value: function _handleUpKey() {
+      var activeItem = this._getActiveItem();
+      if (activeItem === undefined) {
+        this._selectActiveItemAtIndex(this.state.autocompleteItems.length - 1);
+      } else {
+        var prevIndex = void 0;
+        if (activeItem.index === 0) {
+          prevIndex = this.state.autocompleteItems.length - 1;
+        } else {
+          prevIndex = (activeItem.index - 1) % this.state.autocompleteItems.length;
+        }
+        this._selectActiveItemAtIndex(prevIndex);
+      }
+    }
+  }, {
+    key: 'handleInputKeyDown',
+    value: function handleInputKeyDown(event) {
+      var ARROW_UP = 38;
+      var ARROW_DOWN = 40;
+      var ENTER_KEY = 13;
+      var ESC_KEY = 27;
+
+      switch (event.keyCode) {
+        case ENTER_KEY:
+          event.preventDefault();
+          this._handleEnterKey();
+          break;
+        case ARROW_DOWN:
+          this._handleDownKey();
+          break;
+        case ARROW_UP:
+          this._handleUpKey();
+          break;
+        case ESC_KEY:
+          this.clearAutocomplete();
+          break;
+      }
+    }
+  }, {
+    key: '_setActiveItemAtIndex',
+    value: function _setActiveItemAtIndex(index) {
+      this.setState({
+        autocompleteItems: this.state.autocompleteItems.map(function (item, idx) {
+          if (idx === index) {
+            return _extends({}, item, { active: true });
+          } else {
+            return _extends({}, item, { active: false });
+          }
+        })
+      });
+    }
+  }, {
+    key: 'handleInputChange',
+    value: function handleInputChange(event) {
+      this.props.onChange(event.target.value);
+      if (!event.target.value) {
+        this.clearAutocomplete();
+        return;
+      }
+      this.autocompleteService.getPlacePredictions(_extends({}, this.props.options, { input: event.target.value }), this.autocompleteCallback);
+    }
+  }, {
+    key: 'autocompleteItemStyle',
+    value: function autocompleteItemStyle(active) {
+      if (active) {
+        return _extends({}, _defaultStyles2.default.autocompleteItemActive, this.props.styles.autocompleteItemActive);
+      } else {
+        return {};
+      }
+    }
+  }, {
+    key: 'renderAutocomplete',
+    value: function renderAutocomplete() {
+      var _this3 = this;
+
+      var autocompleteItems = this.state.autocompleteItems;
+      var styles = this.props.styles;
+
+      if (autocompleteItems.length === 0) {
+        return null;
+      }
+      return _react2.default.createElement(
+        'div',
+        {
+          id: 'PlacesAutocomplete__autocomplete-container',
+          className: this.props.classNames.autocompleteContainer || '',
+          style: _extends({}, _defaultStyles2.default.autocompleteContainer, styles.autocompleteContainer) },
+        autocompleteItems.map(function (p, idx) {
+          return _react2.default.createElement(
+            'div',
+            {
+              key: p.placeId,
+              onMouseOver: function onMouseOver() {
+                return _this3._setActiveItemAtIndex(p.index);
+              },
+              onMouseDown: function onMouseDown() {
+                return _this3.selectAddress(p.suggestion, p.placeId);
+              },
+              style: _extends({}, _defaultStyles2.default.autocompleteItem, styles.autocompleteItem, _this3.autocompleteItemStyle(p.active)) },
+            _this3.props.autocompleteItem({ suggestion: p.suggestion, formattedSuggestion: p.formattedSuggestion })
+          );
+        })
+      );
+    }
+  }, {
+    key: 'renderInput',
+    value: function renderInput() {
+      var _this4 = this;
+
+      var _props = this.props,
+          classNames = _props.classNames,
+          placeholder = _props.placeholder,
+          styles = _props.styles,
+          value = _props.value,
+          autoFocus = _props.autoFocus;
+
+      return _react2.default.createElement('input', {
+        type: 'text',
+        placeholder: placeholder,
+        className: classNames.input || '',
+        value: value,
+        onChange: this.handleInputChange,
+        onKeyDown: this.handleInputKeyDown,
+        onBlur: function onBlur() {
+          return _this4.clearAutocomplete();
+        },
+        style: styles.input,
+        autoFocus: autoFocus
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _props2 = this.props,
+          classNames = _props2.classNames,
+          styles = _props2.styles;
+
+      return _react2.default.createElement(
+        'div',
+        {
+          style: _extends({}, _defaultStyles2.default.root, styles.root),
+          className: classNames.root || '' },
+        this.renderInput(),
+        this.renderAutocomplete()
+      );
+    }
+  }]);
+
+  return PlacesAutocomplete;
+}(_react2.default.Component);
+
+PlacesAutocomplete.propTypes = {
+  value: _react2.default.PropTypes.string.isRequired,
+  onChange: _react2.default.PropTypes.func.isRequired,
+  onError: _react2.default.PropTypes.func,
+  clearItemsOnError: _react2.default.PropTypes.bool,
+  onSelect: _react2.default.PropTypes.func,
+  placeholder: _react2.default.PropTypes.string,
+  autoFocus: _react2.default.PropTypes.bool,
+  autocompleteItem: _react2.default.PropTypes.func,
+  classNames: _react2.default.PropTypes.shape({
+    root: _react2.default.PropTypes.string,
+    input: _react2.default.PropTypes.string,
+    autocompleteContainer: _react2.default.PropTypes.string
+  }),
+  styles: _react2.default.PropTypes.shape({
+    root: _react2.default.PropTypes.object,
+    input: _react2.default.PropTypes.object,
+    autocompleteContainer: _react2.default.PropTypes.object,
+    autocompleteItem: _react2.default.PropTypes.object,
+    autocompleteItemActive: _react2.default.PropTypes.object
+  }),
+  options: _react2.default.PropTypes.shape({
+    bounds: _react2.default.PropTypes.object,
+    componentRestrictions: _react2.default.PropTypes.object,
+    location: _react2.default.PropTypes.object,
+    offset: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.number, _react2.default.PropTypes.string]),
+    radius: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.number, _react2.default.PropTypes.string]),
+    types: _react2.default.PropTypes.array
+  })
+};
+
+PlacesAutocomplete.defaultProps = {
+  clearItemsOnError: false,
+  onError: function onError(status) {
+    return console.error('[react-places-autocomplete]: error happened when fetching data from Google Maps API.\nPlease check the docs here (https://developers.google.com/maps/documentation/javascript/places#place_details_responses)\nStatus: ', status);
+  },
+  placeholder: 'Address',
+  autoFocus: false,
+  classNames: {},
+  autocompleteItem: function autocompleteItem(_ref) {
+    var suggestion = _ref.suggestion;
+    return _react2.default.createElement(
+      'div',
+      null,
+      suggestion
+    );
+  },
+  styles: {},
+  options: {}
+};
+
+exports.default = PlacesAutocomplete;
+
+/***/ }),
+/* 270 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var defaultStyles = {
+  root: {
+    position: 'relative',
+    paddingBottom: '0px'
+  },
+  autocompleteContainer: {
+    position: 'absolute',
+    top: '100%',
+    backgroundColor: 'white',
+    border: '1px solid #555',
+    width: '100%',
+    zIndex: 9999
+  },
+  autocompleteItem: {
+    backgroundColor: '#ffffff',
+    padding: '10px',
+    color: '#555',
+    cursor: 'pointer'
+  },
+  autocompleteItemActive: {
+    backgroundColor: '#fafafa'
+  }
+};
+
+exports.default = defaultStyles;
+
+/***/ }),
+/* 271 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.geocodeByPlaceId = exports.geocodeByAddress = undefined;
+
+var _PlacesAutocomplete = __webpack_require__(269);
+
+var _PlacesAutocomplete2 = _interopRequireDefault(_PlacesAutocomplete);
+
+var _utils = __webpack_require__(272);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.geocodeByAddress = _utils.geocodeByAddress;
+exports.geocodeByPlaceId = _utils.geocodeByPlaceId;
+exports.default = _PlacesAutocomplete2.default;
+
+/***/ }),
+/* 272 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var geocodeByAddress = exports.geocodeByAddress = function geocodeByAddress(address, callback) {
+  var geocoder = new google.maps.Geocoder();
+  var OK = google.maps.GeocoderStatus.OK;
+
+  geocoder.geocode({ address: address }, function (results, status) {
+    if (status !== OK) {
+      callback({ status: status }, null, results);
+      return;
+    }
+
+    var latLng = {
+      lat: results[0].geometry.location.lat(),
+      lng: results[0].geometry.location.lng()
+    };
+
+    callback(null, latLng, results);
+  });
+};
+
+var geocodeByPlaceId = exports.geocodeByPlaceId = function geocodeByPlaceId(placeId, callback) {
+  var geocoder = new google.maps.Geocoder();
+  var OK = google.maps.GeocoderStatus.OK;
+
+  geocoder.geocode({ placeId: placeId }, function (results, status) {
+    if (status !== OK) {
+      callback({ status: status }, null, null);
+      return;
+    }
+
+    var latLng = {
+      lat: results[0].geometry.location.lat(),
+      lng: results[0].geometry.location.lng()
+    };
+
+    callback(null, latLng, results);
+  });
+};
+
+/***/ }),
+/* 273 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+  Copyright (c) 2016 Jed Watson.
+  Licensed under the MIT License (MIT), see
+  http://jedwatson.github.io/classnames
+*/
+/* global define */
+
+(function () {
+	'use strict';
+
+	var hasOwn = {}.hasOwnProperty;
+
+	function classNames () {
+		var classes = [];
+
+		for (var i = 0; i < arguments.length; i++) {
+			var arg = arguments[i];
+			if (!arg) continue;
+
+			var argType = typeof arg;
+
+			if (argType === 'string' || argType === 'number') {
+				classes.push(arg);
+			} else if (Array.isArray(arg)) {
+				classes.push(classNames.apply(null, arg));
+			} else if (argType === 'object') {
+				for (var key in arg) {
+					if (hasOwn.call(arg, key) && arg[key]) {
+						classes.push(key);
+					}
+				}
+			}
+		}
+
+		return classes.join(' ');
+	}
+
+	if (typeof module !== 'undefined' && module.exports) {
+		module.exports = classNames;
+	} else if (true) {
+		// register as 'classnames', consistent with npm package name
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
+			return classNames;
+		}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	} else {
+		window.classNames = classNames;
+	}
+}());
+
+
+/***/ }),
+/* 274 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Copyright 2013-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ */
+
+
+
+var shallowEqual = __webpack_require__(283);
+
+/**
+ * Does a shallow comparison for props and state.
+ * See ReactComponentWithPureRenderMixin
+ * See also https://facebook.github.io/react/docs/shallow-compare.html
+ */
+function shallowCompare(instance, nextProps, nextState) {
+  return !shallowEqual(instance.props, nextProps) || !shallowEqual(instance.state, nextState);
+}
+
+module.exports = shallowCompare;
+
+/***/ }),
+/* 275 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = function (props) {
+  var attributes = {};
+
+  allowedAttributes.forEach(function (allowedAttribute) {
+    if (props[allowedAttribute]) {
+      attributes[allowedAttribute] = props[allowedAttribute];
+    }
+  });
+
+  return attributes;
+};
+
+/**
+ * Attributes allowed on input elements
+ */
+var allowedAttributes = ['autoFocus', 'disabled', 'form', 'formAction', 'formEncType', 'formMethod', 'formNoValidate', 'formTarget', 'height', 'id', 'inputMode', 'maxLength', 'name', 'onClick', 'onContextMenu', 'onCopy', 'onCut', 'onDoubleClick', 'onMouseDown', 'onMouseEnter', 'onMouseLeave', 'onMouseMove', 'onMouseOut', 'onMouseOver', 'onMouseUp', 'onPaste', 'pattern', 'placeholder', 'readOnly', 'required', 'size', 'spellCheck', 'tabIndex', 'aria-atomic', 'aria-busy', 'aria-controls', 'aria-current', 'aria-describedby', 'aria-details', 'aria-disabled', 'aria-dropeffect', 'aria-errormessage', 'aria-flowto', 'aria-grabbed', 'aria-haspopup', 'aria-hidden', 'aria-invalid', 'aria-keyshortcuts', 'aria-label', 'aria-labelledby', 'aria-live', 'aria-owns', 'aria-relevant', 'aria-roledescription', 'aria-activedescendant', 'aria-autocomplete', 'aria-multiline', 'aria-placeholder', 'aria-readonly', 'aria-required'];
+
+/**
+ * Filter the properties for only allowed input properties
+ * @param  {Object} props The properties to filter
+ * @return {Object} The filtered, allowed properties
+ */
+
+/***/ }),
+/* 276 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(27);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _classnames = __webpack_require__(273);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _lodash = __webpack_require__(282);
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
+var _defaults = __webpack_require__(277);
+
+var _defaults2 = _interopRequireDefault(_defaults);
+
+var _propTypes = __webpack_require__(279);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _filterInputAttributes = __webpack_require__(275);
+
+var _filterInputAttributes2 = _interopRequireDefault(_filterInputAttributes);
+
+var _input = __webpack_require__(278);
+
+var _input2 = _interopRequireDefault(_input);
+
+var _suggestList = __webpack_require__(281);
+
+var _suggestList2 = _interopRequireDefault(_suggestList);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* global window */
+
+// Escapes special characters in user input for regex
+function escapeRegExp(str) {
+  return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
+}
+
+/**
+ * Entry point for the Geosuggest component
+ */
+
+var Geosuggest = function (_React$Component) {
+  _inherits(Geosuggest, _React$Component);
+
+  /**
+   * The constructor. Sets the initial state.
+   * @param  {Object} props The properties object.
+   */
+  function Geosuggest(props) {
+    _classCallCheck(this, Geosuggest);
+
+    var _this = _possibleConstructorReturn(this, (Geosuggest.__proto__ || Object.getPrototypeOf(Geosuggest)).call(this, props));
+
+    _this.onInputChange = function (userInput) {
+      _this.setState({ userInput: userInput }, _this.onAfterInputChange);
+    };
+
+    _this.onAfterInputChange = function () {
+      if (!_this.state.isSuggestsHidden) {
+        _this.showSuggests();
+      }
+      _this.props.onChange(_this.state.userInput);
+    };
+
+    _this.onInputFocus = function () {
+      _this.props.onFocus();
+      _this.showSuggests();
+    };
+
+    _this.onInputBlur = function () {
+      if (!_this.state.ignoreBlur) {
+        _this.hideSuggests();
+      }
+    };
+
+    _this.onNext = function () {
+      return _this.activateSuggest('next');
+    };
+
+    _this.onPrev = function () {
+      return _this.activateSuggest('prev');
+    };
+
+    _this.onSelect = function () {
+      return _this.selectSuggest(_this.state.activeSuggest);
+    };
+
+    _this.onSuggestMouseDown = function () {
+      return _this.setState({ ignoreBlur: true });
+    };
+
+    _this.onSuggestMouseOut = function () {
+      return _this.setState({ ignoreBlur: false });
+    };
+
+    _this.onSuggestNoResults = function () {
+      _this.props.onSuggestNoResults(_this.state.userInput);
+    };
+
+    _this.hideSuggests = function () {
+      _this.props.onBlur(_this.state.userInput);
+      _this.timer = setTimeout(function () {
+        _this.setState({
+          isSuggestsHidden: true,
+          activeSuggest: null
+        });
+      }, 100);
+    };
+
+    _this.selectSuggest = function (suggest) {
+      if (!suggest) {
+        suggest = {
+          label: _this.state.userInput
+        };
+      }
+
+      _this.setState({
+        isSuggestsHidden: true,
+        userInput: suggest.label
+      });
+
+      if (suggest.location) {
+        _this.setState({ ignoreBlur: false });
+        _this.props.onSuggestSelect(suggest);
+        return;
+      }
+
+      _this.geocodeSuggest(suggest);
+    };
+
+    _this.state = {
+      isSuggestsHidden: true,
+      isLoading: false,
+      userInput: props.initialValue,
+      activeSuggest: null,
+      suggests: []
+    };
+
+    _this.onInputChange = _this.onInputChange.bind(_this);
+    _this.onAfterInputChange = _this.onAfterInputChange.bind(_this);
+
+    if (props.queryDelay) {
+      _this.onAfterInputChange = (0, _lodash2.default)(_this.onAfterInputChange, props.queryDelay);
+    }
+    return _this;
+  }
+
+  /**
+   * Change inputValue if prop changes
+   * @param {Object} props The new props
+   */
+
+
+  _createClass(Geosuggest, [{
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(props) {
+      if (this.props.initialValue !== props.initialValue) {
+        this.setState({ userInput: props.initialValue });
+      }
+    }
+
+    /**
+     * Called on the client side after component is mounted.
+     * Google api sdk object will be obtained and cached as a instance property.
+     * Necessary objects of google api will also be determined and saved.
+     */
+
+  }, {
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      if (typeof window === 'undefined') {
+        return;
+      }
+
+      var googleMaps = this.props.googleMaps || window.google && // eslint-disable-line no-extra-parens
+      window.google.maps || this.googleMaps;
+
+      /* istanbul ignore next */
+      if (!googleMaps) {
+        console.error( // eslint-disable-line no-console
+        'Google map api was not found in the page.');
+        return;
+      }
+      this.googleMaps = googleMaps;
+
+      this.autocompleteService = new googleMaps.places.AutocompleteService();
+      this.geocoder = new googleMaps.Geocoder();
+    }
+
+    /**
+     * When the component will unmount
+     */
+
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      clearTimeout(this.timer);
+    }
+
+    /**
+     * When the input changed
+     * @param {String} userInput The input value of the user
+     */
+
+
+    /**
+     * On After the input got changed
+     */
+
+
+    /**
+     * When the input gets focused
+     */
+
+
+    /**
+     * When the input gets blurred
+     */
+
+  }, {
+    key: 'focus',
+
+
+    /**
+     * Focus the input
+     */
+    value: function focus() {
+      this.refs.input.focus();
+    }
+
+    /**
+     * Blur the input
+     */
+
+  }, {
+    key: 'blur',
+    value: function blur() {
+      this.refs.input.blur();
+    }
+
+    /**
+     * Update the value of the user input
+     * @param {String} userInput the new value of the user input
+     */
+
+  }, {
+    key: 'update',
+    value: function update(userInput) {
+      this.setState({ userInput: userInput });
+      this.props.onChange(userInput);
+    }
+
+    /*
+     * Clear the input and close the suggestion pane
+     */
+
+  }, {
+    key: 'clear',
+    value: function clear() {
+      this.setState({ userInput: '' }, this.hideSuggests);
+    }
+
+    /**
+     * Search for new suggests
+     */
+
+  }, {
+    key: 'searchSuggests',
+    value: function searchSuggests() {
+      var _this2 = this;
+
+      if (!this.state.userInput) {
+        this.updateSuggests();
+        return;
+      }
+
+      var options = {
+        input: this.state.userInput
+      };
+
+      ['location', 'radius', 'bounds', 'types'].forEach(function (option) {
+        if (_this2.props[option]) {
+          options[option] = _this2.props[option];
+        }
+      });
+
+      if (this.props.country) {
+        options.componentRestrictions = {
+          country: this.props.country
+        };
+      }
+
+      this.setState({ isLoading: true }, function () {
+        _this2.autocompleteService.getPlacePredictions(options, function (suggestsGoogle) {
+          _this2.setState({ isLoading: false });
+          _this2.updateSuggests(suggestsGoogle || [], // can be null
+          function () {
+            if (_this2.props.autoActivateFirstSuggest && !_this2.state.activeSuggest) {
+              _this2.activateSuggest('next');
+            }
+          });
+        });
+      });
+    }
+
+    /**
+     * Update the suggests
+     * @param {Array} suggestsGoogle The new google suggests
+     * @param {Function} callback Called once the state has been updated
+     */
+
+  }, {
+    key: 'updateSuggests',
+    value: function updateSuggests() {
+      var _this3 = this;
+
+      var suggestsGoogle = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+      var callback = arguments[1];
+
+      var suggests = [],
+          regex = new RegExp(escapeRegExp(this.state.userInput), 'gim'),
+          skipSuggest = this.props.skipSuggest,
+          maxFixtures = 10,
+          fixturesSearched = 0,
+          activeSuggest = null;
+
+      this.props.fixtures.forEach(function (suggest) {
+        if (fixturesSearched >= maxFixtures) {
+          return;
+        }
+
+        if (!skipSuggest(suggest) && suggest.label.match(regex)) {
+          fixturesSearched++;
+
+          suggest.placeId = suggest.label;
+          suggest.isFixture = true;
+          suggests.push(suggest);
+        }
+      });
+
+      suggestsGoogle.forEach(function (suggest) {
+        if (!skipSuggest(suggest)) {
+          suggests.push({
+            label: _this3.props.getSuggestLabel(suggest),
+            placeId: suggest.place_id,
+            isFixture: false
+          });
+        }
+      });
+
+      activeSuggest = this.updateActiveSuggest(suggests);
+      this.setState({ suggests: suggests, activeSuggest: activeSuggest }, callback);
+    }
+
+    /**
+     * Return the new activeSuggest object after suggests have been updated
+     * @param {Array} suggests The new list of suggests
+     * @return {Object} The new activeSuggest
+     **/
+
+  }, {
+    key: 'updateActiveSuggest',
+    value: function updateActiveSuggest() {
+      var suggests = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+
+      var activeSuggest = this.state.activeSuggest;
+
+      if (activeSuggest) {
+        var newSuggest = suggests.find(function (listedSuggest) {
+          return activeSuggest.placeId === listedSuggest.placeId && activeSuggest.isFixture === listedSuggest.isFixture;
+        });
+
+        activeSuggest = newSuggest || null;
+      }
+
+      return activeSuggest;
+    }
+
+    /**
+     * Show the suggestions
+     */
+
+  }, {
+    key: 'showSuggests',
+    value: function showSuggests() {
+      this.searchSuggests();
+      this.setState({ isSuggestsHidden: false });
+    }
+
+    /**
+     * Hide the suggestions
+     */
+
+  }, {
+    key: 'activateSuggest',
+
+
+    /**
+     * Activate a new suggest
+     * @param {String} direction The direction in which to activate new suggest
+     */
+    value: function activateSuggest(direction) {
+      // eslint-disable-line complexity
+      if (this.state.isSuggestsHidden) {
+        this.showSuggests();
+        return;
+      }
+
+      var suggestsCount = this.state.suggests.length - 1,
+          next = direction === 'next';
+      var newActiveSuggest = null,
+          newIndex = 0,
+          i = 0;
+
+      for (i; i <= suggestsCount; i++) {
+        if (this.state.suggests[i] === this.state.activeSuggest) {
+          newIndex = next ? i + 1 : i - 1;
+        }
+      }
+
+      if (!this.state.activeSuggest) {
+        newIndex = next ? 0 : suggestsCount;
+      }
+
+      if (newIndex >= 0 && newIndex <= suggestsCount) {
+        newActiveSuggest = this.state.suggests[newIndex];
+      }
+
+      this.props.onActivateSuggest(newActiveSuggest);
+
+      this.setState({ activeSuggest: newActiveSuggest });
+    }
+
+    /**
+     * When an item got selected
+     * @param {GeosuggestItem} suggest The selected suggest item
+     */
+
+  }, {
+    key: 'geocodeSuggest',
+
+
+    /**
+     * Geocode a suggest
+     * @param  {Object} suggest The suggest
+     */
+    value: function geocodeSuggest(suggest) {
+      var _this4 = this;
+
+      this.geocoder.geocode(suggest.placeId && !suggest.isFixture ? { placeId: suggest.placeId } : { address: suggest.label }, function (results, status) {
+        if (status === _this4.googleMaps.GeocoderStatus.OK) {
+          var gmaps = results[0],
+              location = gmaps.geometry.location;
+
+          suggest.gmaps = gmaps;
+          suggest.location = {
+            lat: location.lat(),
+            lng: location.lng()
+          };
+        }
+        _this4.props.onSuggestSelect(suggest);
+      });
+    }
+
+    /**
+     * Render the view
+     * @return {Function} The React element to render
+     */
+
+  }, {
+    key: 'render',
+    value: function render() {
+      var attributes = (0, _filterInputAttributes2.default)(this.props),
+          classes = (0, _classnames2.default)('geosuggest', this.props.className, { 'geosuggest--loading': this.state.isLoading }),
+          shouldRenderLabel = this.props.label && attributes.id,
+          input = _react2.default.createElement(_input2.default, _extends({ className: this.props.inputClassName,
+        ref: 'input',
+        value: this.state.userInput,
+        ignoreEnter: !this.state.isSuggestsHidden,
+        ignoreTab: this.props.ignoreTab,
+        style: this.props.style.input,
+        onChange: this.onInputChange,
+        onFocus: this.onInputFocus,
+        onBlur: this.onInputBlur,
+        onKeyPress: this.props.onKeyPress,
+        onNext: this.onNext,
+        onPrev: this.onPrev,
+        onSelect: this.onSelect,
+        onEscape: this.hideSuggests }, attributes)),
+          suggestionsList = _react2.default.createElement(_suggestList2.default, { isHidden: this.state.isSuggestsHidden,
+        style: this.props.style.suggests,
+        suggestItemStyle: this.props.style.suggestItem,
+        suggestsClassName: this.props.suggestsClassName,
+        suggestItemClassName: this.props.suggestItemClassName,
+        suggests: this.state.suggests,
+        hiddenClassName: this.props.suggestsHiddenClassName,
+        suggestItemActiveClassName: this.props.suggestItemActiveClassName,
+        activeSuggest: this.state.activeSuggest,
+        onSuggestNoResults: this.onSuggestNoResults,
+        onSuggestMouseDown: this.onSuggestMouseDown,
+        onSuggestMouseOut: this.onSuggestMouseOut,
+        onSuggestSelect: this.selectSuggest });
+
+      return _react2.default.createElement(
+        'div',
+        { className: classes },
+        _react2.default.createElement(
+          'div',
+          { className: 'geosuggest__input-wrapper' },
+          shouldRenderLabel && _react2.default.createElement(
+            'label',
+            { className: 'geosuggest__label',
+              htmlFor: attributes.id },
+            this.props.label
+          ),
+          input
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'geosuggest__suggests-wrapper' },
+          suggestionsList
+        )
+      );
+    }
+  }]);
+
+  return Geosuggest;
+}(_react2.default.Component);
+
+/**
+ * Types for the properties
+ * @type {Object}
+ */
+
+
+Geosuggest.propTypes = _propTypes2.default;
+
+/**
+ * Default values for the properties
+ * @type {Object}
+ */
+Geosuggest.defaultProps = _defaults2.default;
+
+exports.default = Geosuggest;
+
+/***/ }),
+/* 277 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/* istanbul ignore next */
+/**
+ * Default values
+ */
+exports.default = {
+  fixtures: [],
+  initialValue: '',
+  placeholder: 'Search places',
+  disabled: false,
+  className: '',
+  inputClassName: '',
+  location: null,
+  radius: null,
+  bounds: null,
+  country: null,
+  types: null,
+  queryDelay: 250,
+  googleMaps: null,
+  onActivateSuggest: function onActivateSuggest() {},
+  onSuggestSelect: function onSuggestSelect() {},
+  onSuggestNoResults: function onSuggestNoResults() {},
+  onFocus: function onFocus() {},
+  onBlur: function onBlur() {},
+  onChange: function onChange() {},
+  skipSuggest: function skipSuggest() {},
+  getSuggestLabel: function getSuggestLabel(suggest) {
+    return suggest.description;
+  },
+  autoActivateFirstSuggest: false,
+  style: {
+    'input': {},
+    'suggests': {},
+    'suggestItem': {}
+  },
+  ignoreTab: false
+};
+
+/***/ }),
+/* 278 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(27);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _shallowCompare = __webpack_require__(274);
+
+var _shallowCompare2 = _interopRequireDefault(_shallowCompare);
+
+var _classnames = __webpack_require__(273);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _filterInputAttributes = __webpack_require__(275);
+
+var _filterInputAttributes2 = _interopRequireDefault(_filterInputAttributes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // eslint-disable-line no-unused-vars
+
+
+/**
+ * The input field
+ * @param {Object} props The component's props
+ * @return {JSX} The icon component.
+ */
+var Input = function (_React$Component) {
+  _inherits(Input, _React$Component);
+
+  function Input() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
+    _classCallCheck(this, Input);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Input.__proto__ || Object.getPrototypeOf(Input)).call.apply(_ref, [this].concat(args))), _this), _this.onChange = function () {
+      _this.props.onChange(_this.refs.input.value);
+    }, _this.onFocus = function () {
+      _this.props.onFocus();
+    }, _this.onBlur = function () {
+      _this.props.onBlur();
+    }, _this.onKeyPress = function (event) {
+      _this.props.onKeyPress(event);
+    }, _this.onInputKeyDown = function (event) {
+      // eslint-disable-line complexity
+      switch (event.which) {
+        case 40:
+          // DOWN
+          event.preventDefault();
+          _this.props.onNext();
+          break;
+        case 38:
+          // UP
+          event.preventDefault();
+          _this.props.onPrev();
+          break;
+        case 13:
+          // ENTER
+          if (_this.props.ignoreEnter) {
+            event.preventDefault();
+          }
+
+          _this.props.onSelect();
+          break;
+        case 9:
+          // TAB
+          if (!_this.props.ignoreTab) {
+            _this.props.onSelect();
+          }
+          break;
+        case 27:
+          // ESC
+          _this.props.onEscape();
+          break;
+        /* istanbul ignore next */
+        default:
+          break;
+      }
+    }, _temp), _possibleConstructorReturn(_this, _ret);
+  }
+
+  _createClass(Input, [{
+    key: 'shouldComponentUpdate',
+
+    /**
+     * Whether or not the component should update
+     * @param {Object} nextProps The new properties
+     * @param {Object} nextState The new state
+     * @return {Boolean} Update or not?
+     */
+    value: function shouldComponentUpdate(nextProps, nextState) {
+      return (0, _shallowCompare2.default)(this, nextProps, nextState);
+    }
+
+    /**
+     * When the input got changed
+     */
+
+
+    /**
+     * When the input got focused
+     */
+
+
+    /**
+     * When the input loses focus
+     */
+
+
+    /**
+     * When a key gets pressed in the input
+     * @param  {Event} event The keypress event
+     */
+
+
+    /**
+     * When a key gets pressed in the input
+     * @param  {Event} event The keydown event
+     */
+
+  }, {
+    key: 'focus',
+
+
+    /**
+     * Focus the input
+     */
+    value: function focus() {
+      this.refs.input.focus();
+    }
+
+    /**
+     * Blur the input
+     */
+
+  }, {
+    key: 'blur',
+    value: function blur() {
+      this.refs.input.blur();
+    }
+
+    /**
+     * Render the view
+     * @return {Function} The React element to render
+     */
+
+  }, {
+    key: 'render',
+    value: function render() {
+      var attributes = (0, _filterInputAttributes2.default)(this.props),
+          classes = (0, _classnames2.default)('geosuggest__input', this.props.className);
+
+      return _react2.default.createElement('input', _extends({ className: classes,
+        ref: 'input',
+        type: 'text',
+        autoComplete: 'off'
+      }, attributes, {
+        value: this.props.value,
+        style: this.props.style,
+        onKeyDown: this.onInputKeyDown,
+        onChange: this.onChange,
+        onKeyPress: this.onKeyPress,
+        onFocus: this.onFocus,
+        onBlur: this.onBlur }));
+    }
+  }]);
+
+  return Input;
+}(_react2.default.Component);
+
+/**
+ * Default values for the properties
+ * @type {Object}
+ */
+
+
+Input.defaultProps = {
+  className: '',
+  value: '',
+  ignoreTab: false,
+  onKeyDown: function onKeyDown() {},
+  onKeyPress: function onKeyPress() {}
+};
+
+exports.default = Input;
+
+/***/ }),
+/* 279 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(27);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * Default values
+ */
+exports.default = {
+  fixtures: _react2.default.PropTypes.array,
+  initialValue: _react2.default.PropTypes.string,
+  placeholder: _react2.default.PropTypes.string,
+  disabled: _react2.default.PropTypes.bool,
+  className: _react2.default.PropTypes.string,
+  inputClassName: _react2.default.PropTypes.string,
+  suggestsClassName: _react2.default.PropTypes.string,
+  suggestsHiddenClassName: _react2.default.PropTypes.string,
+  suggestItemClassName: _react2.default.PropTypes.string,
+  suggestItemActiveClassName: _react2.default.PropTypes.string,
+  location: _react2.default.PropTypes.object,
+  radius: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.number]),
+  bounds: _react2.default.PropTypes.object,
+  country: _react2.default.PropTypes.string,
+  types: _react2.default.PropTypes.array,
+  queryDelay: _react2.default.PropTypes.number,
+  googleMaps: _react2.default.PropTypes.object,
+  onSuggestSelect: _react2.default.PropTypes.func,
+  onFocus: _react2.default.PropTypes.func,
+  onBlur: _react2.default.PropTypes.func,
+  onChange: _react2.default.PropTypes.func,
+  onKeyPress: _react2.default.PropTypes.func,
+  skipSuggest: _react2.default.PropTypes.func,
+  getSuggestLabel: _react2.default.PropTypes.func,
+  autoActivateFirstSuggest: _react2.default.PropTypes.bool,
+  style: _react2.default.PropTypes.shape({
+    input: _react2.default.PropTypes.object,
+    suggests: _react2.default.PropTypes.object,
+    suggestItem: _react2.default.PropTypes.object
+  }),
+  ignoreTab: _react2.default.PropTypes.bool,
+  label: _react2.default.PropTypes.string
+};
+
+/***/ }),
+/* 280 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(27);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _shallowCompare = __webpack_require__(274);
+
+var _shallowCompare2 = _interopRequireDefault(_shallowCompare);
+
+var _classnames2 = __webpack_require__(273);
+
+var _classnames3 = _interopRequireDefault(_classnames2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+/**
+ * A single Geosuggest item in the list
+ * @param {Object} props The component's props
+ * @return {JSX} The icon component.
+ */
+var SuggestItem = function (_React$Component) {
+  _inherits(SuggestItem, _React$Component);
+
+  function SuggestItem() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
+    _classCallCheck(this, SuggestItem);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = SuggestItem.__proto__ || Object.getPrototypeOf(SuggestItem)).call.apply(_ref, [this].concat(args))), _this), _this.onClick = function (event) {
+      event.preventDefault();
+      _this.props.onSelect(_this.props.suggest);
+    }, _temp), _possibleConstructorReturn(_this, _ret);
+  }
+
+  _createClass(SuggestItem, [{
+    key: 'shouldComponentUpdate',
+
+    /**
+     * Whether or not the component should update
+     * @param {Object} nextProps The new properties
+     * @param {Object} nextState The new state
+     * @return {Boolean} Update or not?
+     */
+    value: function shouldComponentUpdate(nextProps, nextState) {
+      return (0, _shallowCompare2.default)(this, nextProps, nextState);
+    }
+
+    /**
+     * When the suggest item got clicked
+     * @param {Event} event The click event
+     */
+
+  }, {
+    key: 'render',
+
+
+    /**
+     * Render the view
+     * @return {Function} The React element to render
+     */
+    value: function render() {
+      var classes = (0, _classnames3.default)('geosuggest__item', this.props.className, this.props.suggestItemClassName, { 'geosuggest__item--active': this.props.isActive }, _defineProperty({}, this.props.activeClassname, this.props.activeClassname ? this.props.isActive : null));
+
+      return _react2.default.createElement(
+        'li',
+        { className: classes,
+          style: this.props.style,
+          onMouseDown: this.props.onMouseDown,
+          onMouseOut: this.props.onMouseOut,
+          onClick: this.onClick },
+        this.props.suggest.label
+      );
+    }
+  }]);
+
+  return SuggestItem;
+}(_react2.default.Component);
+
+/**
+ * Default values for the properties
+ * @type {Object}
+ */
+
+
+exports.default = SuggestItem;
+SuggestItem.defaultProps = {
+  isActive: false,
+  className: '',
+  suggest: {}
+};
+
+/***/ }),
+/* 281 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(27);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _shallowCompare = __webpack_require__(274);
+
+var _shallowCompare2 = _interopRequireDefault(_shallowCompare);
+
+var _classnames2 = __webpack_require__(273);
+
+var _classnames3 = _interopRequireDefault(_classnames2);
+
+var _suggestItem = __webpack_require__(280);
+
+var _suggestItem2 = _interopRequireDefault(_suggestItem);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // eslint-disable-line no-unused-vars
+
+
+/**
+ * The list with suggestions. Either from an API or provided as fixture
+ * @param {Object} props The component's props
+ * @return {JSX} The icon component.
+ */
+var SuggestList = function (_React$Component) {
+  _inherits(SuggestList, _React$Component);
+
+  function SuggestList() {
+    _classCallCheck(this, SuggestList);
+
+    return _possibleConstructorReturn(this, (SuggestList.__proto__ || Object.getPrototypeOf(SuggestList)).apply(this, arguments));
+  }
+
+  _createClass(SuggestList, [{
+    key: 'shouldComponentUpdate',
+
+    /**
+     * Whether or not the component should update
+     * @param {Object} nextProps The new properties
+     * @param {Object} nextState The new state
+     * @return {Boolean} Update or not?
+     */
+    value: function shouldComponentUpdate(nextProps, nextState) {
+      return (0, _shallowCompare2.default)(this, nextProps, nextState);
+    }
+
+    /**
+     * Whether or not it is hidden
+     * @return {Boolean} Hidden or not?
+     */
+
+  }, {
+    key: 'isHidden',
+    value: function isHidden() {
+      return this.props.isHidden || this.props.suggests.length === 0;
+    }
+
+    /**
+     * There are new properties available for the list
+     * @param {Object} nextProps The new properties
+     */
+
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      if (nextProps.suggests !== this.props.suggests) {
+        if (nextProps.suggests.length === 0) {
+          this.props.onSuggestNoResults();
+        }
+      }
+    }
+
+    /**
+     * Render the view
+     * @return {Function} The React element to render
+     */
+
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      var classes = (0, _classnames3.default)('geosuggest__suggests', this.props.suggestsClassName, { 'geosuggest__suggests--hidden': this.isHidden() }, _defineProperty({}, this.props.hiddenClassName, this.props.hiddenClassName ? this.isHidden() : null));
+
+      return _react2.default.createElement(
+        'ul',
+        { className: classes, style: this.props.style },
+        this.props.suggests.map(function (suggest) {
+          var isActive = _this2.props.activeSuggest && suggest.placeId === _this2.props.activeSuggest.placeId;
+
+          return _react2.default.createElement(_suggestItem2.default, { key: suggest.placeId,
+            className: suggest.className,
+            suggest: suggest,
+            style: _this2.props.suggestItemStyle,
+            suggestItemClassName: _this2.props.suggestItemClassName,
+            isActive: isActive,
+            activeClassname: _this2.props.suggestItemActiveClassName,
+            onMouseDown: _this2.props.onSuggestMouseDown,
+            onMouseOut: _this2.props.onSuggestMouseOut,
+            onSelect: _this2.props.onSuggestSelect });
+        })
+      );
+    }
+  }]);
+
+  return SuggestList;
+}(_react2.default.Component);
+
+/**
+ * Default values for the properties
+ * @type {Object}
+ */
+
+
+exports.default = SuggestList;
+SuggestList.defaultProps = {
+  isHidden: true,
+  suggests: []
+};
+
+/***/ }),
+/* 282 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {/**
+ * lodash (Custom Build) <https://lodash.com/>
+ * Build: `lodash modularize exports="npm" -o ./`
+ * Copyright jQuery Foundation and other contributors <https://jquery.org/>
+ * Released under MIT license <https://lodash.com/license>
+ * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+ * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+ */
+
+/** Used as the `TypeError` message for "Functions" methods. */
+var FUNC_ERROR_TEXT = 'Expected a function';
+
+/** Used as references for various `Number` constants. */
+var NAN = 0 / 0;
+
+/** `Object#toString` result references. */
+var symbolTag = '[object Symbol]';
+
+/** Used to match leading and trailing whitespace. */
+var reTrim = /^\s+|\s+$/g;
+
+/** Used to detect bad signed hexadecimal string values. */
+var reIsBadHex = /^[-+]0x[0-9a-f]+$/i;
+
+/** Used to detect binary string values. */
+var reIsBinary = /^0b[01]+$/i;
+
+/** Used to detect octal string values. */
+var reIsOctal = /^0o[0-7]+$/i;
+
+/** Built-in method references without a dependency on `root`. */
+var freeParseInt = parseInt;
+
+/** Detect free variable `global` from Node.js. */
+var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
+
+/** Detect free variable `self`. */
+var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
+
+/** Used as a reference to the global object. */
+var root = freeGlobal || freeSelf || Function('return this')();
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */
+var objectToString = objectProto.toString;
+
+/* Built-in method references for those with the same name as other `lodash` methods. */
+var nativeMax = Math.max,
+    nativeMin = Math.min;
+
+/**
+ * Gets the timestamp of the number of milliseconds that have elapsed since
+ * the Unix epoch (1 January 1970 00:00:00 UTC).
+ *
+ * @static
+ * @memberOf _
+ * @since 2.4.0
+ * @category Date
+ * @returns {number} Returns the timestamp.
+ * @example
+ *
+ * _.defer(function(stamp) {
+ *   console.log(_.now() - stamp);
+ * }, _.now());
+ * // => Logs the number of milliseconds it took for the deferred invocation.
+ */
+var now = function() {
+  return root.Date.now();
+};
+
+/**
+ * Creates a debounced function that delays invoking `func` until after `wait`
+ * milliseconds have elapsed since the last time the debounced function was
+ * invoked. The debounced function comes with a `cancel` method to cancel
+ * delayed `func` invocations and a `flush` method to immediately invoke them.
+ * Provide `options` to indicate whether `func` should be invoked on the
+ * leading and/or trailing edge of the `wait` timeout. The `func` is invoked
+ * with the last arguments provided to the debounced function. Subsequent
+ * calls to the debounced function return the result of the last `func`
+ * invocation.
+ *
+ * **Note:** If `leading` and `trailing` options are `true`, `func` is
+ * invoked on the trailing edge of the timeout only if the debounced function
+ * is invoked more than once during the `wait` timeout.
+ *
+ * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred
+ * until to the next tick, similar to `setTimeout` with a timeout of `0`.
+ *
+ * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
+ * for details over the differences between `_.debounce` and `_.throttle`.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Function
+ * @param {Function} func The function to debounce.
+ * @param {number} [wait=0] The number of milliseconds to delay.
+ * @param {Object} [options={}] The options object.
+ * @param {boolean} [options.leading=false]
+ *  Specify invoking on the leading edge of the timeout.
+ * @param {number} [options.maxWait]
+ *  The maximum time `func` is allowed to be delayed before it's invoked.
+ * @param {boolean} [options.trailing=true]
+ *  Specify invoking on the trailing edge of the timeout.
+ * @returns {Function} Returns the new debounced function.
+ * @example
+ *
+ * // Avoid costly calculations while the window size is in flux.
+ * jQuery(window).on('resize', _.debounce(calculateLayout, 150));
+ *
+ * // Invoke `sendMail` when clicked, debouncing subsequent calls.
+ * jQuery(element).on('click', _.debounce(sendMail, 300, {
+ *   'leading': true,
+ *   'trailing': false
+ * }));
+ *
+ * // Ensure `batchLog` is invoked once after 1 second of debounced calls.
+ * var debounced = _.debounce(batchLog, 250, { 'maxWait': 1000 });
+ * var source = new EventSource('/stream');
+ * jQuery(source).on('message', debounced);
+ *
+ * // Cancel the trailing debounced invocation.
+ * jQuery(window).on('popstate', debounced.cancel);
+ */
+function debounce(func, wait, options) {
+  var lastArgs,
+      lastThis,
+      maxWait,
+      result,
+      timerId,
+      lastCallTime,
+      lastInvokeTime = 0,
+      leading = false,
+      maxing = false,
+      trailing = true;
+
+  if (typeof func != 'function') {
+    throw new TypeError(FUNC_ERROR_TEXT);
+  }
+  wait = toNumber(wait) || 0;
+  if (isObject(options)) {
+    leading = !!options.leading;
+    maxing = 'maxWait' in options;
+    maxWait = maxing ? nativeMax(toNumber(options.maxWait) || 0, wait) : maxWait;
+    trailing = 'trailing' in options ? !!options.trailing : trailing;
+  }
+
+  function invokeFunc(time) {
+    var args = lastArgs,
+        thisArg = lastThis;
+
+    lastArgs = lastThis = undefined;
+    lastInvokeTime = time;
+    result = func.apply(thisArg, args);
+    return result;
+  }
+
+  function leadingEdge(time) {
+    // Reset any `maxWait` timer.
+    lastInvokeTime = time;
+    // Start the timer for the trailing edge.
+    timerId = setTimeout(timerExpired, wait);
+    // Invoke the leading edge.
+    return leading ? invokeFunc(time) : result;
+  }
+
+  function remainingWait(time) {
+    var timeSinceLastCall = time - lastCallTime,
+        timeSinceLastInvoke = time - lastInvokeTime,
+        result = wait - timeSinceLastCall;
+
+    return maxing ? nativeMin(result, maxWait - timeSinceLastInvoke) : result;
+  }
+
+  function shouldInvoke(time) {
+    var timeSinceLastCall = time - lastCallTime,
+        timeSinceLastInvoke = time - lastInvokeTime;
+
+    // Either this is the first call, activity has stopped and we're at the
+    // trailing edge, the system time has gone backwards and we're treating
+    // it as the trailing edge, or we've hit the `maxWait` limit.
+    return (lastCallTime === undefined || (timeSinceLastCall >= wait) ||
+      (timeSinceLastCall < 0) || (maxing && timeSinceLastInvoke >= maxWait));
+  }
+
+  function timerExpired() {
+    var time = now();
+    if (shouldInvoke(time)) {
+      return trailingEdge(time);
+    }
+    // Restart the timer.
+    timerId = setTimeout(timerExpired, remainingWait(time));
+  }
+
+  function trailingEdge(time) {
+    timerId = undefined;
+
+    // Only invoke if we have `lastArgs` which means `func` has been
+    // debounced at least once.
+    if (trailing && lastArgs) {
+      return invokeFunc(time);
+    }
+    lastArgs = lastThis = undefined;
+    return result;
+  }
+
+  function cancel() {
+    if (timerId !== undefined) {
+      clearTimeout(timerId);
+    }
+    lastInvokeTime = 0;
+    lastArgs = lastCallTime = lastThis = timerId = undefined;
+  }
+
+  function flush() {
+    return timerId === undefined ? result : trailingEdge(now());
+  }
+
+  function debounced() {
+    var time = now(),
+        isInvoking = shouldInvoke(time);
+
+    lastArgs = arguments;
+    lastThis = this;
+    lastCallTime = time;
+
+    if (isInvoking) {
+      if (timerId === undefined) {
+        return leadingEdge(lastCallTime);
+      }
+      if (maxing) {
+        // Handle invocations in a tight loop.
+        timerId = setTimeout(timerExpired, wait);
+        return invokeFunc(lastCallTime);
+      }
+    }
+    if (timerId === undefined) {
+      timerId = setTimeout(timerExpired, wait);
+    }
+    return result;
+  }
+  debounced.cancel = cancel;
+  debounced.flush = flush;
+  return debounced;
+}
+
+/**
+ * Checks if `value` is the
+ * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
+ * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+ * @example
+ *
+ * _.isObject({});
+ * // => true
+ *
+ * _.isObject([1, 2, 3]);
+ * // => true
+ *
+ * _.isObject(_.noop);
+ * // => true
+ *
+ * _.isObject(null);
+ * // => false
+ */
+function isObject(value) {
+  var type = typeof value;
+  return !!value && (type == 'object' || type == 'function');
+}
+
+/**
+ * Checks if `value` is object-like. A value is object-like if it's not `null`
+ * and has a `typeof` result of "object".
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+ * @example
+ *
+ * _.isObjectLike({});
+ * // => true
+ *
+ * _.isObjectLike([1, 2, 3]);
+ * // => true
+ *
+ * _.isObjectLike(_.noop);
+ * // => false
+ *
+ * _.isObjectLike(null);
+ * // => false
+ */
+function isObjectLike(value) {
+  return !!value && typeof value == 'object';
+}
+
+/**
+ * Checks if `value` is classified as a `Symbol` primitive or object.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a symbol, else `false`.
+ * @example
+ *
+ * _.isSymbol(Symbol.iterator);
+ * // => true
+ *
+ * _.isSymbol('abc');
+ * // => false
+ */
+function isSymbol(value) {
+  return typeof value == 'symbol' ||
+    (isObjectLike(value) && objectToString.call(value) == symbolTag);
+}
+
+/**
+ * Converts `value` to a number.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to process.
+ * @returns {number} Returns the number.
+ * @example
+ *
+ * _.toNumber(3.2);
+ * // => 3.2
+ *
+ * _.toNumber(Number.MIN_VALUE);
+ * // => 5e-324
+ *
+ * _.toNumber(Infinity);
+ * // => Infinity
+ *
+ * _.toNumber('3.2');
+ * // => 3.2
+ */
+function toNumber(value) {
+  if (typeof value == 'number') {
+    return value;
+  }
+  if (isSymbol(value)) {
+    return NAN;
+  }
+  if (isObject(value)) {
+    var other = typeof value.valueOf == 'function' ? value.valueOf() : value;
+    value = isObject(other) ? (other + '') : other;
+  }
+  if (typeof value != 'string') {
+    return value === 0 ? value : +value;
+  }
+  value = value.replace(reTrim, '');
+  var isBinary = reIsBinary.test(value);
+  return (isBinary || reIsOctal.test(value))
+    ? freeParseInt(value.slice(2), isBinary ? 2 : 8)
+    : (reIsBadHex.test(value) ? NAN : +value);
+}
+
+module.exports = debounce;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(284)))
+
+/***/ }),
+/* 283 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @typechecks
+ * 
+ */
+
+/*eslint-disable no-self-compare */
+
+
+
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+/**
+ * inlined Object.is polyfill to avoid requiring consumers ship their own
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
+ */
+function is(x, y) {
+  // SameValue algorithm
+  if (x === y) {
+    // Steps 1-5, 7-10
+    // Steps 6.b-6.e: +0 != -0
+    // Added the nonzero y check to make Flow happy, but it is redundant
+    return x !== 0 || y !== 0 || 1 / x === 1 / y;
+  } else {
+    // Step 6.a: NaN == NaN
+    return x !== x && y !== y;
+  }
+}
+
+/**
+ * Performs equality by iterating through keys on an object and returning false
+ * when any key has values which are not strictly equal between the arguments.
+ * Returns true when the values of all keys are strictly equal.
+ */
+function shallowEqual(objA, objB) {
+  if (is(objA, objB)) {
+    return true;
+  }
+
+  if (typeof objA !== 'object' || objA === null || typeof objB !== 'object' || objB === null) {
+    return false;
+  }
+
+  var keysA = Object.keys(objA);
+  var keysB = Object.keys(objB);
+
+  if (keysA.length !== keysB.length) {
+    return false;
+  }
+
+  // Test for A's keys different from B.
+  for (var i = 0; i < keysA.length; i++) {
+    if (!hasOwnProperty.call(objB, keysA[i]) || !is(objA[keysA[i]], objB[keysA[i]])) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+module.exports = shallowEqual;
+
+/***/ }),
+/* 284 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
 
 /***/ })
 /******/ ]);
