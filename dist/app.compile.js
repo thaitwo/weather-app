@@ -9472,13 +9472,6 @@ var SearchBar = function (_React$Component) {
       event.preventDefault();
       _reactRouter.browserHistory.push('/weather/' + this.state.country + '/' + this.state.city + '/' + this.state.state);
     }
-  }, {
-    key: 'handKeyPress',
-    value: function handKeyPress(event) {
-      if (event.key = 'Enter') {
-        handleSubmit;
-      }
-    }
 
     // Sets the city that the user selects from the suggestions as the value ("city")
 
@@ -9500,7 +9493,6 @@ var SearchBar = function (_React$Component) {
       country = country.replace(/ /g, "_"); // Replaces all spaces with underscores
       country = country.toLowerCase();
 
-      // console.log(suggest);
       // Takes the data from the selected suggestion and sets the state
       this.setState({
         city: city,
@@ -9527,10 +9519,6 @@ var SearchBar = function (_React$Component) {
 
   return SearchBar;
 }(_react2.default.Component);
-
-// onSuggestSelect={(suggest) => {
-//   this.onSuggestSelect(suggest);
-// }}
 
 exports.default = SearchBar;
 
@@ -14047,11 +14035,6 @@ var Weather = function (_React$Component) {
         console.log(error);
       });
     }
-
-    // fetchWeather(data) {
-    //   console.log(data);
-    // }
-
   }, {
     key: 'render',
     value: function render() {
@@ -31012,8 +30995,6 @@ __webpack_require__(80);
     _react2.default.createElement(_reactRouter.Route, { path: '/weather/:country/:city/:state', component: _weather2.default })
   )
 ), document.getElementById('root'));
-
-// <IndexRoute component={App} />
 
 /***/ })
 /******/ ]);

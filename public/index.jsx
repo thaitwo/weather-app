@@ -19,5 +19,3 @@ render((
     </Route>
   </Router>
 ), document.getElementById('root'))
-
-// <IndexRoute component={App} />

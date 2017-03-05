@@ -9,6 +9,7 @@ import Geosuggest from 'react-geosuggest';
 const api_url_conditions = `http://api.wunderground.com/api/5332856fca0fe1e7/conditions/q/ca/san_francisco.json`;
 const api_url_forecast = `http://api.wunderground.com/api/5332856fca0fe1e7/forecast/q/ca/san_francisco.json`;
 
+
 class Weather extends React.Component {
   constructor(props) {
     super(props);
@@ -44,10 +45,6 @@ class Weather extends React.Component {
       console.log(error);
     });
   }
-
-  // fetchWeather(data) {
-  //   console.log(data);
-  // }
 
   render() {
   	console.log(this.props.params);

@@ -6,6 +6,7 @@ import Geosuggest from 'react-geosuggest';
 
 require('../stylesheets/main.scss');
 
+
 // Search box for users to input city
 class SearchBar extends React.Component {
   constructor(props) {
@@ -25,12 +26,6 @@ class SearchBar extends React.Component {
     browserHistory.push(`/weather/${this.state.country}/${this.state.city}/${this.state.state}`);
   }
 
-  handKeyPress(event) {
-    if (event.key = 'Enter') {
-      handleSubmit;
-    }
-  }
-
   // Sets the city that the user selects from the suggestions as the value ("city")
   onSuggestSelect(suggest) {
     let city = suggest.label.split(',')[0];
@@ -48,7 +43,6 @@ class SearchBar extends React.Component {
     country = country.replace(/ /g,"_");          // Replaces all spaces with underscores
     country = country.toLowerCase();
 
-    // console.log(suggest);
     // Takes the data from the selected suggestion and sets the state
     this.setState({
       city: city,
@@ -71,9 +65,5 @@ class SearchBar extends React.Component {
     )
   }
 }
-
-    // onSuggestSelect={(suggest) => {
-    //   this.onSuggestSelect(suggest);
-    // }}
 
 export default SearchBar;
