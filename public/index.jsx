@@ -9,6 +9,8 @@ import App from './components/app.jsx';
 import Home from './components/home.jsx';
 import Weather from './components/weather.jsx';
 
+require('./stylesheets/main.scss');
+
 render((
   <Router history={browserHistory}>
     <Route component={App}>

@@ -4,6 +4,7 @@ import React from 'react';
 import { browserHistory } from 'react-router';
 import Geosuggest from 'react-geosuggest';
 
+require('../stylesheets/main.scss');
 
 // Search box for users to input city
 class SearchBar extends React.Component {
@@ -35,13 +36,17 @@ class SearchBar extends React.Component {
     let city = suggest.label.split(',')[0];
     city = city.split(' - ')[0];                  // Separate strings into substrings that are divided by ' - ' (space, dash, space)
     city = city.replace(/ /g,"_");                // Replaces all spaces with underscores
+    city = city.toLowerCase();
 
     let state = suggest.label.split(',')[1];
+    state = state.trim();
+    state = state.toLowerCase();
     console.log(state);
 
     let country = suggest.label.split(',').pop();
     country = country.trim();                     // Removes all spaces before or after string
     country = country.replace(/ /g,"_");          // Replaces all spaces with underscores
+    country = country.toLowerCase();
 
     // console.log(suggest);
     // Takes the data from the selected suggestion and sets the state
@@ -61,7 +66,7 @@ class SearchBar extends React.Component {
           value={this.state.city}
           onSuggestSelect={this.onSuggestSelect}
         />
-        <input type="submit" value="Search" />
+        <input type="submit" value="Search" className="button" />
       </form>
     )
   }

@@ -25,6 +25,11 @@ module.exports = {
         options: { presets: ['es2015'] },
         exclude: [/node_modules/]
       },
+      {
+        test: /\.scss$/,
+        // include: [path.resolve(__dirname, './public/stylesheets')],
+        loader: 'style-loader!css-loader!sass-loader'
+      }
     ]
   }
 };
