@@ -1,4 +1,4 @@
-// ./components/weather-card.jsx
+// ./jsx/weather-card.jsx
 
 import React from 'react';
 import ForecastHourly from './forecast-hourly.jsx';

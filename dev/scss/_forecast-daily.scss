@@ -1,0 +1,33 @@
+.main {
+  background-image: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+  font-family: Avenir Next;
+  padding: 200px 0;
+  text-align: center;
+
+  h1 {
+    color: white;
+    font-weight: normal;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bolder;
+  letter-spacing: 4px;
+}
+
+.tagline {
+  color: #ffffff;
+}
+
+#root {
+  height: 100%;
+}
+
+form {
+  display: inline-block;
+}

@@ -1,15 +1,13 @@
-// ./public/index.jsx
+// ./dev/index.jsx
 
 import React from 'react';
 import { render } from 'react-dom';
 import { Router, Route, IndexRoute, Link, browserHistory } from 'react-router';
 
 // Import custom components
-import App from './components/app.jsx';
-import Home from './components/home.jsx';
-import FetchWeather from './components/weather.jsx';
-
-require('./stylesheets/main.scss');
+import App from './jsx/app.jsx';
+import Home from './jsx/home.jsx';
+import FetchWeather from './jsx/weather.jsx';
 
 render((
   <Router history={browserHistory}>

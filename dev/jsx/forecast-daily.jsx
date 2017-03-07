@@ -1,4 +1,4 @@
-// ./components/forecast-daily.jsx;
+// ./jsx/forecast-daily.jsx;
 
 import React from 'react';
 

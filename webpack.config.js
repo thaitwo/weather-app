@@ -1,14 +1,20 @@
-var path = require('path');
-var webpack = require('webpack');
+const path = require('path');
+const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+const extractSass = new ExtractTextPlugin({
+  filename: "css/styles.css",
+  disable: process.env.NODE_ENV === "development"
+});
 
 module.exports = {
-  context: path.resolve(__dirname, './public'),
+  context: path.resolve(__dirname, 'dev'),
   entry: {
     app: './index.jsx',
   },
   output: {
-    path: path.resolve(__dirname, './dist'),
-    filename: '[name].compile.js',
+    path: path.resolve(__dirname, 'public'),
+    filename: 'js/[name].compile.js',
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json']
@@ -27,8 +33,18 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loader: 'style-loader!css-loader!sass-loader'
+        loader: extractSass.extract({
+          use: [{ loader: 'css-loader' }, { loader: 'sass-loader' }],
+          // use style-loader in development
+          fallback: 'style-loader'
+        })
       }
     ]
-  }
+  },
+  plugins: [
+    extractSass
+  ]
 };
+
+// Top directory shoudl be either resources or asset folder
+  // Put all uncompiled files in this folder

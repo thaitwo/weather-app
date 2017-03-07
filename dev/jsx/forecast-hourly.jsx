@@ -1,4 +1,4 @@
-// ./components/forecast-hourly.jsx
+// ./jsx/forecast-hourly.jsx
 
 import React from 'react';
 

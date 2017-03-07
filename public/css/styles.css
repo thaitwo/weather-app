@@ -1,0 +1,160 @@
+/*
+** BASE
+**
+*/
+html {
+  box-sizing: border-box; }
+
+*, *:before, *:after {
+  box-sizing: inherit; }
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+/*
+** SEARCH BAR
+**
+*/
+.geosuggest {
+  float: left; }
+
+.geosuggest__input {
+  border: 0;
+  border-radius: 2px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.08), 0px 2px 4px rgba(0, 0, 0, 0.08);
+  font-family: "Avenir Next";
+  font-size: 16px;
+  padding: 12px 18px;
+  width: 550px; }
+  .geosuggest__input:focus {
+    outline: 0; }
+
+.geosuggest__suggests {
+  background-color: white;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.16), 0px 2px 8px rgba(0, 0, 0, 0.16);
+  margin-top: -1px; }
+  .geosuggest__suggests li {
+    padding: 10px 0 10px 18px;
+    text-align: left; }
+    .geosuggest__suggests li:hover {
+      background-color: rgba(0, 0, 0, 0.08);
+      cursor: pointer; }
+
+::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  color: rgba(0, 0, 0, 0.15); }
+
+.search-bar {
+  margin: 50px 0; }
+
+.button {
+  background-color: rgba(0, 0, 0, 0.25);
+  border: 0px;
+  color: white;
+  cursor: pointer;
+  display: inline;
+  float: right;
+  font-family: "Avenir Next";
+  font-size: 16px;
+  padding: 12px 40px; }
+
+/*
+** FLEX
+**
+*/
+.is-round {
+  border-radius: 2px; }
+
+.l-flex {
+  display: flex; }
+  .l-flex.is-hori {
+    flex-direction: row; }
+  .l-flex.is-hori-rev {
+    flex-direction: row-reverse; }
+  .l-flex.is-vert {
+    flex-direction: column; }
+  .l-flex.is-vert-rev {
+    flex-direction: column-reverse; }
+  .l-flex.align-hori-left {
+    justify-content: left; }
+  .l-flex.align-hori-center {
+    justify-content: center; }
+  .l-flex.align-vert-center {
+    align-items: center; }
+  .l-flex.align-vert-flex-start {
+    align-items: flex-start; }
+  .l-flex.align-hori-space-between {
+    justify-content: space-between; }
+  .l-flex.align-hori-space-around {
+    justify-content: space-around; }
+  .l-flex.flex-wrap {
+    flex-wrap: wrap; }
+
+/*
+** WEATHER DATA
+**
+*/
+.main {
+  background-image: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+  font-family: Avenir Next;
+  padding: 200px 0;
+  text-align: center; }
+  .main h1 {
+    color: white;
+    font-weight: normal; }
+  .main a {
+    text-decoration: none; }
+
+.title {
+  font-size: 24px;
+  font-weight: bolder;
+  letter-spacing: 4px; }
+
+.tagline {
+  color: #ffffff; }
+
+#root {
+  height: 100%; }
+
+form {
+  display: inline-block; }
