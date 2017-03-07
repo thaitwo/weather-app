@@ -6,10 +6,6 @@ import SearchBar from './search-bar';
 import WeatherCard from './weather-card';
 import Geosuggest from 'react-geosuggest';
 
-const api_url_conditions = `http://api.wunderground.com/api/5332856fca0fe1e7/conditions/q/ca/san_francisco.json`;
-const api_url_forecast = `http://api.wunderground.com/api/5332856fca0fe1e7/forecast/q/ca/san_francisco.json`;
-
-
 class FetchWeather extends React.Component {
   constructor(props) {
     super(props);
@@ -61,6 +57,41 @@ class FetchWeather extends React.Component {
       hourCondition10: '',
       hourTemp10: '',
       hourPrecip10: '',
+      dailyWeekday1: '',
+      dailyMonth1: '',
+      dailyDay1: '',
+      dailyCondition1: '',
+      dailyTempHigh1: '',
+      dailyTempLow1: '',
+      dailyPrecip1: '',
+      dailyWeekday2: '',
+      dailyMonth2: '',
+      dailyDay2: '',
+      dailyCondition2: '',
+      dailyTempHigh2: '',
+      dailyTempLow2: '',
+      dailyPrecip2: '',
+      dailyWeekday3: '',
+      dailyMonth3: '',
+      dailyDay3: '',
+      dailyCondition3: '',
+      dailyTempHigh3: '',
+      dailyTempLow3: '',
+      dailyPrecip3: '',
+      dailyWeekday4: '',
+      dailyMonth4: '',
+      dailyDay4: '',
+      dailyCondition4: '',
+      dailyTempHigh4: '',
+      dailyTempLow4: '',
+      dailyPrecip4: '',
+      dailyWeekday5: '',
+      dailyMonth5: '',
+      dailyDay5: '',
+      dailyCondition5: '',
+      dailyTempHigh5: '',
+      dailyTempLow5: '',
+      dailyPrecip5: '',
     };
   }
 
@@ -70,11 +101,13 @@ class FetchWeather extends React.Component {
     axios.all([
       axios.get(`http://api.wunderground.com/api/5332856fca0fe1e7/conditions/q/${this.props.params.state}/${this.props.params.city}.json`),
       axios.get(`http://api.wunderground.com/api/5332856fca0fe1e7/forecast/q/${this.props.params.state}/${this.props.params.city}.json`),
-      axios.get(`http://api.wunderground.com/api/5332856fca0fe1e7/hourly/q/${this.props.params.state}/${this.props.params.city}.json`)
+      axios.get(`http://api.wunderground.com/api/5332856fca0fe1e7/hourly/q/${this.props.params.state}/${this.props.params.city}.json`),
+      axios.get(`http://api.wunderground.com/api/5332856fca0fe1e7/forecast10day/q/${this.props.params.state}/${this.props.params.city}.json`)
     ])
-    .then(axios.spread((conditions, forecast, hourly) => {
+    .then(axios.spread((conditions, forecast, hourly, daily) => {
       const hourlyData = hourly.data.hourly_forecast;
       const conditionsData = conditions.data.current_observation;
+      const dailyData = daily.data.forecast.simpleforecast.forecastday;
 
       // Divide date string into substrings and get the first 3 strings (Mon, 06 Mar)
       let date = conditionsData.observation_time_rfc822;
@@ -134,8 +167,42 @@ class FetchWeather extends React.Component {
         hourPrecip10: hourlyData[9].pop,
 
         // Daily forecast
+        dailyWeekday1: dailyData[1].date.weekday_short,
+        dailyMonth1: dailyData[1].date.monthname_short,
+        dailyDay1: dailyData[1].date.day,
+        dailyCondition1: dailyData[1].conditions,
+        dailyTempHigh1: dailyData[1].high.fahrenheit,
+        dailyTempLow1: dailyData[1].low.fahrenheit,
+        dailyPrecip1: dailyData[1].pop,
+        dailyWeekday2: dailyData[2].date.weekday_short,
+        dailyMonth2: dailyData[2].date.monthname_short,
+        dailyDay2: dailyData[2].date.day,
+        dailyCondition2: dailyData[2].conditions,
+        dailyTempHigh2: dailyData[2].high.fahrenheit,
+        dailyTempLow2: dailyData[2].low.fahrenheit,
+        dailyPrecip2: dailyData[2].pop,
+        dailyWeekday3: dailyData[3].date.weekday_short,
+        dailyMonth3: dailyData[3].date.monthname_short,
+        dailyDay3: dailyData[3].date.day,
+        dailyCondition3: dailyData[3].conditions,
+        dailyTempHigh3: dailyData[3].high.fahrenheit,
+        dailyTempLow3: dailyData[3].low.fahrenheit,
+        dailyPrecip3: dailyData[3].pop,
+        dailyWeekday4: dailyData[4].date.weekday_short,
+        dailyMonth4: dailyData[4].date.monthname_short,
+        dailyDay4: dailyData[4].date.day,
+        dailyCondition4: dailyData[4].conditions,
+        dailyTempHigh4: dailyData[4].high.fahrenheit,
+        dailyTempLow4: dailyData[4].low.fahrenheit,
+        dailyPrecip4: dailyData[4].pop,
+        dailyWeekday5: dailyData[5].date.weekday_short,
+        dailyMonth5: dailyData[5].date.monthname_short,
+        dailyDay5: dailyData[5].date.day,
+        dailyCondition5: dailyData[5].conditions,
+        dailyTempHigh5: dailyData[5].high.fahrenheit,
+        dailyTempLow5: dailyData[5].low.fahrenheit,
+        dailyPrecip5: dailyData[5].pop,
       });
-      console.log(conditions, forecast, hourly);
     }))
     .catch(function (error) {
       console.log(error);
@@ -143,7 +210,6 @@ class FetchWeather extends React.Component {
   }
 
   render() {
-  	console.log(this.props.params);
     return (
       <div>
         <SearchBar />
@@ -195,6 +261,41 @@ class FetchWeather extends React.Component {
           hourCondition10={this.state.hourCondition10}
           hourTemp10={this.state.hourTemp10}
           hourPrecip10={this.state.hourPrecip10}
+          dailyWeekday1={this.state.dailyWeekday1}
+          dailyMonth1={this.state.dailyMonth1}
+          dailyDay1={this.state.dailyDay1}
+          dailyCondition1={this.state.dailyCondition1}
+          dailyTempHigh1={this.state.dailyTempHigh1}
+          dailyTempLow1={this.state.dailyTempLow1}
+          dailyPrecip1={this.state.dailyPrecip1}
+          dailyWeekday2={this.state.dailyWeekday2}
+          dailyMonth2={this.state.dailyMonth2}
+          dailyDay2={this.state.dailyDay2}
+          dailyCondition2={this.state.dailyCondition2}
+          dailyTempHigh2={this.state.dailyTempHigh2}
+          dailyTempLow2={this.state.dailyTempLow2}
+          dailyPrecip2={this.state.dailyPrecip2}
+          dailyWeekday3={this.state.dailyWeekday3}
+          dailyMonth3={this.state.dailyMonth3}
+          dailyDay3={this.state.dailyDay3}
+          dailyCondition3={this.state.dailyCondition3}
+          dailyTempHigh3={this.state.dailyTempHigh3}
+          dailyTempLow3={this.state.dailyTempLow3}
+          dailyPrecip3={this.state.dailyPrecip3}
+          dailyWeekday4={this.state.dailyWeekday4}
+          dailyMonth4={this.state.dailyMonth4}
+          dailyDay4={this.state.dailyDay4}
+          dailyCondition4={this.state.dailyCondition4}
+          dailyTempHigh4={this.state.dailyTempHigh4}
+          dailyTempLow4={this.state.dailyTempLow4}
+          dailyPrecip4={this.state.dailyPrecip4}
+          dailyWeekday5={this.state.dailyWeekday5}
+          dailyMonth5={this.state.dailyMonth5}
+          dailyDay5={this.state.dailyDay5}
+          dailyCondition5={this.state.dailyCondition5}
+          dailyTempHigh5={this.state.dailyTempHigh5}
+          dailyTempLow5={this.state.dailyTempLow5}
+          dailyPrecip5={this.state.dailyPrecip5}
         />
       </div>
     );
@@ -202,6 +303,3 @@ class FetchWeather extends React.Component {
 }
 
 export default FetchWeather;
-
-
- // _.find(team, (user, index) => user.id === 1);

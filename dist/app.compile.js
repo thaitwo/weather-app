@@ -9486,7 +9486,6 @@ var SearchBar = function (_React$Component) {
       var state = suggest.label.split(',')[1];
       state = state.trim();
       state = state.toLowerCase();
-      console.log(state);
 
       var country = suggest.label.split(',').pop();
       country = country.trim(); // Removes all spaces before or after string
@@ -13974,7 +13973,7 @@ var _searchBar = __webpack_require__(86);
 
 var _searchBar2 = _interopRequireDefault(_searchBar);
 
-var _weatherCard = __webpack_require__(150);
+var _weatherCard = __webpack_require__(152);
 
 var _weatherCard2 = _interopRequireDefault(_weatherCard);
 
@@ -13989,9 +13988,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // ./components/weather.jsx
-
-var api_url_conditions = 'http://api.wunderground.com/api/5332856fca0fe1e7/conditions/q/ca/san_francisco.json';
-var api_url_forecast = 'http://api.wunderground.com/api/5332856fca0fe1e7/forecast/q/ca/san_francisco.json';
 
 var FetchWeather = function (_React$Component) {
   _inherits(FetchWeather, _React$Component);
@@ -14048,7 +14044,42 @@ var FetchWeather = function (_React$Component) {
       hourTime10: '',
       hourCondition10: '',
       hourTemp10: '',
-      hourPrecip10: ''
+      hourPrecip10: '',
+      dailyWeekday1: '',
+      dailyMonth1: '',
+      dailyDay1: '',
+      dailyCondition1: '',
+      dailyTempHigh1: '',
+      dailyTempLow1: '',
+      dailyPrecip1: '',
+      dailyWeekday2: '',
+      dailyMonth2: '',
+      dailyDay2: '',
+      dailyCondition2: '',
+      dailyTempHigh2: '',
+      dailyTempLow2: '',
+      dailyPrecip2: '',
+      dailyWeekday3: '',
+      dailyMonth3: '',
+      dailyDay3: '',
+      dailyCondition3: '',
+      dailyTempHigh3: '',
+      dailyTempLow3: '',
+      dailyPrecip3: '',
+      dailyWeekday4: '',
+      dailyMonth4: '',
+      dailyDay4: '',
+      dailyCondition4: '',
+      dailyTempHigh4: '',
+      dailyTempLow4: '',
+      dailyPrecip4: '',
+      dailyWeekday5: '',
+      dailyMonth5: '',
+      dailyDay5: '',
+      dailyCondition5: '',
+      dailyTempHigh5: '',
+      dailyTempLow5: '',
+      dailyPrecip5: ''
     };
     return _this;
   }
@@ -14062,9 +14093,10 @@ var FetchWeather = function (_React$Component) {
       var _this2 = this;
 
       // Request data from two APIs simultaneously
-      _axios2.default.all([_axios2.default.get('http://api.wunderground.com/api/5332856fca0fe1e7/conditions/q/' + this.props.params.state + '/' + this.props.params.city + '.json'), _axios2.default.get('http://api.wunderground.com/api/5332856fca0fe1e7/forecast/q/' + this.props.params.state + '/' + this.props.params.city + '.json'), _axios2.default.get('http://api.wunderground.com/api/5332856fca0fe1e7/hourly/q/' + this.props.params.state + '/' + this.props.params.city + '.json')]).then(_axios2.default.spread(function (conditions, forecast, hourly) {
+      _axios2.default.all([_axios2.default.get('http://api.wunderground.com/api/5332856fca0fe1e7/conditions/q/' + this.props.params.state + '/' + this.props.params.city + '.json'), _axios2.default.get('http://api.wunderground.com/api/5332856fca0fe1e7/forecast/q/' + this.props.params.state + '/' + this.props.params.city + '.json'), _axios2.default.get('http://api.wunderground.com/api/5332856fca0fe1e7/hourly/q/' + this.props.params.state + '/' + this.props.params.city + '.json'), _axios2.default.get('http://api.wunderground.com/api/5332856fca0fe1e7/forecast10day/q/' + this.props.params.state + '/' + this.props.params.city + '.json')]).then(_axios2.default.spread(function (conditions, forecast, hourly, daily) {
         var hourlyData = hourly.data.hourly_forecast;
         var conditionsData = conditions.data.current_observation;
+        var dailyData = daily.data.forecast.simpleforecast.forecastday;
 
         // Divide date string into substrings and get the first 3 strings (Mon, 06 Mar)
         var date = conditionsData.observation_time_rfc822;
@@ -14121,10 +14153,45 @@ var FetchWeather = function (_React$Component) {
           hourTime10: hourlyData[9].FCTTIME.civil,
           hourCondition10: hourlyData[9].condition,
           hourTemp10: hourlyData[9].temp.english,
-          hourPrecip10: hourlyData[9].pop
+          hourPrecip10: hourlyData[9].pop,
 
+          // Daily forecast
+          dailyWeekday1: dailyData[1].date.weekday_short,
+          dailyMonth1: dailyData[1].date.monthname_short,
+          dailyDay1: dailyData[1].date.day,
+          dailyCondition1: dailyData[1].conditions,
+          dailyTempHigh1: dailyData[1].high.fahrenheit,
+          dailyTempLow1: dailyData[1].low.fahrenheit,
+          dailyPrecip1: dailyData[1].pop,
+          dailyWeekday2: dailyData[2].date.weekday_short,
+          dailyMonth2: dailyData[2].date.monthname_short,
+          dailyDay2: dailyData[2].date.day,
+          dailyCondition2: dailyData[2].conditions,
+          dailyTempHigh2: dailyData[2].high.fahrenheit,
+          dailyTempLow2: dailyData[2].low.fahrenheit,
+          dailyPrecip2: dailyData[2].pop,
+          dailyWeekday3: dailyData[3].date.weekday_short,
+          dailyMonth3: dailyData[3].date.monthname_short,
+          dailyDay3: dailyData[3].date.day,
+          dailyCondition3: dailyData[3].conditions,
+          dailyTempHigh3: dailyData[3].high.fahrenheit,
+          dailyTempLow3: dailyData[3].low.fahrenheit,
+          dailyPrecip3: dailyData[3].pop,
+          dailyWeekday4: dailyData[4].date.weekday_short,
+          dailyMonth4: dailyData[4].date.monthname_short,
+          dailyDay4: dailyData[4].date.day,
+          dailyCondition4: dailyData[4].conditions,
+          dailyTempHigh4: dailyData[4].high.fahrenheit,
+          dailyTempLow4: dailyData[4].low.fahrenheit,
+          dailyPrecip4: dailyData[4].pop,
+          dailyWeekday5: dailyData[5].date.weekday_short,
+          dailyMonth5: dailyData[5].date.monthname_short,
+          dailyDay5: dailyData[5].date.day,
+          dailyCondition5: dailyData[5].conditions,
+          dailyTempHigh5: dailyData[5].high.fahrenheit,
+          dailyTempLow5: dailyData[5].low.fahrenheit,
+          dailyPrecip5: dailyData[5].pop
         });
-        console.log(conditions, forecast, hourly);
       })).catch(function (error) {
         console.log(error);
       });
@@ -14132,7 +14199,6 @@ var FetchWeather = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      console.log(this.props.params);
       return _react2.default.createElement(
         'div',
         null,
@@ -14184,7 +14250,42 @@ var FetchWeather = function (_React$Component) {
           hourTime10: this.state.hourTime10,
           hourCondition10: this.state.hourCondition10,
           hourTemp10: this.state.hourTemp10,
-          hourPrecip10: this.state.hourPrecip10
+          hourPrecip10: this.state.hourPrecip10,
+          dailyWeekday1: this.state.dailyWeekday1,
+          dailyMonth1: this.state.dailyMonth1,
+          dailyDay1: this.state.dailyDay1,
+          dailyCondition1: this.state.dailyCondition1,
+          dailyTempHigh1: this.state.dailyTempHigh1,
+          dailyTempLow1: this.state.dailyTempLow1,
+          dailyPrecip1: this.state.dailyPrecip1,
+          dailyWeekday2: this.state.dailyWeekday2,
+          dailyMonth2: this.state.dailyMonth2,
+          dailyDay2: this.state.dailyDay2,
+          dailyCondition2: this.state.dailyCondition2,
+          dailyTempHigh2: this.state.dailyTempHigh2,
+          dailyTempLow2: this.state.dailyTempLow2,
+          dailyPrecip2: this.state.dailyPrecip2,
+          dailyWeekday3: this.state.dailyWeekday3,
+          dailyMonth3: this.state.dailyMonth3,
+          dailyDay3: this.state.dailyDay3,
+          dailyCondition3: this.state.dailyCondition3,
+          dailyTempHigh3: this.state.dailyTempHigh3,
+          dailyTempLow3: this.state.dailyTempLow3,
+          dailyPrecip3: this.state.dailyPrecip3,
+          dailyWeekday4: this.state.dailyWeekday4,
+          dailyMonth4: this.state.dailyMonth4,
+          dailyDay4: this.state.dailyDay4,
+          dailyCondition4: this.state.dailyCondition4,
+          dailyTempHigh4: this.state.dailyTempHigh4,
+          dailyTempLow4: this.state.dailyTempLow4,
+          dailyPrecip4: this.state.dailyPrecip4,
+          dailyWeekday5: this.state.dailyWeekday5,
+          dailyMonth5: this.state.dailyMonth5,
+          dailyDay5: this.state.dailyDay5,
+          dailyCondition5: this.state.dailyCondition5,
+          dailyTempHigh5: this.state.dailyTempHigh5,
+          dailyTempLow5: this.state.dailyTempLow5,
+          dailyPrecip5: this.state.dailyPrecip5
         })
       );
     }
@@ -14194,8 +14295,6 @@ var FetchWeather = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = FetchWeather;
-
-// _.find(team, (user, index) => user.id === 1);
 
 /***/ }),
 /* 131 */
@@ -15065,9 +15164,531 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _forecastHour = __webpack_require__(288);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _forecastHour2 = _interopRequireDefault(_forecastHour);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // ./components/forecast-daily.jsx;
+
+var ForecastDaily = function (_React$Component) {
+  _inherits(ForecastDaily, _React$Component);
+
+  function ForecastDaily(props) {
+    _classCallCheck(this, ForecastDaily);
+
+    return _possibleConstructorReturn(this, (ForecastDaily.__proto__ || Object.getPrototypeOf(ForecastDaily)).call(this, props));
+  }
+
+  _createClass(ForecastDaily, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            'h4',
+            null,
+            this.props.dailyWeekday1,
+            ', ',
+            this.props.dailyMonth1,
+            ' ',
+            this.props.dailyDay1
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
+            this.props.dailyCondition1
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
+            this.props.dailyTempHigh1,
+            '\xB0 / ',
+            this.props.dailyTempLow1,
+            '\xB0'
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
+            this.props.dailyPrecip1,
+            '%'
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            'h4',
+            null,
+            this.props.dailyWeekday2,
+            ', ',
+            this.props.dailyMonth2,
+            ' ',
+            this.props.dailyDay2
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
+            this.props.dailyCondition2
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
+            this.props.dailyTempHigh2,
+            '\xB0 / ',
+            this.props.dailyTempLow2,
+            '\xB0'
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
+            this.props.dailyPrecip2,
+            '%'
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            'h4',
+            null,
+            this.props.dailyWeekday3,
+            ', ',
+            this.props.dailyMonth3,
+            ' ',
+            this.props.dailyDay3
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
+            this.props.dailyCondition3
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
+            this.props.dailyTempHigh3,
+            '\xB0 / ',
+            this.props.dailyTempLow3,
+            '\xB0'
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
+            this.props.dailyPrecip3,
+            '%'
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            'h4',
+            null,
+            this.props.dailyWeekday4,
+            ', ',
+            this.props.dailyMonth4,
+            ' ',
+            this.props.dailyDay4
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
+            this.props.dailyCondition4
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
+            this.props.dailyTempHigh4,
+            '\xB0 / ',
+            this.props.dailyTempLow4,
+            '\xB0'
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
+            this.props.dailyPrecip4,
+            '%'
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            'h4',
+            null,
+            this.props.dailyWeekday5,
+            ', ',
+            this.props.dailyMonth5,
+            ' ',
+            this.props.dailyDay5
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
+            this.props.dailyCondition5
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
+            this.props.dailyTempHigh5,
+            '\xB0 / ',
+            this.props.dailyTempLow5,
+            '\xB0'
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
+            this.props.dailyPrecip5,
+            '%'
+          )
+        )
+      );
+    }
+  }]);
+
+  return ForecastDaily;
+}(_react2.default.Component);
+
+exports.default = ForecastDaily;
+
+/***/ }),
+/* 151 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // ./components/forecast-hour.jsx
+
+var ForecastHourly = function (_React$Component) {
+  _inherits(ForecastHourly, _React$Component);
+
+  function ForecastHourly(props) {
+    _classCallCheck(this, ForecastHourly);
+
+    return _possibleConstructorReturn(this, (ForecastHourly.__proto__ || Object.getPrototypeOf(ForecastHourly)).call(this, props));
+  }
+
+  _createClass(ForecastHourly, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'ul',
+          null,
+          _react2.default.createElement(
+            'li',
+            null,
+            this.props.hourTime1
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            this.props.hourCondition1
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            this.props.hourTemp1,
+            ' \xB0F'
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            this.props.hourPrecip1,
+            '%'
+          )
+        ),
+        _react2.default.createElement(
+          'ul',
+          null,
+          _react2.default.createElement(
+            'li',
+            null,
+            this.props.hourTime2
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            this.props.hourCondition2
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            this.props.hourTemp2,
+            ' \xB0F'
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            this.props.hourPrecip2,
+            '%'
+          )
+        ),
+        _react2.default.createElement(
+          'ul',
+          null,
+          _react2.default.createElement(
+            'li',
+            null,
+            this.props.hourTime3
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            this.props.hourCondition3
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            this.props.hourTemp3,
+            ' \xB0F'
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            this.props.hourPrecip3,
+            '%'
+          )
+        ),
+        _react2.default.createElement(
+          'ul',
+          null,
+          _react2.default.createElement(
+            'li',
+            null,
+            this.props.hourTime4
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            this.props.hourCondition4
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            this.props.hourTemp4,
+            ' \xB0F'
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            this.props.hourPrecip4,
+            '%'
+          )
+        ),
+        _react2.default.createElement(
+          'ul',
+          null,
+          _react2.default.createElement(
+            'li',
+            null,
+            this.props.hourTime5
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            this.props.hourCondition5
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            this.props.hourTemp5,
+            ' \xB0F'
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            this.props.hourPrecip5,
+            '%'
+          )
+        ),
+        _react2.default.createElement(
+          'ul',
+          null,
+          _react2.default.createElement(
+            'li',
+            null,
+            this.props.hourTime6
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            this.props.hourCondition6
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            this.props.hourTemp6,
+            ' \xB0F'
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            this.props.hourPrecip6,
+            '%'
+          )
+        ),
+        _react2.default.createElement(
+          'ul',
+          null,
+          _react2.default.createElement(
+            'li',
+            null,
+            this.props.hourTime7
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            this.props.hourCondition7
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            this.props.hourTemp7,
+            ' \xB0F'
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            this.props.hourPrecip7,
+            '%'
+          )
+        ),
+        _react2.default.createElement(
+          'ul',
+          null,
+          _react2.default.createElement(
+            'li',
+            null,
+            this.props.hourTime8
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            this.props.hourCondition8
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            this.props.hourTemp8,
+            ' \xB0F'
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            this.props.hourPrecip8,
+            '%'
+          )
+        ),
+        _react2.default.createElement(
+          'ul',
+          null,
+          _react2.default.createElement(
+            'li',
+            null,
+            this.props.hourTime9
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            this.props.hourCondition9
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            this.props.hourTemp9,
+            ' \xB0F'
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            this.props.hourPrecip9,
+            '%'
+          )
+        ),
+        _react2.default.createElement(
+          'ul',
+          null,
+          _react2.default.createElement(
+            'li',
+            null,
+            this.props.hourTime10
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            this.props.hourCondition10
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            this.props.hourTemp10,
+            ' \xB0F'
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            this.props.hourPrecip10,
+            '%'
+          )
+        )
+      );
+    }
+  }]);
+
+  return ForecastHourly;
+}(_react2.default.Component);
+
+exports.default = ForecastHourly;
+
+/***/ }),
+/* 152 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _forecastHourly = __webpack_require__(151);
+
+var _forecastHourly2 = _interopRequireDefault(_forecastHourly);
+
+var _forecastDaily = __webpack_require__(150);
+
+var _forecastDaily2 = _interopRequireDefault(_forecastDaily);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -15105,47 +15726,52 @@ var WeatherCard = function (_React$Component) {
         _react2.default.createElement(
           'p',
           null,
-          'Condition: ',
-          this.props.condition
-        ),
-        _react2.default.createElement(
-          'p',
-          null,
           'Temp: ',
           this.props.temp,
           ' \xB0F'
         ),
         _react2.default.createElement(
-          'p',
+          'ul',
           null,
-          'Gusts ',
-          this.props.wind,
-          ' MPH'
-        ),
-        _react2.default.createElement(
-          'p',
-          null,
-          'Humidity: ',
-          this.props.humidity
-        ),
-        _react2.default.createElement(
-          'p',
-          null,
-          'Precipitation: ',
-          this.props.precip,
-          '%'
+          _react2.default.createElement(
+            'li',
+            null,
+            'Condition: ',
+            this.props.condition
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            'Gusts ',
+            this.props.wind,
+            ' MPH'
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            'Humidity: ',
+            this.props.humidity
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            'Precipitation: ',
+            this.props.precip,
+            '%'
+          )
         ),
         _react2.default.createElement(
           'h1',
           null,
           'HOURLY FORECAST'
         ),
-        _react2.default.createElement(_forecastHour2.default, this.props),
+        _react2.default.createElement(_forecastHourly2.default, this.props),
         _react2.default.createElement(
           'h1',
           null,
           '5 DAY FORECAST'
-        )
+        ),
+        _react2.default.createElement(_forecastDaily2.default, this.props)
       );
     }
   }]);
@@ -15156,8 +15782,6 @@ var WeatherCard = function (_React$Component) {
 exports.default = WeatherCard;
 
 /***/ }),
-/* 151 */,
-/* 152 */,
 /* 153 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -31143,316 +31767,6 @@ __webpack_require__(47);
     _react2.default.createElement(_reactRouter.Route, { path: '/weather/:country/:city/:state', component: _weather2.default })
   )
 ), document.getElementById('root'));
-
-/***/ }),
-/* 287 */,
-/* 288 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(4);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // ./components/forecast-hour.jsx
-
-var ForecastHour = function (_React$Component) {
-  _inherits(ForecastHour, _React$Component);
-
-  function ForecastHour(props) {
-    _classCallCheck(this, ForecastHour);
-
-    return _possibleConstructorReturn(this, (ForecastHour.__proto__ || Object.getPrototypeOf(ForecastHour)).call(this, props));
-  }
-
-  _createClass(ForecastHour, [{
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(
-          'ul',
-          null,
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourTime1
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourCondition1
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourTemp1,
-            ' \xB0F'
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourPrecip1,
-            '%'
-          )
-        ),
-        _react2.default.createElement(
-          'ul',
-          null,
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourTime2
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourCondition2
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourTemp2,
-            ' \xB0F'
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourPrecip2,
-            '%'
-          )
-        ),
-        _react2.default.createElement(
-          'ul',
-          null,
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourTime3
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourCondition3
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourTemp3,
-            ' \xB0F'
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourPrecip3,
-            '%'
-          )
-        ),
-        _react2.default.createElement(
-          'ul',
-          null,
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourTime4
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourCondition4
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourTemp4,
-            ' \xB0F'
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourPrecip4,
-            '%'
-          )
-        ),
-        _react2.default.createElement(
-          'ul',
-          null,
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourTime5
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourCondition5
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourTemp5,
-            ' \xB0F'
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourPrecip5,
-            '%'
-          )
-        ),
-        _react2.default.createElement(
-          'ul',
-          null,
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourTime6
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourCondition6
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourTemp6,
-            ' \xB0F'
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourPrecip6,
-            '%'
-          )
-        ),
-        _react2.default.createElement(
-          'ul',
-          null,
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourTime7
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourCondition7
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourTemp7,
-            ' \xB0F'
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourPrecip7,
-            '%'
-          )
-        ),
-        _react2.default.createElement(
-          'ul',
-          null,
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourTime8
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourCondition8
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourTemp8,
-            ' \xB0F'
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourPrecip8,
-            '%'
-          )
-        ),
-        _react2.default.createElement(
-          'ul',
-          null,
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourTime9
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourCondition9
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourTemp9,
-            ' \xB0F'
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourPrecip9,
-            '%'
-          )
-        ),
-        _react2.default.createElement(
-          'ul',
-          null,
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourTime10
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourCondition10
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourTemp10,
-            ' \xB0F'
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourPrecip10,
-            '%'
-          )
-        )
-      );
-    }
-  }]);
-
-  return ForecastHour;
-}(_react2.default.Component);
-
-exports.default = ForecastHour;
 
 /***/ })
 /******/ ]);
