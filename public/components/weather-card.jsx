@@ -12,14 +12,14 @@ class WeatherCard extends React.Component {
   render() {
     return (
       <div>
-        <p>{this.props.date}</p>
+        <p>{this.props.currentdate}</p>
         <h2>{this.props.cityname}</h2>
-        <p>Temp: {this.props.temp} °F</p>
+        <p>Temp: {this.props.currenttemp} °F</p>
         <ul>
-          <li>Condition: {this.props.condition}</li>
-          <li>Gusts {this.props.wind} MPH</li>
-          <li>Humidity: {this.props.humidity}</li>
-          <li>Precipitation: {this.props.precip}%</li>
+          <li>Condition: {this.props.currentcondition}</li>
+          <li>Gusts {this.props.currentwind} MPH</li>
+          <li>Humidity: {this.props.currenthumidity}</li>
+          <li>Precipitation: {this.props.currentprecip}%</li>
         </ul>
         <h1>HOURLY FORECAST</h1>
         <ForecastHourly {...this.props}/>

@@ -13999,12 +13999,12 @@ var FetchWeather = function (_React$Component) {
 
     _this.state = {
       cityname: '',
-      condition: '',
-      date: '',
-      humidity: '',
-      precip: '',
-      temp: '',
-      wind: '',
+      currentcondition: '',
+      currentdate: '',
+      currenthumidity: '',
+      currentprecip: '',
+      currenttemp: '',
+      currentwind: '',
       hourTime1: '',
       hourCondition1: '',
       hourTemp1: '',
@@ -14094,8 +14094,9 @@ var FetchWeather = function (_React$Component) {
 
       // Request data from two APIs simultaneously
       _axios2.default.all([_axios2.default.get('http://api.wunderground.com/api/5332856fca0fe1e7/conditions/q/' + this.props.params.state + '/' + this.props.params.city + '.json'), _axios2.default.get('http://api.wunderground.com/api/5332856fca0fe1e7/forecast/q/' + this.props.params.state + '/' + this.props.params.city + '.json'), _axios2.default.get('http://api.wunderground.com/api/5332856fca0fe1e7/hourly/q/' + this.props.params.state + '/' + this.props.params.city + '.json'), _axios2.default.get('http://api.wunderground.com/api/5332856fca0fe1e7/forecast10day/q/' + this.props.params.state + '/' + this.props.params.city + '.json')]).then(_axios2.default.spread(function (conditions, forecast, hourly, daily) {
-        var hourlyData = hourly.data.hourly_forecast;
         var conditionsData = conditions.data.current_observation;
+        var forecastData = forecast.data.forecast.simpleforecast.forecastday;
+        var hourlyData = hourly.data.hourly_forecast;
         var dailyData = daily.data.forecast.simpleforecast.forecastday;
 
         // Divide date string into substrings and get the first 3 strings (Mon, 06 Mar)
@@ -14106,12 +14107,12 @@ var FetchWeather = function (_React$Component) {
         _this2.setState({
           // Current conditions
           cityname: conditionsData.display_location.full,
-          condition: conditionsData.weather,
-          date: date,
-          humidity: conditionsData.relative_humidity,
-          precip: forecast.data.forecast.simpleforecast.forecastday[0].pop,
-          temp: conditionsData.temp_f,
-          wind: conditionsData.wind_gust_mph,
+          currentcondition: conditionsData.weather,
+          currentdate: date,
+          currenthumidity: conditionsData.relative_humidity,
+          currentprecip: forecastData[0].pop,
+          currenttemp: conditionsData.temp_f,
+          currentwind: conditionsData.wind_gust_mph,
 
           // Hourly forecast
           hourTime1: hourlyData[0].FCTTIME.civil,
@@ -14205,12 +14206,12 @@ var FetchWeather = function (_React$Component) {
         _react2.default.createElement(_searchBar2.default, null),
         _react2.default.createElement(_weatherCard2.default, {
           cityname: this.state.cityname,
-          condition: this.state.condition,
-          date: this.state.date,
-          humidity: this.state.humidity,
-          precip: this.state.precip,
-          temp: this.state.temp,
-          wind: this.state.wind,
+          currentcondition: this.state.currentcondition,
+          currentdate: this.state.currentdate,
+          currenthumidity: this.state.currenthumidity,
+          currentprecip: this.state.currentprecip,
+          currenttemp: this.state.currenttemp,
+          currentwind: this.state.currentwind,
           hourTime1: this.state.hourTime1,
           hourCondition1: this.state.hourCondition1,
           hourTemp1: this.state.hourTemp1,
@@ -15379,7 +15380,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // ./components/forecast-hour.jsx
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // ./components/forecast-hourly.jsx
 
 var ForecastHourly = function (_React$Component) {
   _inherits(ForecastHourly, _React$Component);
@@ -15716,7 +15717,7 @@ var WeatherCard = function (_React$Component) {
         _react2.default.createElement(
           'p',
           null,
-          this.props.date
+          this.props.currentdate
         ),
         _react2.default.createElement(
           'h2',
@@ -15727,7 +15728,7 @@ var WeatherCard = function (_React$Component) {
           'p',
           null,
           'Temp: ',
-          this.props.temp,
+          this.props.currenttemp,
           ' \xB0F'
         ),
         _react2.default.createElement(
@@ -15737,26 +15738,26 @@ var WeatherCard = function (_React$Component) {
             'li',
             null,
             'Condition: ',
-            this.props.condition
+            this.props.currentcondition
           ),
           _react2.default.createElement(
             'li',
             null,
             'Gusts ',
-            this.props.wind,
+            this.props.currentwind,
             ' MPH'
           ),
           _react2.default.createElement(
             'li',
             null,
             'Humidity: ',
-            this.props.humidity
+            this.props.currenthumidity
           ),
           _react2.default.createElement(
             'li',
             null,
             'Precipitation: ',
-            this.props.precip,
+            this.props.currentprecip,
             '%'
           )
         ),

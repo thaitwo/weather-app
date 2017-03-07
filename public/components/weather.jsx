@@ -11,12 +11,12 @@ class FetchWeather extends React.Component {
     super(props);
     this.state = {
       cityname: '',
-      condition: '',
-      date: '',
-      humidity: '',
-      precip: '',
-      temp: '',
-      wind: '',
+      currentcondition: '',
+      currentdate: '',
+      currenthumidity: '',
+      currentprecip: '',
+      currenttemp: '',
+      currentwind: '',
       hourTime1: '',
       hourCondition1: '',
       hourTemp1: '',
@@ -105,8 +105,9 @@ class FetchWeather extends React.Component {
       axios.get(`http://api.wunderground.com/api/5332856fca0fe1e7/forecast10day/q/${this.props.params.state}/${this.props.params.city}.json`)
     ])
     .then(axios.spread((conditions, forecast, hourly, daily) => {
-      const hourlyData = hourly.data.hourly_forecast;
       const conditionsData = conditions.data.current_observation;
+      const forecastData = forecast.data.forecast.simpleforecast.forecastday;
+      const hourlyData = hourly.data.hourly_forecast;
       const dailyData = daily.data.forecast.simpleforecast.forecastday;
 
       // Divide date string into substrings and get the first 3 strings (Mon, 06 Mar)
@@ -117,12 +118,12 @@ class FetchWeather extends React.Component {
       this.setState({
         // Current conditions
         cityname: conditionsData.display_location.full,
-        condition: conditionsData.weather,
-        date: date,
-        humidity: conditionsData.relative_humidity,
-        precip: forecast.data.forecast.simpleforecast.forecastday[0].pop,
-        temp: conditionsData.temp_f,
-        wind: conditionsData.wind_gust_mph,
+        currentcondition: conditionsData.weather,
+        currentdate: date,
+        currenthumidity: conditionsData.relative_humidity,
+        currentprecip: forecastData[0].pop,
+        currenttemp: conditionsData.temp_f,
+        currentwind: conditionsData.wind_gust_mph,
 
         // Hourly forecast
         hourTime1: hourlyData[0].FCTTIME.civil,
@@ -215,12 +216,12 @@ class FetchWeather extends React.Component {
         <SearchBar />
         <WeatherCard
           cityname={this.state.cityname}
-          condition={this.state.condition}
-          date={this.state.date}
-          humidity={this.state.humidity}
-          precip={this.state.precip}
-          temp={this.state.temp}
-          wind={this.state.wind}
+          currentcondition={this.state.currentcondition}
+          currentdate={this.state.currentdate}
+          currenthumidity={this.state.currenthumidity}
+          currentprecip={this.state.currentprecip}
+          currenttemp={this.state.currenttemp}
+          currentwind={this.state.currentwind}
           hourTime1={this.state.hourTime1}
           hourCondition1={this.state.hourCondition1}
           hourTemp1={this.state.hourTemp1}
