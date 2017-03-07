@@ -1,6 +1,8 @@
 // ./components/weather-card.jsx
 
 import React from 'react';
+import ForecastHourly from './forecast-hourly.jsx';
+import ForecastDaily from './forecast-daily.jsx';
 
 class WeatherCard extends React.Component {
   constructor(props) {
@@ -10,13 +12,19 @@ class WeatherCard extends React.Component {
   render() {
     return (
       <div>
+        <p>{this.props.currentdate}</p>
         <h2>{this.props.cityname}</h2>
-        <p>{this.props.updated_time}</p>
-        <p>Condition: {this.props.condition}</p>
-        <p>Temp: {this.props.temp} °F</p>
-        <p>Wind: {this.props.wind}</p>
-        <p>Humidity: {this.props.humidity}</p>
-        <p>Precipitation: {this.props.precip}%</p>
+        <p>Temp: {this.props.currenttemp} °F</p>
+        <ul>
+          <li>Condition: {this.props.currentcondition}</li>
+          <li>Gusts {this.props.currentwind} MPH</li>
+          <li>Humidity: {this.props.currenthumidity}</li>
+          <li>Precipitation: {this.props.currentprecip}%</li>
+        </ul>
+        <h1>HOURLY FORECAST</h1>
+        <ForecastHourly {...this.props}/>
+        <h1>5 DAY FORECAST</h1>
+        <ForecastDaily {...this.props}/>
       </div>
     );
   }

@@ -36,7 +36,6 @@ class SearchBar extends React.Component {
     let state = suggest.label.split(',')[1];
     state = state.trim();
     state = state.toLowerCase();
-    console.log(state);
 
     let country = suggest.label.split(',').pop();
     country = country.trim();                     // Removes all spaces before or after string
