@@ -45,6 +45,3 @@ module.exports = {
     extractSass
   ]
 };
-
-// Top directory shoudl be either resources or asset folder
-  // Put all uncompiled files in this folder

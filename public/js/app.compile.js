@@ -9482,7 +9482,11 @@ var SearchBar = function (_React$Component) {
           value: this.state.city,
           onSuggestSelect: this.onSuggestSelect
         }),
-        _react2.default.createElement('input', { type: 'submit', value: 'Search', className: 'button is-round' })
+        _react2.default.createElement(
+          'button',
+          { type: 'submit', value: 'Search', className: 'button' },
+          _react2.default.createElement('i', { className: 'fa fa-search', 'aria-hidden': 'true' })
+        )
       );
     }
   }]);
@@ -13838,15 +13842,6 @@ var App = function (_React$Component) {
         _react2.default.createElement(
           'div',
           { className: 'container main' },
-          _react2.default.createElement(
-            _reactRouter.Link,
-            { to: '/' },
-            _react2.default.createElement(
-              'h1',
-              { className: 'title' },
-              'weathercast'
-            )
-          ),
           this.props.children
         )
       );
@@ -13904,12 +13899,21 @@ var Home = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(_searchBar2.default, { className: 'search-bar' }),
+        _react2.default.createElement(
+          _reactRouter.Link,
+          { to: '/' },
+          _react2.default.createElement(
+            'h1',
+            { className: 'title' },
+            'Weathercast'
+          )
+        ),
         _react2.default.createElement(
           'p',
           { className: 'tagline' },
-          'You choose the city. We\'ll forecast.'
-        )
+          'Bringing a splash of weather to your life.'
+        ),
+        _react2.default.createElement(_searchBar2.default, { className: 'search-bar' })
       );
     }
   }]);

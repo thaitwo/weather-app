@@ -8,8 +8,9 @@ class Home extends React.Component {
   render() {
     return (
       <div>
+        <Link to="/"><h1 className="title">Weathercast</h1></Link>
+        <p className="tagline">Bringing a splash of weather to your life.</p>
         <SearchBar className="search-bar"/>
-        <p className="tagline">You choose the city. We'll forecast.</p>
       </div>
     );
   }

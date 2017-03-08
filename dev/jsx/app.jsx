@@ -10,7 +10,6 @@ class App extends React.Component {
     return (
       // Contents from the child components will be inserted in this container <div>
       <div className="container main">
-        <Link to="/"><h1 className="title">weathercast</h1></Link>
         {this.props.children}
       </div>
     );

@@ -56,7 +56,7 @@ class SearchBar extends React.Component {
           value={this.state.city}
           onSuggestSelect={this.onSuggestSelect}
         />
-        <input type="submit" value="Search" className="button is-round" />
+        <button type="submit" value="Search" className="button"><i className="fa fa-search" aria-hidden="true"></i></button>
       </form>
     )
   }
