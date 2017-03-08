@@ -1,33 +1,22 @@
-.main {
-  background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
-  padding: 120px 0 250px;
-  text-align: center;
-
-  a {
-    text-decoration: none;
-  }
-}
-
-.title {
-  color: #ffffff;
-  font-family: 'Patua One', cursive;
-  font-size: 64px;
-  font-weight: 300;
-  letter-spacing: 5px;
-  margin-bottom: 0px;
-}
-
-.tagline {
-  color: rgba(0, 0, 0, 0.15);
-  font-family: $font;
-  font-size: 24px;
-  font-weight: 300;
-}
-
-#root {
-  height: 100%;
-}
-
 form {
   display: inline-block;
+}
+
+.forecast-daily {
+  font-family: $font;
+  font-size: 20px;
+  font-weight: normal;
+  color: rgba(0, 0, 0, .8);
+  width: 100%;
+
+  ul {
+    background-color: rgba(0, 0, 0, .04);
+    border-radius: 2px;
+    padding: 30px;
+
+    h4 {
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+  }
 }

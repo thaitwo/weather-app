@@ -13841,8 +13841,12 @@ var App = function (_React$Component) {
         // Contents from the child components will be inserted in this container <div>
         _react2.default.createElement(
           'div',
-          { className: 'container main' },
-          this.props.children
+          { className: 'container' },
+          _react2.default.createElement(
+            'div',
+            { className: 'main' },
+            this.props.children
+          )
         )
       );
     }
@@ -13898,7 +13902,7 @@ var Home = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        null,
+        { className: 'homepage' },
         _react2.default.createElement(
           _reactRouter.Link,
           { to: '/' },
@@ -13911,7 +13915,7 @@ var Home = function (_React$Component) {
         _react2.default.createElement(
           'p',
           { className: 'tagline' },
-          'Bringing a splash of weather to your life.'
+          'Your daily splash of live weather.'
         ),
         _react2.default.createElement(_searchBar2.default, { className: 'search-bar' })
       );
@@ -15158,169 +15162,169 @@ var ForecastDaily = function (_React$Component) {
   }
 
   _createClass(ForecastDaily, [{
-    key: 'render',
+    key: "render",
     value: function render() {
       return _react2.default.createElement(
-        'div',
-        null,
+        "div",
+        { className: "forecast-daily l-flex is-hori align-hori-space-between" },
         _react2.default.createElement(
-          'div',
+          "ul",
           null,
           _react2.default.createElement(
-            'h4',
+            "h4",
             null,
             this.props.dailyWeekday1,
-            ', ',
+            ", ",
             this.props.dailyMonth1,
-            ' ',
+            " ",
             this.props.dailyDay1
           ),
           _react2.default.createElement(
-            'p',
+            "li",
             null,
             this.props.dailyCondition1
           ),
           _react2.default.createElement(
-            'p',
+            "li",
             null,
             this.props.dailyTempHigh1,
-            '\xB0 / ',
+            "\xB0 / ",
             this.props.dailyTempLow1,
-            '\xB0'
+            "\xB0"
           ),
           _react2.default.createElement(
-            'p',
+            "li",
             null,
             this.props.dailyPrecip1,
-            '%'
+            "%"
           )
         ),
         _react2.default.createElement(
-          'div',
+          "ul",
           null,
           _react2.default.createElement(
-            'h4',
+            "h4",
             null,
             this.props.dailyWeekday2,
-            ', ',
+            ", ",
             this.props.dailyMonth2,
-            ' ',
+            " ",
             this.props.dailyDay2
           ),
           _react2.default.createElement(
-            'p',
+            "li",
             null,
             this.props.dailyCondition2
           ),
           _react2.default.createElement(
-            'p',
+            "li",
             null,
             this.props.dailyTempHigh2,
-            '\xB0 / ',
+            "\xB0 / ",
             this.props.dailyTempLow2,
-            '\xB0'
+            "\xB0"
           ),
           _react2.default.createElement(
-            'p',
+            "li",
             null,
             this.props.dailyPrecip2,
-            '%'
+            "%"
           )
         ),
         _react2.default.createElement(
-          'div',
+          "ul",
           null,
           _react2.default.createElement(
-            'h4',
+            "h4",
             null,
             this.props.dailyWeekday3,
-            ', ',
+            ", ",
             this.props.dailyMonth3,
-            ' ',
+            " ",
             this.props.dailyDay3
           ),
           _react2.default.createElement(
-            'p',
+            "li",
             null,
             this.props.dailyCondition3
           ),
           _react2.default.createElement(
-            'p',
+            "li",
             null,
             this.props.dailyTempHigh3,
-            '\xB0 / ',
+            "\xB0 / ",
             this.props.dailyTempLow3,
-            '\xB0'
+            "\xB0"
           ),
           _react2.default.createElement(
-            'p',
+            "li",
             null,
             this.props.dailyPrecip3,
-            '%'
+            "%"
           )
         ),
         _react2.default.createElement(
-          'div',
+          "ul",
           null,
           _react2.default.createElement(
-            'h4',
+            "h4",
             null,
             this.props.dailyWeekday4,
-            ', ',
+            ", ",
             this.props.dailyMonth4,
-            ' ',
+            " ",
             this.props.dailyDay4
           ),
           _react2.default.createElement(
-            'p',
+            "li",
             null,
             this.props.dailyCondition4
           ),
           _react2.default.createElement(
-            'p',
+            "li",
             null,
             this.props.dailyTempHigh4,
-            '\xB0 / ',
+            "\xB0 / ",
             this.props.dailyTempLow4,
-            '\xB0'
+            "\xB0"
           ),
           _react2.default.createElement(
-            'p',
+            "li",
             null,
             this.props.dailyPrecip4,
-            '%'
+            "%"
           )
         ),
         _react2.default.createElement(
-          'div',
+          "ul",
           null,
           _react2.default.createElement(
-            'h4',
+            "h4",
             null,
             this.props.dailyWeekday5,
-            ', ',
+            ", ",
             this.props.dailyMonth5,
-            ' ',
+            " ",
             this.props.dailyDay5
           ),
           _react2.default.createElement(
-            'p',
+            "li",
             null,
             this.props.dailyCondition5
           ),
           _react2.default.createElement(
-            'p',
+            "li",
             null,
             this.props.dailyTempHigh5,
-            '\xB0 / ',
+            "\xB0 / ",
             this.props.dailyTempLow5,
-            '\xB0'
+            "\xB0"
           ),
           _react2.default.createElement(
-            'p',
+            "li",
             null,
             this.props.dailyPrecip5,
-            '%'
+            "%"
           )
         )
       );
@@ -15367,269 +15371,316 @@ var ForecastHourly = function (_React$Component) {
   }
 
   _createClass(ForecastHourly, [{
-    key: 'render',
+    key: "render",
     value: function render() {
       return _react2.default.createElement(
-        'div',
-        null,
+        "div",
+        { className: "forecast-hourly" },
         _react2.default.createElement(
-          'ul',
+          "table",
           null,
           _react2.default.createElement(
-            'li',
+            "thead",
             null,
-            this.props.hourTime1
+            _react2.default.createElement(
+              "tr",
+              { className: "l-flex is-hori align-hori-space-between" },
+              _react2.default.createElement(
+                "th",
+                null,
+                "TIME"
+              ),
+              _react2.default.createElement("th", null),
+              _react2.default.createElement(
+                "th",
+                null,
+                "CONDITION"
+              ),
+              _react2.default.createElement(
+                "th",
+                null,
+                "TEMPERATURE"
+              ),
+              _react2.default.createElement(
+                "th",
+                null,
+                "PRECIPITATION"
+              )
+            )
           ),
           _react2.default.createElement(
-            'li',
+            "tbody",
             null,
-            this.props.hourCondition1
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourTemp1,
-            ' \xB0F'
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourPrecip1,
-            '%'
-          )
-        ),
-        _react2.default.createElement(
-          'ul',
-          null,
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourTime2
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourCondition2
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourTemp2,
-            ' \xB0F'
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourPrecip2,
-            '%'
-          )
-        ),
-        _react2.default.createElement(
-          'ul',
-          null,
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourTime3
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourCondition3
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourTemp3,
-            ' \xB0F'
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourPrecip3,
-            '%'
-          )
-        ),
-        _react2.default.createElement(
-          'ul',
-          null,
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourTime4
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourCondition4
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourTemp4,
-            ' \xB0F'
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourPrecip4,
-            '%'
-          )
-        ),
-        _react2.default.createElement(
-          'ul',
-          null,
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourTime5
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourCondition5
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourTemp5,
-            ' \xB0F'
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourPrecip5,
-            '%'
-          )
-        ),
-        _react2.default.createElement(
-          'ul',
-          null,
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourTime6
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourCondition6
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourTemp6,
-            ' \xB0F'
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourPrecip6,
-            '%'
-          )
-        ),
-        _react2.default.createElement(
-          'ul',
-          null,
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourTime7
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourCondition7
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourTemp7,
-            ' \xB0F'
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourPrecip7,
-            '%'
-          )
-        ),
-        _react2.default.createElement(
-          'ul',
-          null,
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourTime8
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourCondition8
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourTemp8,
-            ' \xB0F'
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourPrecip8,
-            '%'
-          )
-        ),
-        _react2.default.createElement(
-          'ul',
-          null,
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourTime9
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourCondition9
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourTemp9,
-            ' \xB0F'
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourPrecip9,
-            '%'
-          )
-        ),
-        _react2.default.createElement(
-          'ul',
-          null,
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourTime10
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourCondition10
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourTemp10,
-            ' \xB0F'
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            this.props.hourPrecip10,
-            '%'
+            _react2.default.createElement(
+              "tr",
+              { className: "l-flex is-hori align-hori-space-between" },
+              _react2.default.createElement(
+                "td",
+                null,
+                this.props.hourTime1
+              ),
+              _react2.default.createElement("td", null),
+              _react2.default.createElement(
+                "td",
+                null,
+                this.props.hourCondition1
+              ),
+              _react2.default.createElement(
+                "td",
+                null,
+                this.props.hourTemp1,
+                " \xB0F"
+              ),
+              _react2.default.createElement(
+                "td",
+                null,
+                this.props.hourPrecip1,
+                "%"
+              )
+            ),
+            _react2.default.createElement(
+              "tr",
+              { className: "l-flex is-hori align-hori-space-between" },
+              _react2.default.createElement(
+                "td",
+                null,
+                this.props.hourTime2
+              ),
+              _react2.default.createElement("td", null),
+              _react2.default.createElement(
+                "td",
+                null,
+                this.props.hourCondition2
+              ),
+              _react2.default.createElement(
+                "td",
+                null,
+                this.props.hourTemp2,
+                " \xB0F"
+              ),
+              _react2.default.createElement(
+                "td",
+                null,
+                this.props.hourPrecip2,
+                "%"
+              )
+            ),
+            _react2.default.createElement(
+              "tr",
+              { className: "l-flex is-hori align-hori-space-between" },
+              _react2.default.createElement(
+                "td",
+                null,
+                this.props.hourTime3
+              ),
+              _react2.default.createElement("td", null),
+              _react2.default.createElement(
+                "td",
+                null,
+                this.props.hourCondition3
+              ),
+              _react2.default.createElement(
+                "td",
+                null,
+                this.props.hourTemp3,
+                " \xB0F"
+              ),
+              _react2.default.createElement(
+                "td",
+                null,
+                this.props.hourPrecip3,
+                "%"
+              )
+            ),
+            _react2.default.createElement(
+              "tr",
+              { className: "l-flex is-hori align-hori-space-between" },
+              _react2.default.createElement(
+                "td",
+                null,
+                this.props.hourTime4
+              ),
+              _react2.default.createElement("td", null),
+              _react2.default.createElement(
+                "td",
+                null,
+                this.props.hourCondition4
+              ),
+              _react2.default.createElement(
+                "td",
+                null,
+                this.props.hourTemp4,
+                " \xB0F"
+              ),
+              _react2.default.createElement(
+                "td",
+                null,
+                this.props.hourPrecip4,
+                "%"
+              )
+            ),
+            _react2.default.createElement(
+              "tr",
+              { className: "l-flex is-hori align-hori-space-between" },
+              _react2.default.createElement(
+                "td",
+                null,
+                this.props.hourTime5
+              ),
+              _react2.default.createElement("td", null),
+              _react2.default.createElement(
+                "td",
+                null,
+                this.props.hourCondition5
+              ),
+              _react2.default.createElement(
+                "td",
+                null,
+                this.props.hourTemp5,
+                " \xB0F"
+              ),
+              _react2.default.createElement(
+                "td",
+                null,
+                this.props.hourPrecip5,
+                "%"
+              )
+            ),
+            _react2.default.createElement(
+              "tr",
+              { className: "l-flex is-hori align-hori-space-between" },
+              _react2.default.createElement(
+                "td",
+                null,
+                this.props.hourTime6
+              ),
+              _react2.default.createElement("td", null),
+              _react2.default.createElement(
+                "td",
+                null,
+                this.props.hourCondition6
+              ),
+              _react2.default.createElement(
+                "td",
+                null,
+                this.props.hourTemp6,
+                " \xB0F"
+              ),
+              _react2.default.createElement(
+                "td",
+                null,
+                this.props.hourPrecip6,
+                "%"
+              )
+            ),
+            _react2.default.createElement(
+              "tr",
+              { className: "l-flex is-hori align-hori-space-between" },
+              _react2.default.createElement(
+                "td",
+                null,
+                this.props.hourTime7
+              ),
+              _react2.default.createElement("td", null),
+              _react2.default.createElement(
+                "td",
+                null,
+                this.props.hourCondition7
+              ),
+              _react2.default.createElement(
+                "td",
+                null,
+                this.props.hourTemp7,
+                " \xB0F"
+              ),
+              _react2.default.createElement(
+                "td",
+                null,
+                this.props.hourPrecip7,
+                "%"
+              )
+            ),
+            _react2.default.createElement(
+              "tr",
+              { className: "l-flex is-hori align-hori-space-between" },
+              _react2.default.createElement(
+                "td",
+                null,
+                this.props.hourTime8
+              ),
+              _react2.default.createElement("td", null),
+              _react2.default.createElement(
+                "td",
+                null,
+                this.props.hourCondition8
+              ),
+              _react2.default.createElement(
+                "td",
+                null,
+                this.props.hourTemp8,
+                " \xB0F"
+              ),
+              _react2.default.createElement(
+                "td",
+                null,
+                this.props.hourPrecip8,
+                "%"
+              )
+            ),
+            _react2.default.createElement(
+              "tr",
+              { className: "l-flex is-hori align-hori-space-between" },
+              _react2.default.createElement(
+                "td",
+                null,
+                this.props.hourTime9
+              ),
+              _react2.default.createElement("td", null),
+              _react2.default.createElement(
+                "td",
+                null,
+                this.props.hourCondition9
+              ),
+              _react2.default.createElement(
+                "td",
+                null,
+                this.props.hourTemp9,
+                " \xB0F"
+              ),
+              _react2.default.createElement(
+                "td",
+                null,
+                this.props.hourPrecip9,
+                "%"
+              )
+            ),
+            _react2.default.createElement(
+              "tr",
+              { className: "l-flex is-hori align-hori-space-between" },
+              _react2.default.createElement(
+                "td",
+                null,
+                this.props.hourTime10
+              ),
+              _react2.default.createElement("td", null),
+              _react2.default.createElement(
+                "td",
+                null,
+                this.props.hourCondition10
+              ),
+              _react2.default.createElement(
+                "td",
+                null,
+                this.props.hourTemp10,
+                " \xB0F"
+              ),
+              _react2.default.createElement(
+                "td",
+                null,
+                this.props.hourPrecip10,
+                "%"
+              )
+            )
           )
         )
       );
@@ -15690,62 +15741,89 @@ var WeatherCard = function (_React$Component) {
         'div',
         null,
         _react2.default.createElement(
-          'p',
-          null,
-          this.props.currentdate
-        ),
-        _react2.default.createElement(
-          'h2',
-          null,
-          this.props.cityname
-        ),
-        _react2.default.createElement(
-          'p',
-          null,
-          'Temp: ',
-          this.props.currenttemp,
-          ' \xB0F'
-        ),
-        _react2.default.createElement(
-          'ul',
-          null,
+          'div',
+          { className: 'weather-current' },
           _react2.default.createElement(
-            'li',
-            null,
-            'Condition: ',
-            this.props.currentcondition
+            'h2',
+            { className: 'city-name' },
+            this.props.cityname
           ),
           _react2.default.createElement(
-            'li',
-            null,
-            'Gusts ',
-            this.props.currentwind,
-            ' MPH'
+            'p',
+            { className: 'current-date' },
+            this.props.currentdate
           ),
           _react2.default.createElement(
-            'li',
+            'div',
             null,
-            'Humidity: ',
-            this.props.currenthumidity
+            _react2.default.createElement(
+              'p',
+              { className: 'current-temp' },
+              this.props.currenttemp,
+              ' ',
+              _react2.default.createElement(
+                'span',
+                null,
+                '\xB0F'
+              )
+            )
           ),
           _react2.default.createElement(
-            'li',
-            null,
-            'Precipitation: ',
-            this.props.currentprecip,
-            '%'
+            'div',
+            { className: 'current-info' },
+            _react2.default.createElement(
+              'h4',
+              { className: 'current-condition' },
+              this.props.currentcondition
+            ),
+            _react2.default.createElement(
+              'ul',
+              { className: 'current-data' },
+              _react2.default.createElement(
+                'li',
+                null,
+                'Precipitation ',
+                _react2.default.createElement(
+                  'span',
+                  null,
+                  this.props.currentprecip,
+                  '%'
+                )
+              ),
+              _react2.default.createElement(
+                'li',
+                null,
+                'Wind ',
+                _react2.default.createElement(
+                  'span',
+                  null,
+                  this.props.currentwind,
+                  ' mph'
+                )
+              ),
+              _react2.default.createElement(
+                'li',
+                null,
+                'Humidity ',
+                _react2.default.createElement(
+                  'span',
+                  null,
+                  this.props.currenthumidity
+                )
+              )
+            )
           )
         ),
         _react2.default.createElement(
           'h1',
-          null,
-          'HOURLY FORECAST'
+          { className: 'forecast-header' },
+          'Hourly Forecast'
         ),
         _react2.default.createElement(_forecastHourly2.default, this.props),
         _react2.default.createElement(
           'h1',
-          null,
-          '5 DAY FORECAST'
+          { className: 'forecast-header' },
+          '5 Day Forecast'
         ),
         _react2.default.createElement(_forecastDaily2.default, this.props)
       );

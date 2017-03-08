@@ -13,6 +13,8 @@
 
 @import 'search-bar';
 
+@import 'home';
+
 /*
 ** FLEX
 **
@@ -25,5 +27,6 @@
 **
 */
 
+@import 'current-weather';
 @import 'forecast-daily';
 @import 'forecast-hourly';

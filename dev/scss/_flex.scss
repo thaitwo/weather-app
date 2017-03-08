@@ -1,51 +1,55 @@
 .is-round {
-    border-radius: 2px;
+  border-radius: 2px;
+}
+
+.uppercase {
+  text-transform: uppercase;
 }
 
 .l-flex {
-    display: flex;
+  display: flex;
 
-    &.is-hori {
-        flex-direction: row;
-    }
+  &.is-hori {
+    flex-direction: row;
+  }
 
-    &.is-hori-rev {
-        flex-direction: row-reverse;
-    }
+  &.is-hori-rev {
+    flex-direction: row-reverse;
+  }
 
-    &.is-vert {
-        flex-direction: column;
-    }
+  &.is-vert {
+    flex-direction: column;
+  }
 
-    &.is-vert-rev {
-        flex-direction: column-reverse;
-    }
+  &.is-vert-rev {
+    flex-direction: column-reverse;
+  }
 
-    &.align-hori-left {
-        justify-content: left;
-    }
+  &.align-hori-left {
+    justify-content: left;
+  }
 
-    &.align-hori-center {
-        justify-content: center;
-    }
+  &.align-hori-center {
+    justify-content: center;
+  }
 
-    &.align-vert-center {
-        align-items: center;
-    }
+  &.align-vert-center {
+    align-items: center;
+  }
 
-    &.align-vert-flex-start {
-        align-items: flex-start;
-    }
+  &.align-vert-flex-start {
+    align-items: flex-start;
+  }
 
-    &.align-hori-space-between {
-        justify-content: space-between;
-    }
+  &.align-hori-space-between {
+    justify-content: space-between;
+  }
 
-    &.align-hori-space-around {
-        justify-content: space-around;
-    }
+  &.align-hori-space-around {
+    justify-content: space-around;
+  }
 
-    &.flex-wrap {
-        flex-wrap: wrap;
-    }
+  &.flex-wrap {
+    flex-wrap: wrap;
+  }
 }
