@@ -1,12 +1,14 @@
 // ./jsx/forecast-daily.jsx;
 
 import React from 'react';
+import slice from 'lodash/slice';
 
 class ForecastDaily extends React.Component {
   constructor(props) {
     super(props);
   }
 
+  // Renders the cards containing data for the 5 Day Forecast
   renderCards() {
     const cards = this.props.dailyData.map((data, index) => {
       return (
@@ -17,7 +19,9 @@ class ForecastDaily extends React.Component {
           <li>{data.pop}%</li>
         </ul>
       );
-    });
+    })
+    // Using Lodash's slice method to get on the first 5 arrays
+    .slice(0, 5);
 
     return cards;
   }

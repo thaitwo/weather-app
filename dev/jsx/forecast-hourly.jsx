@@ -1,12 +1,13 @@
 // ./jsx/forecast-hourly.jsx
 
 import React from 'react';
+import slice from 'lodash/slice';
 
 class ForecastHourly extends React.Component {
   constructor(props) {
     super(props);
   }
-
+  // Renders the header row for the table containing Hourly Forecast data
   renderTableHeaderRow() {
     return (
       <tr className="l-flex is-hori align-hori-space-between">
@@ -19,6 +20,7 @@ class ForecastHourly extends React.Component {
     );
   }
 
+  // Renders the rows with data for the Hourly Forecast
   renderTableRows() {
     const rows = this.props.hourlyData.map((data, index) => {
       return (
@@ -30,7 +32,9 @@ class ForecastHourly extends React.Component {
           <td>{data.pop}%</td>
         </tr>
       );
-    });
+    })
+    // Using Lodash's slice method to get only the first 10 arrays
+    .slice(0, 10);
 
     return rows;
   }
