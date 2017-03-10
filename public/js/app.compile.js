@@ -9463,32 +9463,6 @@ var SearchBar = function (_React$Component) {
       country = country.replace(/ /g, "_"); // Replaces all spaces with underscores
       country = country.toLowerCase();
 
-      // // Sample Loop #1
-      // let words = ['you', 'bot', 'none'];
-
-      // for (let e = 0; e < words.length; e++) {
-      //   console.log(words[e]);
-      // }
-
-      // // Alternative
-      // let x;
-      // for (x in words) {
-      //   console.log(words[x]);
-      // }
-
-      // // Sample Loop #2
-      // for (let i = 0; i < 10; i++) {
-      //   console.log(i);
-      // }
-
-      // // Sample Loop #3
-      // const listWords = words.map((word) =>
-      //   <li key={word.toString()}>{word}</li>
-      // );
-
-      // console.log({listWords});
-
-
       // Takes the data from the selected suggestion and sets the state
       this.setState({
         city: city,
@@ -9510,7 +9484,7 @@ var SearchBar = function (_React$Component) {
         }),
         _react2.default.createElement(
           'button',
-          { type: 'submit', value: 'Search', className: 'button' },
+          { type: 'submit', value: 'Search', className: 'search-button' },
           _react2.default.createElement('i', { className: 'fa fa-search', 'aria-hidden': 'true' })
         )
       );

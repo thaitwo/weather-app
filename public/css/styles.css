@@ -100,7 +100,7 @@ table {
 .search-bar {
   margin-top: 100px; }
 
-.button {
+.search-button {
   background-color: transparent;
   border: 0px;
   border-top-right-radius: 2px;
@@ -115,7 +115,7 @@ table {
   padding: 15.5px 25px;
   position: absolute;
   transition: all .3s; }
-  .button:hover {
+  .search-button:hover {
     color: rgba(0, 0, 0, 0.3); }
 
 .container {
