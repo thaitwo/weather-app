@@ -9,24 +9,36 @@ class WeatherCard extends React.Component {
     super(props);
   }
 
-  render() {
-    return (
-      <div>
+  renderCurrentWeatherCard() {
+    let weathercard = null;
+
+    if (this.props.conditionsData) {
+      weathercard = (
         <div className="weather-current">
-          <h2 className="city-name">{this.props.cityname}</h2>
-          <p className="current-date">{this.props.currentdate}</p>
+          <h2 className="city-name">{this.props.conditionsData.display_location.full}</h2>
+          {/*<p className="current-date">{this.props.currentdate}</p>*/}
           <div>
-            <p className="current-temp">{this.props.currenttemp} <span>°F</span></p>
+            <p className="current-temp">{this.props.conditionsData.temp_f} <span>°F</span></p>
           </div>
           <div className="current-info">
-            <h4 className="current-condition">{this.props.currentcondition}</h4>
+            <h4 className="current-condition">{this.props.conditionsData.weather}</h4>
             <ul className="current-data">
-              <li>Precipitation <span>{this.props.currentprecip}%</span></li>
-              <li>Wind <span>{this.props.currentwind} mph</span></li>
-              <li>Humidity <span>{this.props.currenthumidity}</span></li>
+              <li>Precipitation <span>{this.props.forecastData[0].pop}%</span></li>
+              <li>Wind <span>{this.props.conditionsData.wind_gust_mph} mph</span></li>
+              <li>Humidity <span>{this.props.conditionsData.relative_humidity}</span></li>
             </ul>
           </div>
         </div>
+      );
+    }
+
+    return weathercard;
+  }
+
+  render() {
+    return (
+      <div>
+        {this.renderCurrentWeatherCard()}
         <h1 className="forecast-header">Hourly Forecast</h1>
         <ForecastHourly {...this.props}/>
         <h1 className="forecast-header">5 Day Forecast</h1>
