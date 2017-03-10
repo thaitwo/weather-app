@@ -14,6 +14,7 @@ class FetchWeather extends React.Component {
       forecastData: [ ],
       hourlyData: [ ],
       dailyData: [ ],
+      currentdate: '',
     };
   }
 
@@ -29,8 +30,8 @@ class FetchWeather extends React.Component {
     .then(axios.spread((conditions, forecast, hourly, daily) => {
 
       // Divide date string into substrings and get the first 3 strings (Mon, 06 Mar)
-      // let date = conditionsData.observation_time_rfc822;
-      // date = date.split(/\s+/).slice(0,3).join(' ');
+      let date = conditions.data.current_observation.observation_time_rfc822;
+      date = date.split(/\s+/).slice(0,3).join(' ');
 
       console.log(conditions, forecast, hourly, daily);
       // Set state for React component with API data
@@ -39,9 +40,7 @@ class FetchWeather extends React.Component {
         forecastData: forecast.data.forecast.simpleforecast.forecastday,
         hourlyData: hourly.data.hourly_forecast,
         dailyData: daily.data.forecast.simpleforecast.forecastday,
-
-        // // currentdate: date,
-
+        currentdate: date,
       });
     }))
     .catch(function (error) {
@@ -62,6 +61,7 @@ class FetchWeather extends React.Component {
           forecastData={this.state.forecastData}
           hourlyData={this.state.hourlyData}
           dailyData={this.state.dailyData}
+          currentdate={this.state.currentdate}
         />
       </div>
     );

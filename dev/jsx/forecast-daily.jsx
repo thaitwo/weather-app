@@ -8,6 +8,7 @@ class ForecastDaily extends React.Component {
     super(props);
   }
 
+  // Renders the cards containing data for the 5 Day Forecast
   renderCards() {
     const cards = this.props.dailyData.map((data, index) => {
       return (

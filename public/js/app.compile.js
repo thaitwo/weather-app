@@ -13981,7 +13981,8 @@ var FetchWeather = function (_React$Component) {
       conditionsData: null,
       forecastData: [],
       hourlyData: [],
-      dailyData: []
+      dailyData: [],
+      currentdate: ''
     };
     return _this;
   }
@@ -13998,8 +13999,8 @@ var FetchWeather = function (_React$Component) {
       _axios2.default.all([_axios2.default.get('http://api.wunderground.com/api/5332856fca0fe1e7/conditions/q/' + this.props.params.state + '/' + this.props.params.city + '.json'), _axios2.default.get('http://api.wunderground.com/api/5332856fca0fe1e7/forecast/q/' + this.props.params.state + '/' + this.props.params.city + '.json'), _axios2.default.get('http://api.wunderground.com/api/5332856fca0fe1e7/hourly/q/' + this.props.params.state + '/' + this.props.params.city + '.json'), _axios2.default.get('http://api.wunderground.com/api/5332856fca0fe1e7/forecast10day/q/' + this.props.params.state + '/' + this.props.params.city + '.json')]).then(_axios2.default.spread(function (conditions, forecast, hourly, daily) {
 
         // Divide date string into substrings and get the first 3 strings (Mon, 06 Mar)
-        // let date = conditionsData.observation_time_rfc822;
-        // date = date.split(/\s+/).slice(0,3).join(' ');
+        var date = conditions.data.current_observation.observation_time_rfc822;
+        date = date.split(/\s+/).slice(0, 3).join(' ');
 
         console.log(conditions, forecast, hourly, daily);
         // Set state for React component with API data
@@ -14007,8 +14008,8 @@ var FetchWeather = function (_React$Component) {
           conditionsData: conditions.data.current_observation,
           forecastData: forecast.data.forecast.simpleforecast.forecastday,
           hourlyData: hourly.data.hourly_forecast,
-          dailyData: daily.data.forecast.simpleforecast.forecastday
-
+          dailyData: daily.data.forecast.simpleforecast.forecastday,
+          currentdate: date
         });
       })).catch(function (error) {
         console.log(error);
@@ -14028,7 +14029,8 @@ var FetchWeather = function (_React$Component) {
           conditionsData: this.state.conditionsData,
           forecastData: this.state.forecastData,
           hourlyData: this.state.hourlyData,
-          dailyData: this.state.dailyData
+          dailyData: this.state.dailyData,
+          currentdate: this.state.currentdate
         })
       );
     }
@@ -14928,6 +14930,9 @@ var ForecastDaily = function (_React$Component) {
     return _possibleConstructorReturn(this, (ForecastDaily.__proto__ || Object.getPrototypeOf(ForecastDaily)).call(this, props));
   }
 
+  // Renders the cards containing data for the 5 Day Forecast
+
+
   _createClass(ForecastDaily, [{
     key: 'renderCards',
     value: function renderCards() {
@@ -15023,6 +15028,8 @@ var ForecastHourly = function (_React$Component) {
 
     return _possibleConstructorReturn(this, (ForecastHourly.__proto__ || Object.getPrototypeOf(ForecastHourly)).call(this, props));
   }
+  // Renders the header row for the table containing Hourly Forecast data
+
 
   _createClass(ForecastHourly, [{
     key: 'renderTableHeaderRow',
@@ -15053,6 +15060,9 @@ var ForecastHourly = function (_React$Component) {
         )
       );
     }
+
+    // Renders the rows with data for the Hourly Forecast
+
   }, {
     key: 'renderTableRows',
     value: function renderTableRows() {
@@ -15152,6 +15162,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // ./jsx/weather-card.jsx
 
+// This component displays the layout and all the weather data when for a location
+
 var WeatherCard = function (_React$Component) {
   _inherits(WeatherCard, _React$Component);
 
@@ -15160,6 +15172,9 @@ var WeatherCard = function (_React$Component) {
 
     return _possibleConstructorReturn(this, (WeatherCard.__proto__ || Object.getPrototypeOf(WeatherCard)).call(this, props));
   }
+
+  // Renders the template for the current weather data
+
 
   _createClass(WeatherCard, [{
     key: 'renderCurrentWeatherCard',
@@ -15174,6 +15189,11 @@ var WeatherCard = function (_React$Component) {
             'h2',
             { className: 'city-name' },
             this.props.conditionsData.display_location.full
+          ),
+          _react2.default.createElement(
+            'p',
+            { className: 'current-date' },
+            this.props.currentdate
           ),
           _react2.default.createElement(
             'div',

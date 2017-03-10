@@ -7,7 +7,7 @@ class ForecastHourly extends React.Component {
   constructor(props) {
     super(props);
   }
-
+  // Renders the header row for the table containing Hourly Forecast data
   renderTableHeaderRow() {
     return (
       <tr className="l-flex is-hori align-hori-space-between">
@@ -20,6 +20,7 @@ class ForecastHourly extends React.Component {
     );
   }
 
+  // Renders the rows with data for the Hourly Forecast
   renderTableRows() {
     const rows = this.props.hourlyData.map((data, index) => {
       return (
