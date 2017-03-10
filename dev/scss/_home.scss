@@ -1,0 +1,39 @@
+.container {
+  background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.main {
+  text-align: center;
+  width: 960px;
+  margin: auto;
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.homepage {
+  margin-top: 140px;
+}
+
+.title {
+  color: #ffffff;
+  font-family: $font-secondary;
+  font-size: 64px;
+  font-weight: 300;
+  letter-spacing: 2px;
+  margin-bottom: 0px;
+}
+
+.tagline {
+  color: rgba(0, 0, 0, 0.15);
+  font-family: $font;
+  font-size: 24px;
+  font-weight: 300;
+  letter-spacing: 1px;
+}

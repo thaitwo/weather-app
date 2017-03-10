@@ -1,0 +1,22 @@
+form {
+  display: inline-block;
+}
+
+.forecast-daily {
+  font-family: $font;
+  font-size: 20px;
+  font-weight: normal;
+  color: rgba(0, 0, 0, .8);
+  width: 100%;
+
+  ul {
+    background-color: rgba(0, 0, 0, .04);
+    border-radius: 2px;
+    padding: 30px;
+
+    h4 {
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+  }
+}

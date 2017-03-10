@@ -1,17 +1,18 @@
-// ./components/home.jsx
+// ./jsx/home.jsx
 
 import React from 'react';
 import { Router, Route, IndexRoute, Link, browserHistory } from 'react-router';
 import SearchBar from './search-bar.jsx';
 
-require('../stylesheets/main.scss');
-
 class Home extends React.Component {
+
   render() {
     return (
-      <div>
+      <div className="homepage">
+        <Link to="/"><h1 className="title">Weathercast</h1></Link>
+        <p className="tagline">Your daily splash of live weather.</p>
         <SearchBar className="search-bar"/>
-        <p>You choose the city. We'll forecast.</p>
+        <loop />
       </div>
     );
   }
