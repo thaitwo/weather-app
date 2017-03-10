@@ -1,6 +1,7 @@
 // ./jsx/forecast-hourly.jsx
 
 import React from 'react';
+import slice from 'lodash/slice';
 
 class ForecastHourly extends React.Component {
   constructor(props) {
@@ -30,7 +31,9 @@ class ForecastHourly extends React.Component {
           <td>{data.pop}%</td>
         </tr>
       );
-    });
+    })
+    // Using Lodash's slice method to get only the first 10 arrays
+    .slice(0, 10);
 
     return rows;
   }
