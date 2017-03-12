@@ -12,15 +12,21 @@ class ForecastDaily extends React.Component {
   renderCards() {
     const cards = this.props.dailyData.map((data, index) => {
       return (
-        <ul key={index}>
-          <h4>{data.date.weekday_short}, {data.date.monthname_short} {data.date.day}</h4>
-          <li>{data.conditions}</li>
-          <li>{data.high.fahrenheit}° / {data.low.fahrenheit}°</li>
-          <li>{data.pop}%</li>
-        </ul>
+        <div  key={index}>
+          <div>
+            <h4>{data.date.weekday_short}, {data.date.monthname_short} {data.date.day}</h4>
+          </div>
+          <div className="forecast-daily-card">
+            <p>{data.conditions}</p>
+            <ul className="l-flex is-hori align-hori-space-between">
+              <li>{data.high.fahrenheit}° | {data.low.fahrenheit}°</li>
+              <li>{data.pop}%</li>
+            </ul>
+          </div>
+        </div>
       );
     })
-    // Using Lodash's slice method to get on the first 5 arrays
+    // Using Lodash's slice method to get only the first 5 arrays
     .slice(0, 5);
 
     return cards;

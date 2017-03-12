@@ -13917,8 +13917,7 @@ var Home = function (_React$Component) {
           { className: 'tagline' },
           'Your daily splash of live weather.'
         ),
-        _react2.default.createElement(_searchBar2.default, { className: 'search-bar' }),
-        _react2.default.createElement('loop', null)
+        _react2.default.createElement(_searchBar2.default, { className: 'search-bar' })
       );
     }
   }]);
@@ -14024,7 +14023,7 @@ var FetchWeather = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(_searchBar2.default, null),
+        _react2.default.createElement(_searchBar2.default, { className: 'is-small' }),
         _react2.default.createElement(_weatherCard2.default, {
           conditionsData: this.state.conditionsData,
           forecastData: this.state.forecastData,
@@ -14938,39 +14937,51 @@ var ForecastDaily = function (_React$Component) {
     value: function renderCards() {
       var cards = this.props.dailyData.map(function (data, index) {
         return _react2.default.createElement(
-          'ul',
+          'div',
           { key: index },
           _react2.default.createElement(
-            'h4',
+            'div',
             null,
-            data.date.weekday_short,
-            ', ',
-            data.date.monthname_short,
-            ' ',
-            data.date.day
+            _react2.default.createElement(
+              'h4',
+              null,
+              data.date.weekday_short,
+              ', ',
+              data.date.monthname_short,
+              ' ',
+              data.date.day
+            )
           ),
           _react2.default.createElement(
-            'li',
-            null,
-            data.conditions
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            data.high.fahrenheit,
-            '\xB0 / ',
-            data.low.fahrenheit,
-            '\xB0'
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            data.pop,
-            '%'
+            'div',
+            { className: 'forecast-daily-card' },
+            _react2.default.createElement(
+              'p',
+              null,
+              data.conditions
+            ),
+            _react2.default.createElement(
+              'ul',
+              { className: 'l-flex is-hori align-hori-space-between' },
+              _react2.default.createElement(
+                'li',
+                null,
+                data.high.fahrenheit,
+                '\xB0 | ',
+                data.low.fahrenheit,
+                '\xB0'
+              ),
+              _react2.default.createElement(
+                'li',
+                null,
+                data.pop,
+                '%'
+              )
+            )
           )
         );
       })
-      // Using Lodash's slice method to get on the first 5 arrays
+      // Using Lodash's slice method to get only the first 5 arrays
       .slice(0, 5);
 
       return cards;
@@ -15162,7 +15173,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // ./jsx/weather-card.jsx
 
-// This component displays the layout and all the weather data when for a location
+// This component displays the template and all the weather data when for a location
 
 var WeatherCard = function (_React$Component) {
   _inherits(WeatherCard, _React$Component);

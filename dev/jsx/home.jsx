@@ -12,7 +12,6 @@ class Home extends React.Component {
         <Link to="/"><h1 className="title">Weathercast</h1></Link>
         <p className="tagline">Your daily splash of live weather.</p>
         <SearchBar className="search-bar"/>
-        <loop />
       </div>
     );
   }

@@ -1,6 +1,6 @@
 // ./jsx/weather-card.jsx
 
-// This component displays the layout and all the weather data when for a location
+// This component displays the template and all the weather data when for a location
 
 import React from 'react';
 import ForecastHourly from './forecast-hourly.jsx';

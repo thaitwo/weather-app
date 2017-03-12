@@ -1,22 +1,37 @@
-form {
-  display: inline-block;
-}
-
 .forecast-daily {
-  font-family: $font;
-  font-size: 20px;
-  font-weight: normal;
   color: rgba(0, 0, 0, .8);
+  font-family: $font;
+  font-weight: normal;
+  margin: 80px 0;
   width: 100%;
 
-  ul {
-    background-color: rgba(0, 0, 0, .04);
-    border-radius: 2px;
-    padding: 30px;
+  h4 {
+    background-color: #8fd3f4;
+    border-radius: 2px 2px 0 0;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 15px 40px;
+    text-transform: uppercase;
+  }
 
-    h4 {
-      font-weight: bold;
-      text-transform: uppercase;
+  .forecast-daily-card {
+    background-color: rgba(0, 0, 0, .04);
+
+    p {
+      font-size: 18px;
+      padding: 140px 20px 20px;
+    }
+  }
+
+  ul {
+    border-radius: 2px;
+    padding: 0 20px;
+
+    li {
+      color: rgba(0, 0, 0, .4);
+      font-size: 16px;
+      padding: 15px 0;
     }
   }
 }
