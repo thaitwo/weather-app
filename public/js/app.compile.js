@@ -14023,7 +14023,7 @@ var FetchWeather = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(_searchBar2.default, { className: 'is-small' }),
+        _react2.default.createElement(_searchBar2.default, null),
         _react2.default.createElement(_weatherCard2.default, {
           conditionsData: this.state.conditionsData,
           forecastData: this.state.forecastData,

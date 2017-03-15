@@ -55,7 +55,7 @@ class FetchWeather extends React.Component {
   render() {
     return (
       <div>
-        <SearchBar className="is-small"/>
+        <SearchBar />
         <WeatherCard
           conditionsData={this.state.conditionsData}
           forecastData={this.state.forecastData}
