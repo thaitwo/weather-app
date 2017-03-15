@@ -55,6 +55,9 @@ table {
 ** SEARCH BAR
 **
 */
+form {
+  display: inline-block; }
+
 .geosuggest {
   float: left; }
 
@@ -128,7 +131,7 @@ table {
 
 .main {
   text-align: center;
-  width: 960px;
+  width: 1000px;
   margin: auto; }
   .main a {
     text-decoration: none; }
@@ -192,6 +195,9 @@ table {
 */
 .weather-current {
   margin: 50px 0; }
+  .weather-current .current-icon {
+    fill: white;
+    width: 220px; }
 
 .city-name {
   color: rgba(0, 0, 0, 0.15);
@@ -211,53 +217,71 @@ table {
   font-family: "Source Sans Pro", sans-serif;
   font-size: 160px;
   font-weight: 800;
-  margin: 60px 0 40px; }
+  margin: 60px 0; }
   .current-temp span {
     font-weight: 200; }
 
 .current-condition {
+  color: #ffffff;
   float: left;
   font-size: 24px;
-  font-weight: 700;
+  font-weight: 400;
+  letter-spacing: 1px;
   text-transform: uppercase; }
 
 .current-info {
-  color: #ffffff;
   display: inline-block;
   font-family: "Source Sans Pro", sans-serif;
   font-size: 24px;
   font-weight: 300;
   width: 100%; }
   .current-info ul {
+    color: rgba(0, 0, 0, 0.2);
     float: right; }
   .current-info li {
     float: left;
     padding: 0 0 0 80px; }
     .current-info li span {
+      color: #ffffff;
       font-weight: 700; }
 
 .forecast-header {
   color: rgba(0, 0, 0, 0.08);
   font-family: "Patua One", cursive;
   font-size: 64px;
-  margin: 50px 0; }
-
-form {
-  display: inline-block; }
+  margin: 100px 0 50px; }
 
 .forecast-daily {
-  font-family: "Source Sans Pro", sans-serif;
-  font-size: 20px;
-  font-weight: normal;
   color: rgba(0, 0, 0, 0.8);
+  font-family: "Source Sans Pro", sans-serif;
+  font-weight: normal;
+  margin: 80px 0;
   width: 100%; }
+  .forecast-daily h4 {
+    background-color: #8fd3f4;
+    border-radius: 2px 2px 0 0;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 15px 40px;
+    text-transform: uppercase; }
+  .forecast-daily .forecast-daily-card {
+    background-color: rgba(0, 0, 0, 0.05); }
+    .forecast-daily .forecast-daily-card .daily-icon {
+      padding: 25px 20px; }
+      .forecast-daily .forecast-daily-card .daily-icon img {
+        width: 70%; }
+    .forecast-daily .forecast-daily-card p {
+      font-size: 20px;
+      padding: 0 20px 20px; }
   .forecast-daily ul {
-    background-color: rgba(0, 0, 0, 0.04);
     border-radius: 2px;
-    padding: 30px; }
-    .forecast-daily ul h4 {
-      font-weight: bold;
-      text-transform: uppercase; }
+    padding: 0 20px; }
+    .forecast-daily ul li {
+      font-size: 16px;
+      padding: 15px 0; }
+      .forecast-daily ul li i {
+        padding-right: 6px; }
 
 .forecast-hourly {
   font-family: "Source Sans Pro", sans-serif;
@@ -278,6 +302,10 @@ form {
         flex-basis: 20%;
         padding: 20px;
         text-align: left; }
+        .forecast-hourly table tbody tr td.hourly-icon {
+          padding: 5px 5px 5px 15px; }
+        .forecast-hourly table tbody tr td img {
+          height: 50px; }
     .forecast-hourly table li {
       float: left;
       padding: 20px 0; }

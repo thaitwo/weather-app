@@ -1,6 +1,6 @@
 // ./jsx/weather-card.jsx
 
-// This component displays the layout and all the weather data when for a location
+// This component displays the template and all the weather data when for a location
 
 import React from 'react';
 import ForecastHourly from './forecast-hourly.jsx';
@@ -20,7 +20,8 @@ class WeatherCard extends React.Component {
         <div className="weather-current">
           <h2 className="city-name">{this.props.conditionsData.display_location.full}</h2>
           <p className="current-date">{this.props.currentdate}</p>
-          <div>
+          <div className="l-flex is-hori align-hori-space-between">
+            <img className="current-icon" src={`http://icons.wxug.com/i/c/v4/${this.props.conditionsData.icon}.svg`}/>
             <p className="current-temp">{this.props.conditionsData.temp_f} <span>°F</span></p>
           </div>
           <div className="current-info">

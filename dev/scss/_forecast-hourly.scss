@@ -30,6 +30,14 @@
           flex-basis: 20%;
           padding: 20px;
           text-align: left;
+
+          &.hourly-icon {
+            padding: 5px 5px 5px 15px;
+          }
+
+          img {
+            height: 50px;
+          }
         }
       }
     }
