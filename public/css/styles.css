@@ -197,6 +197,9 @@ form {
 */
 .weather-current {
   margin: 50px 0; }
+  .weather-current .current-icon {
+    fill: white;
+    width: 220px; }
 
 .city-name {
   color: rgba(0, 0, 0, 0.15);
@@ -224,7 +227,8 @@ form {
   color: #ffffff;
   float: left;
   font-size: 24px;
-  font-weight: 700;
+  font-weight: 400;
+  letter-spacing: 1px;
   text-transform: uppercase; }
 
 .current-info {

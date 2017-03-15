@@ -15218,7 +15218,8 @@ var WeatherCard = function (_React$Component) {
           ),
           _react2.default.createElement(
             'div',
-            null,
+            { className: 'l-flex is-hori align-hori-space-between' },
+            _react2.default.createElement('img', { className: 'current-icon', src: 'http://icons.wxug.com/i/c/v4/' + this.props.conditionsData.icon + '.svg' }),
             _react2.default.createElement(
               'p',
               { className: 'current-temp' },
