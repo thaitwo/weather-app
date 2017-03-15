@@ -16,11 +16,19 @@
   }
 
   .forecast-daily-card {
-    background-color: rgba(0, 0, 0, .04);
+    background-color: rgba(0, 0, 0, .05);
+
+    .daily-icon {
+      padding: 25px 20px ;
+
+      img {
+        width: 70%;
+      }
+    }
 
     p {
-      font-size: 18px;
-      padding: 140px 20px 20px;
+      font-size: 20px;
+      padding: 0 20px 20px;
     }
   }
 
@@ -29,9 +37,12 @@
     padding: 0 20px;
 
     li {
-      color: rgba(0, 0, 0, .4);
       font-size: 16px;
       padding: 15px 0;
+
+      i {
+        padding-right: 6px;
+      }
     }
   }
 }

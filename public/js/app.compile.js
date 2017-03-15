@@ -14956,6 +14956,11 @@ var ForecastDaily = function (_React$Component) {
             'div',
             { className: 'forecast-daily-card' },
             _react2.default.createElement(
+              'div',
+              { className: 'daily-icon' },
+              _react2.default.createElement('img', { src: 'http://icons.wxug.com/i/c/v4/' + data.icon + '.svg' })
+            ),
+            _react2.default.createElement(
               'p',
               null,
               data.conditions
@@ -14974,6 +14979,7 @@ var ForecastDaily = function (_React$Component) {
               _react2.default.createElement(
                 'li',
                 null,
+                _react2.default.createElement('i', { className: 'fa fa-tint', 'aria-hidden': 'true' }),
                 data.pop,
                 '%'
               )
@@ -15086,7 +15092,11 @@ var ForecastHourly = function (_React$Component) {
             null,
             data.FCTTIME.civil
           ),
-          _react2.default.createElement('td', null),
+          _react2.default.createElement(
+            'td',
+            { className: 'hourly-icon' },
+            _react2.default.createElement('img', { src: 'http://icons.wxug.com/i/c/v4/' + data.icon + '.svg' })
+          ),
           _react2.default.createElement(
             'td',
             null,

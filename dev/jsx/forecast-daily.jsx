@@ -17,10 +17,11 @@ class ForecastDaily extends React.Component {
             <h4>{data.date.weekday_short}, {data.date.monthname_short} {data.date.day}</h4>
           </div>
           <div className="forecast-daily-card">
+            <div className="daily-icon"><img src={`http://icons.wxug.com/i/c/v4/${data.icon}.svg`}/></div>
             <p>{data.conditions}</p>
             <ul className="l-flex is-hori align-hori-space-between">
               <li>{data.high.fahrenheit}° | {data.low.fahrenheit}°</li>
-              <li>{data.pop}%</li>
+              <li><i className="fa fa-tint" aria-hidden="true"></i>{data.pop}%</li>
             </ul>
           </div>
         </div>
