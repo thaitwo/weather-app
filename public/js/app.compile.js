@@ -9478,7 +9478,9 @@ var SearchBar = function (_React$Component) {
     key: 'handleSubmit',
     value: function handleSubmit(event) {
       event.preventDefault();
-      _reactRouter.browserHistory.push('/weather/' + this.state.country + '/' + this.state.city + '/' + this.state.state);
+      if (this.state.city && this.state.state && this.state.country) {
+        _reactRouter.browserHistory.push('/weather/' + this.state.country + '/' + this.state.city + '/' + this.state.state);
+      }
     }
 
     // Sets the city that the user selects from the suggestions as the value ("city")
@@ -14143,8 +14145,8 @@ var FetchWeather = function (_React$Component) {
 
 
   _createClass(FetchWeather, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
+    key: 'getWeatherData',
+    value: function getWeatherData() {
       var _this2 = this;
 
       // Request data from two APIs simultaneously
@@ -14167,9 +14169,33 @@ var FetchWeather = function (_React$Component) {
         console.log(error);
       });
     }
+
+    //
+
   }, {
-    key: 'renderWeatherCards',
-    value: function renderWeatherCards() {}
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.getWeatherData();
+    }
+
+    // Update
+
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps) {
+      var _props$params = this.props.params,
+          city = _props$params.city,
+          state = _props$params.state,
+          country = _props$params.country;
+
+      var prevCity = prevProps.params.city;
+      var prevState = prevProps.params.state;
+      var prevCountry = prevProps.params.country;
+
+      if (city !== prevCity || state !== prevState || country !== prevCountry) {
+        this.getWeatherData();
+      }
+    }
   }, {
     key: 'render',
     value: function render() {

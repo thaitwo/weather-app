@@ -19,7 +19,7 @@ class FetchWeather extends React.Component {
   }
 
   // Fetch data for weather CONDITIONS and FORECAST from Weather Channel API
-  componentDidMount() {
+  getWeatherData() {
     // Request data from two APIs simultaneously
     axios.all([
       axios.get(`http://api.wunderground.com/api/5332856fca0fe1e7/conditions/q/${this.props.params.state}/${this.props.params.city}.json`),
@@ -48,8 +48,21 @@ class FetchWeather extends React.Component {
     });
   }
 
-  renderWeatherCards() {
+  //
+  componentDidMount() {
+    this.getWeatherData();
+  }
 
+  // Update
+  componentDidUpdate(prevProps) {
+    const {city, state, country} = this.props.params;
+    const prevCity = prevProps.params.city;
+    const prevState = prevProps.params.state;
+    const prevCountry = prevProps.params.country;
+
+    if (city !== prevCity || state !== prevState || country !== prevCountry) {
+      this.getWeatherData();
+    }
   }
 
   render() {

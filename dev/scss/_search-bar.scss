@@ -37,6 +37,10 @@ form {
   background-color: rgba(255, 255, 255, 1);
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.16), 0px 4px 8px rgba(0, 0, 0, 0.16);
   margin-top: -1px;
+  max-height: 25em;
+  overflow-x: hidden;
+  overflow-y: auto;
+  transition: max-height 0.4s;
 
   li {
     color: rgba(0, 0, 0, 0.8);
@@ -50,6 +54,17 @@ form {
       cursor: pointer;
     }
   }
+}
+
+.geosuggest__item--active {
+  background: rgba(0, 0, 0, 0.08);
+  color: #fff;
+}
+
+.geosuggest__suggests--hidden {
+  max-height: 0;
+  overflow: hidden;
+  border-width: 0;
 }
 
 ::-webkit-input-placeholder {       /* Chrome/Opera/Safari */
@@ -80,3 +95,12 @@ form {
     color: rgba(0, 0, 0, .3);
   }
 }
+
+
+
+
+
+
+
+
+
