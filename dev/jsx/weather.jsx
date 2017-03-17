@@ -18,9 +18,9 @@ class FetchWeather extends React.Component {
     };
   }
 
-  // Fetch data for weather CONDITIONS and FORECAST from Weather Channel API
+  // Fetch data for weather Conditions, Forecast, Hourly, and 10 Day from Weather Channel API
   getWeatherData() {
-    // Request data from two APIs simultaneously
+    // Request data from multiple APIs simultaneously
     axios.all([
       axios.get(`http://api.wunderground.com/api/5332856fca0fe1e7/conditions/q/${this.props.params.state}/${this.props.params.city}.json`),
       axios.get(`http://api.wunderground.com/api/5332856fca0fe1e7/forecast/q/${this.props.params.state}/${this.props.params.city}.json`),
@@ -48,12 +48,14 @@ class FetchWeather extends React.Component {
     });
   }
 
-  //
+  // Make the initial Ajax request to display the weather data
   componentDidMount() {
     this.getWeatherData();
   }
 
-  // Update
+  // Compare the previous props with the current props taken from the URL.
+  // If they are different, then make a new Ajax request to get new data.
+  // This comparison prevents recursive Ajax requests.
   componentDidUpdate(prevProps) {
     const {city, state, country} = this.props.params;
     const prevCity = prevProps.params.city;

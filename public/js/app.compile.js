@@ -14141,7 +14141,7 @@ var FetchWeather = function (_React$Component) {
     return _this;
   }
 
-  // Fetch data for weather CONDITIONS and FORECAST from Weather Channel API
+  // Fetch data for weather Conditions, Forecast, Hourly, and 10 Day from Weather Channel API
 
 
   _createClass(FetchWeather, [{
@@ -14149,7 +14149,7 @@ var FetchWeather = function (_React$Component) {
     value: function getWeatherData() {
       var _this2 = this;
 
-      // Request data from two APIs simultaneously
+      // Request data from multiple APIs simultaneously
       _axios2.default.all([_axios2.default.get('http://api.wunderground.com/api/5332856fca0fe1e7/conditions/q/' + this.props.params.state + '/' + this.props.params.city + '.json'), _axios2.default.get('http://api.wunderground.com/api/5332856fca0fe1e7/forecast/q/' + this.props.params.state + '/' + this.props.params.city + '.json'), _axios2.default.get('http://api.wunderground.com/api/5332856fca0fe1e7/hourly/q/' + this.props.params.state + '/' + this.props.params.city + '.json'), _axios2.default.get('http://api.wunderground.com/api/5332856fca0fe1e7/forecast10day/q/' + this.props.params.state + '/' + this.props.params.city + '.json')]).then(_axios2.default.spread(function (conditions, forecast, hourly, daily) {
 
         // Divide date string into substrings and get the first 3 strings (Mon, 06 Mar)
@@ -14170,7 +14170,7 @@ var FetchWeather = function (_React$Component) {
       });
     }
 
-    //
+    // Make the initial Ajax request to display the weather data
 
   }, {
     key: 'componentDidMount',
@@ -14178,7 +14178,9 @@ var FetchWeather = function (_React$Component) {
       this.getWeatherData();
     }
 
-    // Update
+    // Compare the previous props with the current props taken from the URL.
+    // If they are different, then make a new Ajax request to get new data.
+    // This comparison prevents recursive Ajax requests.
 
   }, {
     key: 'componentDidUpdate',
