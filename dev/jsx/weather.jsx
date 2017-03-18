@@ -2,6 +2,7 @@
 
 import React from 'react';
 import axios from 'axios';
+import _ from 'lodash';
 import SearchBar from './search-bar';
 import WeatherCard from './weather-card';
 import Geosuggest from 'react-geosuggest';
@@ -57,12 +58,10 @@ class FetchWeather extends React.Component {
   // If they are different, then make a new Ajax request to get new data.
   // This comparison prevents recursive Ajax requests.
   componentDidUpdate(prevProps) {
-    const {city, state, country} = this.props.params;
-    const prevCity = prevProps.params.city;
-    const prevState = prevProps.params.state;
-    const prevCountry = prevProps.params.country;
+    // Use isEqual() only if you know the entire objects are supposed to be the same:
+    const same = _.isEqual(this.props.params, prevProps.params);
 
-    if (city !== prevCity || state !== prevState || country !== prevCountry) {
+    if (!same) {
       this.getWeatherData();
     }
   }

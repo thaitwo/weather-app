@@ -128,7 +128,8 @@ form {
   font-family: "Avenir Next";
   font-size: 16px;
   margin-left: -65px;
-  padding: 15.5px 25px;
+  outline: none;
+  padding: 16.5px 25px;
   position: absolute;
   transition: all .3s; }
   .search-button:hover {
