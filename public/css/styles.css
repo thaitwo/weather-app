@@ -58,6 +58,35 @@ table {
 form {
   display: inline-block; }
 
+.box .geosuggest__input {
+  font-size: 16px;
+  height: 40px;
+  width: 300px; }
+
+.box .geosuggest__suggests-wrapper {
+  width: 300px; }
+
+.box .geosuggest__suggests li {
+  font-size: 16px; }
+
+.box .search-button {
+  background-color: transparent;
+  border: 0px;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+  color: rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  display: inline;
+  float: right;
+  font-family: "Avenir Next";
+  font-size: 16px;
+  margin-left: -55px;
+  padding: 9px 20px;
+  position: absolute;
+  transition: all .3s; }
+  .box .search-button:hover {
+    color: rgba(0, 0, 0, 0.3); }
+
 .geosuggest {
   float: left; }
 
@@ -120,6 +149,16 @@ form {
   transition: all .3s; }
   .search-button:hover {
     color: rgba(0, 0, 0, 0.3); }
+
+.top-bar {
+  padding-top: 15px;
+  top: 0; }
+
+.logo {
+  color: #ffffff;
+  font-family: "Patua One", cursive;
+  font-size: 32px;
+  line-height: 40px; }
 
 .container {
   background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
@@ -219,6 +258,7 @@ form {
   font-weight: 800;
   margin: 60px 0; }
   .current-temp span {
+    color: rgba(255, 255, 255, 0.5);
     font-weight: 200; }
 
 .current-condition {
@@ -263,7 +303,7 @@ form {
     color: #ffffff;
     font-size: 20px;
     font-weight: bold;
-    padding: 15px 40px;
+    padding: 15px;
     text-transform: uppercase; }
   .forecast-daily .forecast-daily-card {
     background-color: rgba(0, 0, 0, 0.05); }
