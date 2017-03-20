@@ -11,7 +11,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // When a GET request is made to the any page (*), render the 'index.ejs' template. From there React will take over.
 app.get('*', (req, res) => {
-  res.render('index');
+  res.render('index', {api_key: process.env.GOOGLE_API_KEY});
 })
 
 // Sets the port to local host 8000
