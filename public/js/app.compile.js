@@ -15353,6 +15353,8 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRouter = __webpack_require__(36);
+
 var _searchBox = __webpack_require__(48);
 
 var _searchBox2 = _interopRequireDefault(_searchBox);
@@ -15381,9 +15383,13 @@ var TopBar = function (_React$Component) {
         'div',
         { className: 'top-bar l-flex is-hori align-hori-space-between' },
         _react2.default.createElement(
-          'h1',
-          { className: 'logo' },
-          'Weathercast'
+          _reactRouter.Link,
+          { to: '/' },
+          _react2.default.createElement(
+            'h1',
+            { className: 'logo' },
+            'Weathercast'
+          )
         ),
         _react2.default.createElement(
           'div',
