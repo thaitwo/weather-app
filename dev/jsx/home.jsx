@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Router, Route, IndexRoute, Link, browserHistory } from 'react-router';
-import SearchBar from './search-bar.jsx';
+import SearchBox from './search-box.jsx';
 
 class Home extends React.Component {
 
@@ -11,8 +11,8 @@ class Home extends React.Component {
       <div className="homepage">
         <Link to="/"><h1 className="title">Weathercast</h1></Link>
         <p className="tagline">Your daily splash of live weather.</p>
-        <div className="search-bar">
-          <SearchBar />
+        <div className="home-search-box">
+          <SearchBox />
         </div>
       </div>
     );

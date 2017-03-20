@@ -1,7 +1,7 @@
 // ./jsx/top-bar.jsx
 
 import React from 'react';
-import SearchBar from './search-bar';
+import SearchBox from './search-box';
 
 class TopBar extends React.Component {
   constructor(props) {
@@ -13,8 +13,8 @@ class TopBar extends React.Component {
     return (
       <div className="top-bar l-flex is-hori align-hori-space-between">
         <h1 className="logo">Weathercast</h1>
-        <div className="box">
-          <SearchBar />
+        <div className="small-searchbox">
+          <SearchBox />
         </div>
       </div>
     )

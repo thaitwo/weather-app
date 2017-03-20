@@ -3,7 +3,7 @@
 import React from 'react';
 import axios from 'axios';
 import _ from 'lodash';
-import SearchBar from './search-bar';
+import SearchBox from './search-box';
 import TopBar from './top-bar';
 import WeatherCard from './weather-card';
 import Geosuggest from 'react-geosuggest';
@@ -35,7 +35,6 @@ class FetchWeather extends React.Component {
       let date = conditions.data.current_observation.observation_time_rfc822;
       date = date.split(/\s+/).slice(0,3).join(' ');
 
-      console.log(conditions, forecast, hourly, daily);
       // Set state for React component with API data
       this.setState({
         conditionsData: conditions.data.current_observation,

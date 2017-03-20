@@ -2,10 +2,11 @@ form {
   display: inline-block;
 }
 
-input {
+.home-search-box {
+  margin-top: 100px;
 }
 
-.box {
+.small-searchbox {
 
   .geosuggest__input {
     font-size: 16px;
@@ -25,7 +26,7 @@ input {
   }
 
   .search-button {
-    background-color: rgba(0, 0, 0, 0);
+    background-color: #ffffff;
     border: 0px;
     border-top-right-radius: 2px;
     border-bottom-right-radius: 2px;
@@ -35,8 +36,8 @@ input {
     float: right;
     font-family: "Avenir Next";
     font-size: 16px;
-    margin-left: -55px;
-    padding: 9px 20px;
+    margin-left: -45px;
+    padding: 9px 25px;
     position: absolute;
     transition: all .3s;
 
@@ -115,12 +116,8 @@ input {
   color: rgba(0, 0, 0, .15);
 }
 
-.search-bar {
-  margin-top: 100px;
-}
-
 .search-button {
-  background-color: rgba(0, 0, 0, 0);
+  background-color: #ffffff;
   border: 0px;
   border-top-right-radius: 2px;
   border-bottom-right-radius: 2px;
