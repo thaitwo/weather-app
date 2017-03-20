@@ -1,11 +1,11 @@
-// ./jsx/search-bar.jsx
+// ./jsx/search-box.jsx
 
 import React from 'react';
 import { browserHistory } from 'react-router';
 import Geosuggest from 'react-geosuggest';
 
 // Search box for users to input city
-class SearchBar extends React.Component {
+class SearchBox extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -19,7 +19,10 @@ class SearchBar extends React.Component {
 
   // When user submits a city, create a link using the data obtained from the selected suggestion
   handleSubmit(event) {
-    event.preventDefault();
+    if (event) {
+      event.preventDefault();
+    }
+
     if (this.state.city && this.state.state && this.state.country) {
       browserHistory.push(`/weather/${this.state.country}/${this.state.city}/${this.state.state}`);
     }
@@ -47,6 +50,8 @@ class SearchBar extends React.Component {
       state: state,
       country: country
     });
+
+    this.handleSubmit();
   }
 
   render() {
@@ -64,4 +69,4 @@ class SearchBar extends React.Component {
   }
 }
 
-export default SearchBar;
+export default SearchBox;

@@ -113,7 +113,7 @@ form {
   /* Chrome/Opera/Safari */
   color: rgba(0, 0, 0, 0.15); }
 
-.search-bar {
+.home-search-box {
   margin-top: 100px; }
 
 .search-button {
@@ -151,7 +151,7 @@ form {
     text-decoration: none; }
 
 .homepage {
-  margin-top: 140px; }
+  margin-top: -150px; }
 
 .title {
   color: #ffffff;
@@ -277,7 +277,7 @@ form {
     color: #ffffff;
     font-size: 20px;
     font-weight: bold;
-    padding: 15px 40px;
+    padding: 15px;
     text-transform: uppercase; }
   .forecast-daily .forecast-daily-card {
     background-color: rgba(0, 0, 0, 0.05); }

@@ -3,7 +3,7 @@
 import React from 'react';
 import axios from 'axios';
 import _ from 'lodash';
-import SearchBar from './search-bar';
+import SearchBox from './search-box';
 import WeatherCard from './weather-card';
 import Geosuggest from 'react-geosuggest';
 
@@ -23,10 +23,10 @@ class FetchWeather extends React.Component {
   getWeatherData() {
     // Request data from multiple APIs simultaneously
     axios.all([
-      axios.get(`http://api.wunderground.com/api/5332856fca0fe1e7/conditions/q/${this.props.params.state}/${this.props.params.city}.json`),
-      axios.get(`http://api.wunderground.com/api/5332856fca0fe1e7/forecast/q/${this.props.params.state}/${this.props.params.city}.json`),
-      axios.get(`http://api.wunderground.com/api/5332856fca0fe1e7/hourly/q/${this.props.params.state}/${this.props.params.city}.json`),
-      axios.get(`http://api.wunderground.com/api/5332856fca0fe1e7/forecast10day/q/${this.props.params.state}/${this.props.params.city}.json`)
+      axios.get(`https://api.wunderground.com/api/5332856fca0fe1e7/conditions/q/${this.props.params.state}/${this.props.params.city}.json`),
+      axios.get(`https://api.wunderground.com/api/5332856fca0fe1e7/forecast/q/${this.props.params.state}/${this.props.params.city}.json`),
+      axios.get(`https://api.wunderground.com/api/5332856fca0fe1e7/hourly/q/${this.props.params.state}/${this.props.params.city}.json`),
+      axios.get(`https://api.wunderground.com/api/5332856fca0fe1e7/forecast10day/q/${this.props.params.state}/${this.props.params.city}.json`)
     ])
     .then(axios.spread((conditions, forecast, hourly, daily) => {
 
@@ -69,7 +69,7 @@ class FetchWeather extends React.Component {
   render() {
     return (
       <div>
-        <SearchBar />
+        <SearchBox />
         <WeatherCard
           conditionsData={this.state.conditionsData}
           forecastData={this.state.forecastData}
