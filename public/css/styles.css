@@ -114,7 +114,11 @@ form {
 .geosuggest__suggests {
   background-color: white;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.16), 0px 4px 8px rgba(0, 0, 0, 0.16);
-  margin-top: -1px; }
+  margin-top: -1px;
+  max-height: 25em;
+  overflow-x: hidden;
+  overflow-y: auto;
+  transition: max-height 0.4s; }
   .geosuggest__suggests li {
     color: rgba(0, 0, 0, 0.8);
     font-family: "Source Sans Pro", sans-serif;
@@ -124,6 +128,15 @@ form {
     .geosuggest__suggests li:hover {
       background-color: rgba(0, 0, 0, 0.08);
       cursor: pointer; }
+
+.geosuggest__item--active {
+  background: rgba(0, 0, 0, 0.08);
+  color: #fff; }
+
+.geosuggest__suggests--hidden {
+  max-height: 0;
+  overflow: hidden;
+  border-width: 0; }
 
 ::-webkit-input-placeholder {
   /* Chrome/Opera/Safari */
@@ -144,7 +157,8 @@ form {
   font-family: "Avenir Next";
   font-size: 16px;
   margin-left: -65px;
-  padding: 15.5px 25px;
+  outline: none;
+  padding: 16.5px 25px;
   position: absolute;
   transition: all .3s; }
   .search-button:hover {
@@ -306,11 +320,13 @@ form {
     padding: 15px;
     text-transform: uppercase; }
   .forecast-daily .forecast-daily-card {
-    background-color: rgba(0, 0, 0, 0.05); }
+    background-color: rgba(0, 0, 0, 0.05);
+    height: 265px;
+    width: 190px; }
     .forecast-daily .forecast-daily-card .daily-icon {
       padding: 25px 20px; }
       .forecast-daily .forecast-daily-card .daily-icon img {
-        width: 70%; }
+        width: 105px; }
     .forecast-daily .forecast-daily-card p {
       font-size: 20px;
       padding: 0 20px 20px; }

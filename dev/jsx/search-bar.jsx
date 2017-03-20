@@ -20,7 +20,9 @@ class SearchBar extends React.Component {
   // When user submits a city, create a link using the data obtained from the selected suggestion
   handleSubmit(event) {
     event.preventDefault();
-    browserHistory.push(`/weather/${this.state.country}/${this.state.city}/${this.state.state}`);
+    if (this.state.city && this.state.state && this.state.country) {
+      browserHistory.push(`/weather/${this.state.country}/${this.state.city}/${this.state.state}`);
+    }
   }
 
   // Sets the city that the user selects from the suggestions as the value ("city")
