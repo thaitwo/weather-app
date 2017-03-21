@@ -27,7 +27,7 @@ class SearchBar extends React.Component {
 
   // Sets the city that the user selects from the suggestions as the value ("city")
   onSuggestSelect(suggest) {
-    let city = suggest.label.split(',')[0];
+    let city = suggest.label.split(',')[0];       // Get first substring from string
     city = city.split(' - ')[0];                  // Separate strings into substrings that are divided by ' - ' (space, dash, space)
     city = city.replace(/ /g,"_");                // Replaces all spaces with underscores
     city = city.toLowerCase();
@@ -36,10 +36,13 @@ class SearchBar extends React.Component {
     state = state.trim();
     state = state.toLowerCase();
 
-    let country = suggest.label.split(',').pop();
+    let country = suggest.label.split(',').pop(); // Get the very last substring from string
     country = country.trim();                     // Removes all spaces before or after string
     country = country.replace(/ /g,"_");          // Replaces all spaces with underscores
     country = country.toLowerCase();
+
+    console.log(suggest);
+    console.log(city, state, country);
 
     // Takes the data from the selected suggestion and sets the state
     this.setState({
