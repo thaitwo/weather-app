@@ -68,7 +68,7 @@ class FetchWeather extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="main">
         <SearchBox />
         <WeatherCard
           conditionsData={this.state.conditionsData}

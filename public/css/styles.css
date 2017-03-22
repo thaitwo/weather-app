@@ -146,12 +146,16 @@ form {
 .main {
   text-align: center;
   width: 1000px;
-  margin: auto; }
+  margin: auto;
+  height: 100%; }
   .main a {
     text-decoration: none; }
 
 .homepage {
-  margin-top: -150px; }
+  margin: auto; }
+
+.homepage-content {
+  margin-top: -200px; }
 
 .title {
   color: #ffffff;
