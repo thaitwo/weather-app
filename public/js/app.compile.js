@@ -31311,11 +31311,6 @@ var FetchWeather = function (_React$Component) {
             cityId = _lodash2.default.get(res, 'data.location.l');
           }
 
-          // If an ID doesn't exist, get out of here instead of running nonsense code below
-          if (!cityId) {
-            return '404 Error';
-          }
-
           // If an ID exist, then make this Ajax call to get weather info for city
           if (cityId) {
             _axios2.default.all([_axios2.default.get(URL_BASE + '/conditions/' + cityId + '.json'), _axios2.default.get(URL_BASE + '/forecast/' + cityId + '.json'), _axios2.default.get(URL_BASE + '/hourly/' + cityId + '.json'), _axios2.default.get(URL_BASE + '/forecast10day/' + cityId + '.json')]).then(_axios2.default.spread(function (conditions, forecast, hourly, daily) {

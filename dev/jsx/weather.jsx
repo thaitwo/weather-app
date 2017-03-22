@@ -68,11 +68,6 @@ class FetchWeather extends React.Component {
           cityId = _.get(res, 'data.location.l');
         }
 
-        // If an ID doesn't exist, get out of here instead of running nonsense code below
-        if (!cityId) {
-          return '404 Error';
-        }
-
         // If an ID exist, then make this Ajax call to get weather info for city
         if (cityId) {
           axios.all([
