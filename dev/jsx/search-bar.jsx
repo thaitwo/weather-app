@@ -29,7 +29,6 @@ class SearchBar extends React.Component {
 
   // Set the city that the user selects from the suggestions as the value
   onSuggestSelect(suggest) {
-    console.log(suggest);
     // GET CITY VALUE
     // Get first substring from string
     let city = suggest.gmaps.formatted_address.split(',')[0];
@@ -55,6 +54,7 @@ class SearchBar extends React.Component {
 
     // GET STATE VALUE
     let state;
+    // Only get the state value if the city is in the US
     if (country === 'usa') {
       // Second to last index. Value is an integer.
       let stateIndex = suggest.gmaps.address_components.length - 2;
@@ -66,8 +66,6 @@ class SearchBar extends React.Component {
       // Convert string value to lowercase
       state = state.toLowerCase();
     }
-
-    console.log(city, country, state);
 
     // Takes the data from the selected suggestion and sets the state
     this.setState({
