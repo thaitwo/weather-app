@@ -9471,6 +9471,10 @@ var _reactGeosuggest = __webpack_require__(116);
 
 var _reactGeosuggest2 = _interopRequireDefault(_reactGeosuggest);
 
+var _lodash = __webpack_require__(171);
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -9505,32 +9509,56 @@ var SearchBar = function (_React$Component) {
     key: 'handleSubmit',
     value: function handleSubmit(event) {
       event.preventDefault();
-      if (this.state.city && this.state.state && this.state.country) {
+      // Check and see if search form has an input value. If yes, create a link. If not, do nothing.
+      if (this.state.city && this.state.country) {
         _reactRouter.browserHistory.push('/weather/' + this.state.country + '/' + this.state.city + '/' + this.state.state);
       }
     }
 
-    // Sets the city that the user selects from the suggestions as the value ("city")
+    // Set the city that the user selects from the suggestions as the value
 
   }, {
     key: 'onSuggestSelect',
     value: function onSuggestSelect(suggest) {
-      var city = suggest.label.split(',')[0]; // Get first substring from string
-      city = city.split(' - ')[0]; // Separate strings into substrings that are divided by ' - ' (space, dash, space)
-      city = city.replace(/ /g, "_"); // Replaces all spaces with underscores
+      console.log(suggest);
+      // GET CITY VALUE
+      // Get first substring from string
+      var city = suggest.gmaps.formatted_address.split(',')[0];
+
+      // Check and see if city value contains ' - '
+      if (city.includes(' - ')) {
+        // Separate strings into substrings that are divided by ' - '
+        city = city.split(' - ')[0];
+      }
+      // Check and see if city value contains spaces
+      if (city.includes(' ')) {
+        // Replace all spaces with underscores
+        city = city.replace(/ /g, "_");
+      }
+      // Convert city value to lowercase
       city = city.toLowerCase();
 
-      var state = suggest.label.split(',')[1];
-      state = state.trim();
-      state = state.toLowerCase();
-
-      var country = suggest.label.split(',').pop(); // Get the very last substring from string
+      // GET COUNTRY VALUE
+      var country = suggest.gmaps.formatted_address.split(',').pop(); // Get the very last substring from string
       country = country.trim(); // Removes all spaces before or after string
       country = country.replace(/ /g, "_"); // Replaces all spaces with underscores
       country = country.toLowerCase();
 
-      console.log(suggest);
-      console.log(city, state, country);
+      // GET STATE VALUE
+      var state = void 0;
+      if (country === 'usa') {
+        // Second to last index. Value is an integer.
+        var stateIndex = suggest.gmaps.address_components.length - 2;
+        // Get the second to last array
+        var stateInfo = suggest.gmaps.address_components[stateIndex];
+
+        // Get the 'state' value
+        state = stateInfo.short_name;
+        // Convert string value to lowercase
+        state = state.toLowerCase();
+      }
+
+      console.log(city, country, state);
 
       // Takes the data from the selected suggestion and sets the state
       this.setState({
@@ -14159,15 +14187,15 @@ var FetchWeather = function (_React$Component) {
     value: function getWeatherData() {
       var _this2 = this;
 
-      if (this.props.params.country === 'united_states') {
+      // Check to see if the country value is equal to 'usa'. If yes, then make Ajax call to get weather info
+      // This URL syntax is specific to cities only in the US
+      if (this.props.params.country === 'usa') {
         _axios2.default.all([_axios2.default.get(URL_BASE + '/conditions/q/' + this.props.params.state + '/' + this.props.params.city + '.json'), _axios2.default.get(URL_BASE + '/forecast/q/' + this.props.params.state + '/' + this.props.params.city + '.json'), _axios2.default.get(URL_BASE + '/hourly/q/' + this.props.params.state + '/' + this.props.params.city + '.json'), _axios2.default.get(URL_BASE + '/forecast10day/q/' + this.props.params.state + '/' + this.props.params.city + '.json')]).then(_axios2.default.spread(function (conditions, forecast, hourly, daily) {
 
           // Divide date string into substrings and get the first 3 strings (Mon, 06 Mar)
           var date = conditions.data.current_observation.observation_time_rfc822;
           date = date.split(/\s+/).slice(0, 3).join(' ');
 
-          console.log(conditions, forecast, hourly, daily);
-          // Set state for React component with API data
           _this2.setState({
             conditionsData: conditions.data.current_observation,
             forecastData: forecast.data.forecast.simpleforecast.forecastday,
@@ -14179,26 +14207,32 @@ var FetchWeather = function (_React$Component) {
           console.log(error);
         });
       } else {
+        // Because certain foreign cities won't return weather data when requested but they all do return
+        // an ID which we can use to get the weather data, we have to get the ID first.
+
+        // If the inputted city is outside of the US, then make this Ajax call to get ID for this city
         _axios2.default.get(URL_BASE + '/geolookup/q/' + this.props.params.country + '/' + this.props.params.city + '.json').then(function (res) {
-          console.log('YEEEEEEE', res);
+          // For this API, there are two ways to get the 'l'(ID) key
+          // Check to see if the inputted city can get the key using this route
           var cityId = _lodash2.default.get(res, 'data.response.results[0].l');
+
+          // If it can't, then get the key using this route
           if (!cityId) {
             cityId = _lodash2.default.get(res, 'data.location.l');
           }
 
-          console.log(cityId);
-
-          // get out of here instead of running nonsense code below
+          // If an ID doesn't exist, get out of here instead of running nonsense code below
           if (!cityId) {
             return '404 Error';
           }
+
+          // If an ID exist, then make this Ajax call to get weather info for city
           if (cityId) {
             _axios2.default.all([_axios2.default.get(URL_BASE + '/conditions/' + cityId + '.json'), _axios2.default.get(URL_BASE + '/forecast/' + cityId + '.json'), _axios2.default.get(URL_BASE + '/hourly/' + cityId + '.json'), _axios2.default.get(URL_BASE + '/forecast10day/' + cityId + '.json')]).then(_axios2.default.spread(function (conditions, forecast, hourly, daily) {
               // Divide date string into substrings and get the first 3 strings (Mon, 06 Mar)
               var date = conditions.data.current_observation.observation_time_rfc822;
               date = date.split(/\s+/).slice(0, 3).join(' ');
 
-              // Set state for React component with API data
               _this2.setState({
                 conditionsData: conditions.data.current_observation,
                 forecastData: forecast.data.forecast.simpleforecast.forecastday,

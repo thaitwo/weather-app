@@ -10,6 +10,7 @@ import Geosuggest from 'react-geosuggest';
 const API_KEY = '5332856fca0fe1e7';
 const URL_BASE = `http://api.wunderground.com/api/${API_KEY}`;
 
+
 class FetchWeather extends React.Component {
   constructor(props) {
     super(props);
@@ -24,7 +25,9 @@ class FetchWeather extends React.Component {
 
   // Fetch data for weather Conditions, Forecast, Hourly, and 10 Day from Weather Channel API
   getWeatherData() {
-    if (this.props.params.country === 'united_states') {
+    // Check to see if the country value is equal to 'usa'. If yes, then make Ajax call to get weather info
+    // This URL syntax is specific to cities only in the US
+    if (this.props.params.country === 'usa') {
       axios.all([
         axios.get(`${URL_BASE}/conditions/q/${this.props.params.state}/${this.props.params.city}.json`),
         axios.get(`${URL_BASE}/forecast/q/${this.props.params.state}/${this.props.params.city}.json`),
@@ -37,8 +40,6 @@ class FetchWeather extends React.Component {
         let date = conditions.data.current_observation.observation_time_rfc822;
         date = date.split(/\s+/).slice(0,3).join(' ');
 
-        console.log(conditions, forecast, hourly, daily);
-        // Set state for React component with API data
         this.setState({
           conditionsData: conditions.data.current_observation,
           forecastData: forecast.data.forecast.simpleforecast.forecastday,
@@ -52,20 +53,27 @@ class FetchWeather extends React.Component {
       });
     }
     else {
+      // Because certain foreign cities won't return weather data when requested but they all do return
+      // an ID which we can use to get the weather data, we have to get the ID first.
+
+      // If the inputted city is outside of the US, then make this Ajax call to get ID for this city
       axios.get(`${URL_BASE}/geolookup/q/${this.props.params.country}/${this.props.params.city}.json`)
       .then(res => {
-        console.log('YEEEEEEE', res);
+        // For this API, there are two ways to get the 'l'(ID) key
+        // Check to see if the inputted city can get the key using this route
         let cityId = _.get(res, 'data.response.results[0].l');
+
+        // If it can't, then get the key using this route
         if (!cityId) {
           cityId = _.get(res, 'data.location.l');
         }
 
-        console.log(cityId);
-
-        // get out of here instead of running nonsense code below
+        // If an ID doesn't exist, get out of here instead of running nonsense code below
         if (!cityId) {
           return '404 Error';
         }
+
+        // If an ID exist, then make this Ajax call to get weather info for city
         if (cityId) {
           axios.all([
             axios.get(`${URL_BASE}/conditions/${cityId}.json`),
@@ -78,7 +86,6 @@ class FetchWeather extends React.Component {
             let date = conditions.data.current_observation.observation_time_rfc822;
             date = date.split(/\s+/).slice(0,3).join(' ');
 
-            // Set state for React component with API data
             this.setState({
               conditionsData: conditions.data.current_observation,
               forecastData: forecast.data.forecast.simpleforecast.forecastday,
