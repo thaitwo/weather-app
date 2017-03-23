@@ -51,8 +51,14 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
+.logo {
+  color: #ffffff;
+  font-family: "Patua One", cursive;
+  font-size: 32px;
+  line-height: 40px; }
+
 /*
-** SEARCH BAR
+** LAYOUT
 **
 */
 form {
@@ -61,6 +67,11 @@ form {
 .home-search-box {
   margin-top: 100px; }
 
+/*
+** Small Search Box
+**
+** Display a smaller version on sub pages in the application.
+*/
 .small-searchbox .geosuggest__input {
   font-size: 16px;
   height: 40px;
@@ -153,6 +164,9 @@ form {
   /* Chrome/Opera/Safari */
   color: rgba(0, 0, 0, 0.15); }
 
+.home-search-box {
+  margin-top: 100px; }
+
 .search-button {
   background-color: #ffffff;
   border: 0px;
@@ -176,12 +190,6 @@ form {
   padding-top: 15px;
   top: 0; }
 
-.logo {
-  color: #ffffff;
-  font-family: "Patua One", cursive;
-  font-size: 32px;
-  line-height: 40px; }
-
 .container {
   background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
   bottom: 0;
@@ -193,12 +201,16 @@ form {
 .main {
   text-align: center;
   width: 1000px;
-  margin: auto; }
+  margin: auto;
+  height: 100%; }
   .main a {
     text-decoration: none; }
 
 .homepage {
-  margin-top: 140px; }
+  margin: 150px 0 0 0; }
+
+.homepage-content {
+  margin-top: -200px; }
 
 .title {
   color: #ffffff;
@@ -214,6 +226,135 @@ form {
   font-size: 24px;
   font-weight: 300;
   letter-spacing: 1px; }
+
+/*
+** SEARCH BAR
+**
+*/
+form {
+  display: inline-block; }
+
+.home-search-box {
+  margin-top: 100px; }
+
+/*
+** Small Search Box
+**
+** Display a smaller version on sub pages in the application.
+*/
+.small-searchbox .geosuggest__input {
+  font-size: 16px;
+  height: 40px;
+  width: 300px; }
+  .small-searchbox .geosuggest__input:hover {
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08), 0px 4px 8px rgba(0, 0, 0, 0.16); }
+  .small-searchbox .geosuggest__input:focus {
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08), 0px 4px 8px rgba(0, 0, 0, 0.16);
+    outline: 0; }
+
+.small-searchbox .geosuggest__suggests-wrapper {
+  width: 300px; }
+
+.small-searchbox .geosuggest__suggests {
+  border-radius: 0 0 2px 2px; }
+  .small-searchbox .geosuggest__suggests li {
+    font-size: 16px; }
+
+.small-searchbox .search-button {
+  background-color: #ffffff;
+  border: 0px;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+  color: rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  display: inline;
+  float: right;
+  font-family: "Avenir Next";
+  font-size: 16px;
+  margin-left: -45px;
+  padding: 9px 15px;
+  position: absolute;
+  transition: all .3s; }
+  .small-searchbox .search-button:hover {
+    color: rgba(0, 0, 0, 0.3); }
+
+.geosuggest {
+  float: left; }
+
+.geosuggest__input {
+  border: 0;
+  border-radius: 2px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.08), 0px 2px 4px rgba(0, 0, 0, 0.08);
+  color: rgba(0, 0, 0, 0.8);
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  padding: 15px 20px;
+  transition: all .3s;
+  width: 550px; }
+  .geosuggest__input:hover {
+    box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.08), 0px 4px 12px rgba(0, 0, 0, 0.16); }
+  .geosuggest__input:focus {
+    box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.08), 0px 4px 12px rgba(0, 0, 0, 0.08);
+    outline: 0; }
+
+.geosuggest__suggests-wrapper {
+  position: absolute;
+  width: 550px; }
+
+.geosuggest__suggests {
+  background-color: white;
+  border-radius: 0 0 2px 2px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.16), 0px 4px 8px rgba(0, 0, 0, 0.16);
+  margin-top: -1px;
+  max-height: 25em;
+  overflow-x: hidden;
+  overflow-y: auto;
+  transition: max-height 0.4s; }
+  .geosuggest__suggests li {
+    color: rgba(0, 0, 0, 0.8);
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 20px;
+    padding: 10px 0 10px 18px;
+    text-align: left; }
+    .geosuggest__suggests li:hover {
+      background-color: rgba(0, 0, 0, 0.08);
+      cursor: pointer; }
+
+.geosuggest__item--active {
+  background: rgba(0, 0, 0, 0.08);
+  color: #fff; }
+
+.geosuggest__suggests--hidden {
+  max-height: 0;
+  overflow: hidden;
+  border-width: 0; }
+
+::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  color: rgba(0, 0, 0, 0.15); }
+
+.home-search-box {
+  margin-top: 100px; }
+
+.search-button {
+  background-color: #ffffff;
+  border: 0px;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+  color: rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  display: inline;
+  float: right;
+  font-family: "Avenir Next";
+  font-size: 16px;
+  margin-left: -65px;
+  outline: none;
+  padding: 16.5px 25px;
+  position: absolute;
+  transition: all .3s; }
+  .search-button:hover {
+    color: rgba(0, 0, 0, 0.3); }
 
 /*
 ** FLEX

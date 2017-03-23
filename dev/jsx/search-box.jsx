@@ -19,7 +19,10 @@ class SearchBox extends React.Component {
 
   // When user submits a city, create a link using the data obtained from the selected suggestion
   handleSubmit(event) {
-    event.preventDefault();
+    if (event) {
+      event.preventDefault();
+    }
+
     if (this.state.city && this.state.state && this.state.country) {
       browserHistory.push(`/weather/${this.state.country}/${this.state.city}/${this.state.state}`);
     }
@@ -47,6 +50,8 @@ class SearchBox extends React.Component {
       state: state,
       country: country
     });
+
+    this.handleSubmit();
   }
 
   render() {

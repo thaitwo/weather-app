@@ -11,6 +11,7 @@
   text-align: center;
   width: 1000px;
   margin: auto;
+  height: 100%;
 
   a {
     text-decoration: none;
@@ -18,7 +19,11 @@
 }
 
 .homepage {
-  margin-top: 140px;
+  margin: 150px 0 0 0;
+}
+
+.homepage-content {
+  margin-top: -200px;
 }
 
 .title {

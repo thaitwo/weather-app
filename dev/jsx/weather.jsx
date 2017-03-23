@@ -24,10 +24,10 @@ class FetchWeather extends React.Component {
   getWeatherData() {
     // Request data from multiple APIs simultaneously
     axios.all([
-      axios.get(`http://api.wunderground.com/api/5332856fca0fe1e7/conditions/q/${this.props.params.state}/${this.props.params.city}.json`),
-      axios.get(`http://api.wunderground.com/api/5332856fca0fe1e7/forecast/q/${this.props.params.state}/${this.props.params.city}.json`),
-      axios.get(`http://api.wunderground.com/api/5332856fca0fe1e7/hourly/q/${this.props.params.state}/${this.props.params.city}.json`),
-      axios.get(`http://api.wunderground.com/api/5332856fca0fe1e7/forecast10day/q/${this.props.params.state}/${this.props.params.city}.json`)
+      axios.get(`https://api.wunderground.com/api/5332856fca0fe1e7/conditions/q/${this.props.params.state}/${this.props.params.city}.json`),
+      axios.get(`https://api.wunderground.com/api/5332856fca0fe1e7/forecast/q/${this.props.params.state}/${this.props.params.city}.json`),
+      axios.get(`https://api.wunderground.com/api/5332856fca0fe1e7/hourly/q/${this.props.params.state}/${this.props.params.city}.json`),
+      axios.get(`https://api.wunderground.com/api/5332856fca0fe1e7/forecast10day/q/${this.props.params.state}/${this.props.params.city}.json`)
     ])
     .then(axios.spread((conditions, forecast, hourly, daily) => {
 
@@ -68,7 +68,7 @@ class FetchWeather extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="main">
         <TopBar />
         <WeatherCard
           conditionsData={this.state.conditionsData}
