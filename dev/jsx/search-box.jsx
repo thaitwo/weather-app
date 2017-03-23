@@ -20,7 +20,10 @@ class SearchBox extends React.Component {
 
   // When user submits a city, create a link using the data obtained from the selected suggestion
   handleSubmit(event) {
-    event.preventDefault();
+    if (event) {
+      event.preventDefault();
+    }
+
     // Check and see if search form has an input value. If yes, create a link. If not, do nothing.
     if (this.state.city && this.state.country) {
       browserHistory.push(`/weather/${this.state.country}/${this.state.city}/${this.state.state}`);

@@ -6222,7 +6222,10 @@ var SearchBox = function (_React$Component) {
   _createClass(SearchBox, [{
     key: 'handleSubmit',
     value: function handleSubmit(event) {
-      event.preventDefault();
+      if (event) {
+        event.preventDefault();
+      }
+
       // Check and see if search form has an input value. If yes, create a link. If not, do nothing.
       if (this.state.city && this.state.country) {
         _reactRouter.browserHistory.push('/weather/' + this.state.country + '/' + this.state.city + '/' + this.state.state);
@@ -31255,7 +31258,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // ./jsx/weather.jsx
 
 var API_KEY = '5332856fca0fe1e7';
-var URL_BASE = 'http://api.wunderground.com/api/' + API_KEY;
+var URL_BASE = 'https://api.wunderground.com/api/' + API_KEY;
 
 var FetchWeather = function (_React$Component) {
   _inherits(FetchWeather, _React$Component);
