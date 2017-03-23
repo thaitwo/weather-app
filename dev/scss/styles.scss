@@ -5,6 +5,15 @@
 
 @import 'reset';
 @import 'variables';
+@import 'logo';
+
+/*
+** LAYOUT
+**
+*/
+
+@import 'top-bar';
+@import 'home';
 
 /*
 ** SEARCH BAR
@@ -12,8 +21,6 @@
 */
 
 @import 'search-box';
-@import 'top-bar';
-@import 'home';
 
 /*
 ** FLEX

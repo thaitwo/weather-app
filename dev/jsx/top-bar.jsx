@@ -7,7 +7,6 @@ import SearchBox from './search-box';
 class TopBar extends React.Component {
   constructor(props) {
     super(props);
-
   }
 
   render() {
