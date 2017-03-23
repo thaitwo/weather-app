@@ -17,12 +17,14 @@
 
   .forecast-daily-card {
     background-color: rgba(0, 0, 0, .05);
+    height: 265px;
+    width: 190px;
 
     .daily-icon {
       padding: 25px 20px ;
 
       img {
-        width: 70%;
+        width: 105px;
       }
     }
 
