@@ -14058,28 +14058,24 @@ var Home = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: 'main l-flex is-vert align-vert-center' },
+        { className: 'main' },
         _react2.default.createElement(
           'div',
           { className: 'homepage' },
           _react2.default.createElement(
+            'h1',
+            { className: 'title' },
+            'Weathercast'
+          ),
+          _react2.default.createElement(
+            'p',
+            { className: 'tagline' },
+            'Your daily splash of live weather.'
+          ),
+          _react2.default.createElement(
             'div',
-            { className: 'homepage-content' },
-            _react2.default.createElement(
-              'h1',
-              { className: 'title' },
-              'Weathercast'
-            ),
-            _react2.default.createElement(
-              'p',
-              { className: 'tagline' },
-              'Your daily splash of live weather.'
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'home-search-box' },
-              _react2.default.createElement(_searchBox2.default, null)
-            )
+            { className: 'home-search-box' },
+            _react2.default.createElement(_searchBox2.default, null)
           )
         )
       );
