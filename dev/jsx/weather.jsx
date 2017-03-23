@@ -3,7 +3,8 @@
 import React from 'react';
 import axios from 'axios';
 import _ from 'lodash';
-import SearchBar from './search-bar';
+import SearchBox from './search-box';
+import TopBar from './top-bar';
 import WeatherCard from './weather-card';
 import Geosuggest from 'react-geosuggest';
 
@@ -95,7 +96,6 @@ class FetchWeather extends React.Component {
         console.log(error);
       });
     }
-
   }
 
   // Make the initial Ajax request to display the weather data
@@ -117,8 +117,8 @@ class FetchWeather extends React.Component {
 
   render() {
     return (
-      <div>
-        <SearchBar />
+      <div className="main">
+        <TopBar />
         <WeatherCard
           conditionsData={this.state.conditionsData}
           forecastData={this.state.forecastData}

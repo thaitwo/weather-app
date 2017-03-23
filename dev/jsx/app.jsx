@@ -10,9 +10,7 @@ class App extends React.Component {
     return (
       // Contents from the child components will be inserted in this container <div>
       <div className="container">
-        <div className="main">
-          {this.props.children}
-        </div>
+        {this.props.children}
       </div>
     );
   }
