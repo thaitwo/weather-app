@@ -1,11 +1,11 @@
-// ./jsx/search-bar.jsx
+// ./jsx/search-box.jsx
 
 import React from 'react';
 import { browserHistory } from 'react-router';
 import Geosuggest from 'react-geosuggest';
 
 // Search box for users to input city
-class SearchBar extends React.Component {
+class SearchBox extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -51,7 +51,7 @@ class SearchBar extends React.Component {
 
   render() {
     return (
-      <form className="search-bar" onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit}>
         <Geosuggest
           placeholder="Search city"
           types={['(cities)']}
@@ -64,4 +64,4 @@ class SearchBar extends React.Component {
   }
 }
 
-export default SearchBar;
+export default SearchBox;
