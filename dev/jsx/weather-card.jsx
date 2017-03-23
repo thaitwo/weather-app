@@ -43,9 +43,9 @@ class WeatherCard extends React.Component {
     return (
       <div>
         {this.renderCurrentWeatherCard()}
-        <h1 className="forecast-header">Hourly Forecast</h1>
+        <h1 className="forecast-header">HOURLY FORECAST</h1>
         <ForecastHourly {...this.props}/>
-        <h1 className="forecast-header">5 Day Forecast</h1>
+        <h1 className="forecast-header">5 DAY FORECAST</h1>
         <ForecastDaily {...this.props}/>
       </div>
     );

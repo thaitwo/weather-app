@@ -1,6 +1,6 @@
 .forecast-hourly {
   font-family: $font;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: normal;
   color: rgba(0, 0, 0, .8);
   width: 100%;
@@ -14,7 +14,7 @@
 
         th {
           flex-basis: 20%;
-          font-weight: bold;
+          font-weight: 700;
           padding: 20px;
           text-align: left;
         }

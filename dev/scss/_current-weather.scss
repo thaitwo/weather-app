@@ -8,17 +8,18 @@
 }
 
 .city-name {
-  color: rgba(0, 0, 0, 0.15);
+  color: rgba(255, 255, 255, .8);
   font-family: $font-secondary;
   font-size: 32px;
 }
 
 .current-date {
-  color: #ffffff;
+  color: rgba(255, 255, 255, .5);
   font-family: $font;
   font-size: 20px;
-  font-weight: 400;
+  font-weight: 300;
   margin-top: 5px;
+  text-transform: uppercase;
 }
 
 .current-temp {
@@ -37,7 +38,7 @@
 .current-condition {
   color: #ffffff;
   float: left;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 400;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -46,12 +47,12 @@
 .current-info {
   display: inline-block;
   font-family: $font;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 300;
   width: 100%;
 
   ul {
-    color: rgba(0,0,0,.2);
+    color: rgba(255, 255, 255, .4);
     float: right;
   }
 
@@ -61,14 +62,15 @@
 
     span {
       color: #ffffff;
-      font-weight: 700;
+      font-weight: 600;
     }
   }
 }
 
 .forecast-header {
   color: rgba(0, 0, 0, .08);
-  font-family: $font-secondary;
-  font-size: 64px;
+  font-family: $font;
+  font-size: 60px;
+  font-weight: 700;
   margin: 100px 0 50px;
 }
