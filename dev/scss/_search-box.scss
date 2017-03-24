@@ -41,6 +41,17 @@ form {
     }
   }
 
+  .geosuggest__item--active {
+    background: rgba(0, 0, 0, 0.08);
+    color: #fff;
+  }
+
+  .geosuggest__suggests--hidden {
+    max-height: 0;
+    overflow: hidden;
+    border-width: 0;
+  }
+
   .search-button {
     background-color: #ffffff;
     border: 0px;
@@ -118,10 +129,10 @@ form {
   }
 }
 
-.geosuggest__item--active {
-  background: rgba(0, 0, 0, 0.08);
-  color: #fff;
-}
+// .geosuggest__item--active {
+//   background: rgba(0, 0, 0, 0.08);
+//   color: #fff;
+// }
 
 .geosuggest__suggests--hidden {
   max-height: 0;

@@ -90,6 +90,15 @@ form {
   .small-searchbox .geosuggest__suggests li {
     font-size: 16px; }
 
+.small-searchbox .geosuggest__item--active {
+  background: rgba(0, 0, 0, 0.08);
+  color: #fff; }
+
+.small-searchbox .geosuggest__suggests--hidden {
+  max-height: 0;
+  overflow: hidden;
+  border-width: 0; }
+
 .small-searchbox .search-button {
   background-color: #ffffff;
   border: 0px;
@@ -151,10 +160,6 @@ form {
       background-color: rgba(0, 0, 0, 0.08);
       cursor: pointer; }
 
-.geosuggest__item--active {
-  background: rgba(0, 0, 0, 0.08);
-  color: #fff; }
-
 .geosuggest__suggests--hidden {
   max-height: 0;
   overflow: hidden;
@@ -201,8 +206,7 @@ form {
 .main {
   text-align: center;
   width: 1000px;
-  margin: auto;
-  height: 100%; }
+  margin: auto; }
   .main a {
     text-decoration: none; }
 
@@ -260,6 +264,15 @@ form {
   .small-searchbox .geosuggest__suggests li {
     font-size: 16px; }
 
+.small-searchbox .geosuggest__item--active {
+  background: rgba(0, 0, 0, 0.08);
+  color: #fff; }
+
+.small-searchbox .geosuggest__suggests--hidden {
+  max-height: 0;
+  overflow: hidden;
+  border-width: 0; }
+
 .small-searchbox .search-button {
   background-color: #ffffff;
   border: 0px;
@@ -320,10 +333,6 @@ form {
     .geosuggest__suggests li:hover {
       background-color: rgba(0, 0, 0, 0.08);
       cursor: pointer; }
-
-.geosuggest__item--active {
-  background: rgba(0, 0, 0, 0.08);
-  color: #fff; }
 
 .geosuggest__suggests--hidden {
   max-height: 0;
