@@ -85,7 +85,9 @@ form {
 .small-searchbox .geosuggest__suggests {
   border-radius: 0 0 2px 2px; }
   .small-searchbox .geosuggest__suggests li {
-    font-size: 16px; }
+    color: rgba(0, 0, 0, 0.8);
+    font-size: 16px;
+    text-align: left; }
 
 .small-searchbox .geosuggest__item--active {
   background: rgba(0, 0, 0, 0.08);
@@ -268,7 +270,9 @@ form {
 .small-searchbox .geosuggest__suggests {
   border-radius: 0 0 2px 2px; }
   .small-searchbox .geosuggest__suggests li {
-    font-size: 16px; }
+    color: rgba(0, 0, 0, 0.8);
+    font-size: 16px;
+    text-align: left; }
 
 .small-searchbox .geosuggest__item--active {
   background: rgba(0, 0, 0, 0.08);

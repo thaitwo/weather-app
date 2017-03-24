@@ -32,8 +32,6 @@ class SearchBox extends React.Component {
 
   // Set the city that the user selects from the suggestions as the value
   onSuggestSelect(suggest) {
-
-    console.log('SUGGEST', suggest);
     // GET CITY VALUE
     // Get first substring from string
     let city = suggest.gmaps.formatted_address.split(',')[0];
@@ -74,7 +72,6 @@ class SearchBox extends React.Component {
       state = _.trim(state);
       // Convert string value to lowercase
       state = state.toLowerCase();
-      console.log(state);
     }
 
     // Takes the data from the selected suggestion and sets the state

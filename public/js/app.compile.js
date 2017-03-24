@@ -6237,8 +6237,6 @@ var SearchBox = function (_React$Component) {
   }, {
     key: 'onSuggestSelect',
     value: function onSuggestSelect(suggest) {
-
-      console.log('SUGGEST', suggest);
       // GET CITY VALUE
       // Get first substring from string
       var city = suggest.gmaps.formatted_address.split(',')[0];
@@ -6279,7 +6277,6 @@ var SearchBox = function (_React$Component) {
         state = _lodash2.default.trim(state);
         // Convert string value to lowercase
         state = state.toLowerCase();
-        console.log(state);
       }
 
       // Takes the data from the selected suggestion and sets the state
@@ -31296,7 +31293,6 @@ var FetchWeather = function (_React$Component) {
       // This URL syntax is specific to cities only in the US
       if (this.props.params.country === 'usa') {
         _axios2.default.all([_axios2.default.get(_const.URL_BASE + '/conditions/q/' + this.props.params.state + '/' + this.props.params.city + '.json'), _axios2.default.get(_const.URL_BASE + '/forecast/q/' + this.props.params.state + '/' + this.props.params.city + '.json'), _axios2.default.get(_const.URL_BASE + '/hourly/q/' + this.props.params.state + '/' + this.props.params.city + '.json'), _axios2.default.get(_const.URL_BASE + '/forecast10day/q/' + this.props.params.state + '/' + this.props.params.city + '.json')]).then(_axios2.default.spread(function (conditions, forecast, hourly, daily) {
-          console.log('CONDITIONS', conditions);
           // Divide date string into substrings and get the first 3 strings (Mon, 06 Mar)
           var date = conditions.data.current_observation.observation_time_rfc822;
           date = date.split(/\s+/).slice(0, 3).join(' ');
