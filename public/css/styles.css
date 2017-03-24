@@ -64,9 +64,6 @@ table {
 form {
   display: inline-block; }
 
-.home-search-box {
-  margin-top: 100px; }
-
 /*
 ** Small Search Box
 **
@@ -117,6 +114,14 @@ form {
   .small-searchbox .search-button:hover {
     color: rgba(0, 0, 0, 0.3); }
 
+/*
+** Large Search Box
+**
+** Display a large version on homepage in the application.
+*/
+.home-search-box {
+  margin-top: 100px; }
+
 .geosuggest {
   float: left; }
 
@@ -165,13 +170,19 @@ form {
   overflow: hidden;
   border-width: 0; }
 
+.geosuggest__item--active {
+  background: rgba(0, 0, 0, 0.08);
+  color: #fff; }
+
 ::-webkit-input-placeholder {
   /* Chrome/Opera/Safari */
   color: rgba(0, 0, 0, 0.15); }
 
-.home-search-box {
-  margin-top: 100px; }
-
+/*
+** Search Button
+**
+**
+*/
 .search-button {
   background-color: #ffffff;
   border: 0px;
@@ -181,8 +192,6 @@ form {
   cursor: pointer;
   display: inline;
   float: right;
-  font-family: "Avenir Next";
-  font-size: 16px;
   margin-left: -65px;
   outline: none;
   padding: 16.5px 25px;
@@ -238,9 +247,6 @@ form {
 form {
   display: inline-block; }
 
-.home-search-box {
-  margin-top: 100px; }
-
 /*
 ** Small Search Box
 **
@@ -291,6 +297,14 @@ form {
   .small-searchbox .search-button:hover {
     color: rgba(0, 0, 0, 0.3); }
 
+/*
+** Large Search Box
+**
+** Display a large version on homepage in the application.
+*/
+.home-search-box {
+  margin-top: 100px; }
+
 .geosuggest {
   float: left; }
 
@@ -339,13 +353,19 @@ form {
   overflow: hidden;
   border-width: 0; }
 
+.geosuggest__item--active {
+  background: rgba(0, 0, 0, 0.08);
+  color: #fff; }
+
 ::-webkit-input-placeholder {
   /* Chrome/Opera/Safari */
   color: rgba(0, 0, 0, 0.15); }
 
-.home-search-box {
-  margin-top: 100px; }
-
+/*
+** Search Button
+**
+**
+*/
 .search-button {
   background-color: #ffffff;
   border: 0px;
@@ -355,8 +375,6 @@ form {
   cursor: pointer;
   display: inline;
   float: right;
-  font-family: "Avenir Next";
-  font-size: 16px;
   margin-left: -65px;
   outline: none;
   padding: 16.5px 25px;

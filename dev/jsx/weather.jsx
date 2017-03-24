@@ -34,7 +34,7 @@ class FetchWeather extends React.Component {
         axios.get(`${URL_BASE}/forecast10day/q/${this.props.params.state}/${this.props.params.city}.json`)
       ])
       .then(axios.spread((conditions, forecast, hourly, daily) => {
-
+        console.log('CONDITIONS', conditions);
         // Divide date string into substrings and get the first 3 strings (Mon, 06 Mar)
         let date = conditions.data.current_observation.observation_time_rfc822;
         date = date.split(/\s+/).slice(0,3).join(' ');

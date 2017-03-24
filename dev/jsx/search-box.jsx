@@ -32,6 +32,8 @@ class SearchBox extends React.Component {
 
   // Set the city that the user selects from the suggestions as the value
   onSuggestSelect(suggest) {
+
+    console.log('SUGGEST', suggest);
     // GET CITY VALUE
     // Get first substring from string
     let city = suggest.gmaps.formatted_address.split(',')[0];
@@ -50,24 +52,29 @@ class SearchBox extends React.Component {
     city = city.toLowerCase();
 
     // GET COUNTRY VALUE
-    let country = suggest.gmaps.formatted_address.split(',').pop();   // Get the very last substring from string
-    country = country.trim();                                         // Removes all spaces before or after string
-    country = country.replace(/ /g,"_");                              // Replaces all spaces with underscores
+    // Get the very last substring from string
+    let country = suggest.gmaps.formatted_address.split(',').pop();
+    // Remove all spaces before and after string
+    country = country.trim();
+    // Replaces all spaces with underscores
+    country = country.replace(/ /g,"_");
+    // Convert string value to lowercase
     country = country.toLowerCase();
 
     // GET STATE VALUE
     let state;
     // Only get the state value if the city is in the US
     if (country === 'usa') {
-      // Second to last index. Value is an integer.
-      let stateIndex = suggest.gmaps.address_components.length - 2;
-      // Get the second to last array
-      let stateInfo = suggest.gmaps.address_components[stateIndex];
+      // Get the value for the state info (format is "City, ST, United States")
+      let stateInfo = suggest.label;
 
-      // Get the 'state' value
-      state = stateInfo.short_name;
+      // Get 'state' value by spliting entire string separated by commas and getting 2nd string
+      state = _.split(stateInfo, ',')[1];
+      // Remove all spaces before and after string
+      state = _.trim(state);
       // Convert string value to lowercase
       state = state.toLowerCase();
+      console.log(state);
     }
 
     // Takes the data from the selected suggestion and sets the state
@@ -89,7 +96,7 @@ class SearchBox extends React.Component {
           value={this.state.city}
           onSuggestSelect={this.onSuggestSelect}
         />
-        <button type="submit" value="Search" className="search-button"><i className="fa fa-search" aria-hidden="true"></i></button>
+        <button type="submit" className="search-button"><i className="fa fa-search" aria-hidden="true"></i></button>
       </form>
     )
   }
