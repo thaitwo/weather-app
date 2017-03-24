@@ -7,9 +7,7 @@ import SearchBox from './search-box';
 import TopBar from './top-bar';
 import WeatherCard from './weather-card';
 import Geosuggest from 'react-geosuggest';
-
-const API_KEY = '5332856fca0fe1e7';
-const URL_BASE = `https://api.wunderground.com/api/${API_KEY}`;
+import { API_KEY, URL_BASE } from './const';
 
 
 class FetchWeather extends React.Component {

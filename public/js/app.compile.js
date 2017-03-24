@@ -31249,6 +31249,8 @@ var _reactGeosuggest = __webpack_require__(117);
 
 var _reactGeosuggest2 = _interopRequireDefault(_reactGeosuggest);
 
+var _const = __webpack_require__(310);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -31256,9 +31258,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // ./jsx/weather.jsx
-
-var API_KEY = '5332856fca0fe1e7';
-var URL_BASE = 'https://api.wunderground.com/api/' + API_KEY;
 
 var FetchWeather = function (_React$Component) {
   _inherits(FetchWeather, _React$Component);
@@ -31289,7 +31288,7 @@ var FetchWeather = function (_React$Component) {
       // Check to see if the country value is equal to 'usa'. If yes, then make Ajax call to get weather info
       // This URL syntax is specific to cities only in the US
       if (this.props.params.country === 'usa') {
-        _axios2.default.all([_axios2.default.get(URL_BASE + '/conditions/q/' + this.props.params.state + '/' + this.props.params.city + '.json'), _axios2.default.get(URL_BASE + '/forecast/q/' + this.props.params.state + '/' + this.props.params.city + '.json'), _axios2.default.get(URL_BASE + '/hourly/q/' + this.props.params.state + '/' + this.props.params.city + '.json'), _axios2.default.get(URL_BASE + '/forecast10day/q/' + this.props.params.state + '/' + this.props.params.city + '.json')]).then(_axios2.default.spread(function (conditions, forecast, hourly, daily) {
+        _axios2.default.all([_axios2.default.get(_const.URL_BASE + '/conditions/q/' + this.props.params.state + '/' + this.props.params.city + '.json'), _axios2.default.get(_const.URL_BASE + '/forecast/q/' + this.props.params.state + '/' + this.props.params.city + '.json'), _axios2.default.get(_const.URL_BASE + '/hourly/q/' + this.props.params.state + '/' + this.props.params.city + '.json'), _axios2.default.get(_const.URL_BASE + '/forecast10day/q/' + this.props.params.state + '/' + this.props.params.city + '.json')]).then(_axios2.default.spread(function (conditions, forecast, hourly, daily) {
 
           // Divide date string into substrings and get the first 3 strings (Mon, 06 Mar)
           var date = conditions.data.current_observation.observation_time_rfc822;
@@ -31310,7 +31309,7 @@ var FetchWeather = function (_React$Component) {
         // an ID which we can use to get the weather data, we have to get the ID first.
 
         // If the inputted city is outside of the US, then make this Ajax call to get ID for this city
-        _axios2.default.get(URL_BASE + '/geolookup/q/' + this.props.params.country + '/' + this.props.params.city + '.json').then(function (res) {
+        _axios2.default.get(_const.URL_BASE + '/geolookup/q/' + this.props.params.country + '/' + this.props.params.city + '.json').then(function (res) {
           // For this API, there are two ways to get the 'l'(ID) key
           // Check to see if the inputted city can get the key using this route
           var cityId = _lodash2.default.get(res, 'data.response.results[0].l');
@@ -31322,7 +31321,7 @@ var FetchWeather = function (_React$Component) {
 
           // If an ID exist, then make this Ajax call to get weather info for city
           if (cityId) {
-            _axios2.default.all([_axios2.default.get(URL_BASE + '/conditions/' + cityId + '.json'), _axios2.default.get(URL_BASE + '/forecast/' + cityId + '.json'), _axios2.default.get(URL_BASE + '/hourly/' + cityId + '.json'), _axios2.default.get(URL_BASE + '/forecast10day/' + cityId + '.json')]).then(_axios2.default.spread(function (conditions, forecast, hourly, daily) {
+            _axios2.default.all([_axios2.default.get(_const.URL_BASE + '/conditions/' + cityId + '.json'), _axios2.default.get(_const.URL_BASE + '/forecast/' + cityId + '.json'), _axios2.default.get(_const.URL_BASE + '/hourly/' + cityId + '.json'), _axios2.default.get(_const.URL_BASE + '/forecast10day/' + cityId + '.json')]).then(_axios2.default.spread(function (conditions, forecast, hourly, daily) {
               // Divide date string into substrings and get the first 3 strings (Mon, 06 Mar)
               var date = conditions.data.current_observation.observation_time_rfc822;
               date = date.split(/\s+/).slice(0, 3).join(' ');
@@ -48999,6 +48998,26 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 ), document.getElementById('root'));
 
 // Import custom components
+
+/***/ }),
+/* 307 */,
+/* 308 */,
+/* 309 */,
+/* 310 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var API_KEY = '5332856fca0fe1e7';
+
+exports.default = {
+  API_KEY: API_KEY,
+  URL_BASE: 'https://api.wunderground.com/api/' + API_KEY
+};
 
 /***/ })
 /******/ ]);
