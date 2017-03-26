@@ -51,12 +51,78 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
+.logo {
+  color: #ffffff;
+  font-family: "Patua One", cursive;
+  font-size: 32px;
+  line-height: 40px; }
+
 /*
-** SEARCH BAR
+** LAYOUT
 **
 */
 form {
   display: inline-block; }
+
+/*
+** Small Search Box
+**
+** Display a smaller version on sub pages in the application.
+*/
+.small-searchbox .geosuggest__input {
+  font-size: 14px;
+  height: 40px;
+  width: 300px; }
+  .small-searchbox .geosuggest__input:hover {
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08), 0px 4px 8px rgba(0, 0, 0, 0.16); }
+  .small-searchbox .geosuggest__input:focus {
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08), 0px 4px 8px rgba(0, 0, 0, 0.16);
+    outline: 0; }
+
+.small-searchbox .geosuggest__suggests-wrapper {
+  width: 300px; }
+
+.small-searchbox .geosuggest__suggests {
+  border-radius: 0 0 2px 2px; }
+  .small-searchbox .geosuggest__suggests li {
+    color: rgba(0, 0, 0, 0.8);
+    font-size: 14px;
+    text-align: left; }
+
+.small-searchbox .geosuggest__item--active {
+  background: rgba(0, 0, 0, 0.08);
+  color: #fff; }
+
+.small-searchbox .geosuggest__suggests--hidden {
+  max-height: 0;
+  overflow: hidden;
+  border-width: 0; }
+
+.small-searchbox .search-button {
+  background-color: #ffffff;
+  border: 0px;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+  color: rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  display: inline;
+  float: right;
+  font-family: "Avenir Next";
+  font-size: 14px;
+  margin-left: -43px;
+  padding: 10.5px 15px;
+  position: absolute;
+  transition: all .3s; }
+  .small-searchbox .search-button:hover {
+    color: rgba(0, 0, 0, 0.3); }
+
+/*
+** Large Search Box
+**
+** Display a large version on homepage in the application.
+*/
+.home-search-box {
+  margin-top: 100px; }
 
 .geosuggest {
   float: left; }
@@ -67,13 +133,13 @@ form {
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.08), 0px 2px 4px rgba(0, 0, 0, 0.08);
   color: rgba(0, 0, 0, 0.8);
   font-family: "Montserrat", sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 300;
-  padding: 16px 20px;
+  padding: 15px 20px;
   transition: all .3s;
   width: 550px; }
   .geosuggest__input:hover {
-    box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.08), 0px 4px 12px rgba(0, 0, 0, 0.08); }
+    box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.08), 0px 4px 12px rgba(0, 0, 0, 0.16); }
   .geosuggest__input:focus {
     box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.08), 0px 4px 12px rgba(0, 0, 0, 0.08);
     outline: 0; }
@@ -84,6 +150,7 @@ form {
 
 .geosuggest__suggests {
   background-color: white;
+  border-radius: 0 0 2px 2px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.16), 0px 4px 8px rgba(0, 0, 0, 0.16);
   margin-top: -1px;
   max-height: 25em;
@@ -93,7 +160,7 @@ form {
   .geosuggest__suggests li {
     color: rgba(0, 0, 0, 0.8);
     font-family: "Montserrat", sans-serif;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 300;
     padding: 10px 0 10px 18px;
     text-align: left; }
@@ -101,24 +168,26 @@ form {
       background-color: rgba(0, 0, 0, 0.08);
       cursor: pointer; }
 
-.geosuggest__item--active {
-  background: rgba(0, 0, 0, 0.08);
-  color: #fff; }
-
 .geosuggest__suggests--hidden {
   max-height: 0;
   overflow: hidden;
   border-width: 0; }
 
+.geosuggest__item--active {
+  background: rgba(0, 0, 0, 0.08);
+  color: #fff; }
+
 ::-webkit-input-placeholder {
   /* Chrome/Opera/Safari */
   color: rgba(0, 0, 0, 0.15); }
 
-.search-bar {
-  margin-top: 100px; }
-
+/*
+** Search Button
+**
+**
+*/
 .search-button {
-  background-color: transparent;
+  background-color: #ffffff;
   border: 0px;
   border-top-right-radius: 2px;
   border-bottom-right-radius: 2px;
@@ -126,15 +195,18 @@ form {
   cursor: pointer;
   display: inline;
   float: right;
-  font-family: "Avenir Next";
   font-size: 16px;
   margin-left: -65px;
   outline: none;
-  padding: 14.5px 25px;
+  padding: 17px 25px;
   position: absolute;
   transition: all .3s; }
   .search-button:hover {
     color: rgba(0, 0, 0, 0.3); }
+
+.top-bar {
+  padding-top: 15px;
+  top: 0; }
 
 .container {
   background-image: linear-gradient(to top, #4481eb 0%, #04befe 100%);
@@ -152,7 +224,10 @@ form {
     text-decoration: none; }
 
 .homepage {
-  margin-top: 140px; }
+  margin: 150px 0 0 0; }
+
+.homepage-content {
+  margin-top: -200px; }
 
 .title {
   color: #ffffff;
@@ -168,6 +243,153 @@ form {
   font-size: 20px;
   font-weight: 200;
   letter-spacing: 1px; }
+
+/*
+** SEARCH BAR
+**
+*/
+form {
+  display: inline-block; }
+
+/*
+** Small Search Box
+**
+** Display a smaller version on sub pages in the application.
+*/
+.small-searchbox .geosuggest__input {
+  font-size: 14px;
+  height: 40px;
+  width: 300px; }
+  .small-searchbox .geosuggest__input:hover {
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08), 0px 4px 8px rgba(0, 0, 0, 0.16); }
+  .small-searchbox .geosuggest__input:focus {
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08), 0px 4px 8px rgba(0, 0, 0, 0.16);
+    outline: 0; }
+
+.small-searchbox .geosuggest__suggests-wrapper {
+  width: 300px; }
+
+.small-searchbox .geosuggest__suggests {
+  border-radius: 0 0 2px 2px; }
+  .small-searchbox .geosuggest__suggests li {
+    color: rgba(0, 0, 0, 0.8);
+    font-size: 14px;
+    text-align: left; }
+
+.small-searchbox .geosuggest__item--active {
+  background: rgba(0, 0, 0, 0.08);
+  color: #fff; }
+
+.small-searchbox .geosuggest__suggests--hidden {
+  max-height: 0;
+  overflow: hidden;
+  border-width: 0; }
+
+.small-searchbox .search-button {
+  background-color: #ffffff;
+  border: 0px;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+  color: rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  display: inline;
+  float: right;
+  font-family: "Avenir Next";
+  font-size: 14px;
+  margin-left: -43px;
+  padding: 10.5px 15px;
+  position: absolute;
+  transition: all .3s; }
+  .small-searchbox .search-button:hover {
+    color: rgba(0, 0, 0, 0.3); }
+
+/*
+** Large Search Box
+**
+** Display a large version on homepage in the application.
+*/
+.home-search-box {
+  margin-top: 100px; }
+
+.geosuggest {
+  float: left; }
+
+.geosuggest__input {
+  border: 0;
+  border-radius: 2px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.08), 0px 2px 4px rgba(0, 0, 0, 0.08);
+  color: rgba(0, 0, 0, 0.8);
+  font-family: "Montserrat", sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+  padding: 15px 20px;
+  transition: all .3s;
+  width: 550px; }
+  .geosuggest__input:hover {
+    box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.08), 0px 4px 12px rgba(0, 0, 0, 0.16); }
+  .geosuggest__input:focus {
+    box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.08), 0px 4px 12px rgba(0, 0, 0, 0.08);
+    outline: 0; }
+
+.geosuggest__suggests-wrapper {
+  position: absolute;
+  width: 550px; }
+
+.geosuggest__suggests {
+  background-color: white;
+  border-radius: 0 0 2px 2px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.16), 0px 4px 8px rgba(0, 0, 0, 0.16);
+  margin-top: -1px;
+  max-height: 25em;
+  overflow-x: hidden;
+  overflow-y: auto;
+  transition: max-height 0.4s; }
+  .geosuggest__suggests li {
+    color: rgba(0, 0, 0, 0.8);
+    font-family: "Montserrat", sans-serif;
+    font-size: 18px;
+    font-weight: 300;
+    padding: 10px 0 10px 18px;
+    text-align: left; }
+    .geosuggest__suggests li:hover {
+      background-color: rgba(0, 0, 0, 0.08);
+      cursor: pointer; }
+
+.geosuggest__suggests--hidden {
+  max-height: 0;
+  overflow: hidden;
+  border-width: 0; }
+
+.geosuggest__item--active {
+  background: rgba(0, 0, 0, 0.08);
+  color: #fff; }
+
+::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  color: rgba(0, 0, 0, 0.15); }
+
+/*
+** Search Button
+**
+**
+*/
+.search-button {
+  background-color: #ffffff;
+  border: 0px;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+  color: rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  display: inline;
+  float: right;
+  font-size: 16px;
+  margin-left: -65px;
+  outline: none;
+  padding: 17px 25px;
+  position: absolute;
+  transition: all .3s; }
+  .search-button:hover {
+    color: rgba(0, 0, 0, 0.3); }
 
 /*
 ** FLEX
@@ -235,6 +457,7 @@ form {
   font-weight: 800;
   margin: 60px 0; }
   .current-temp span {
+    color: rgba(255, 255, 255, 0.5);
     font-weight: 200; }
 
 .current-condition {
@@ -280,14 +503,16 @@ form {
     color: #ffffff;
     font-size: 20px;
     font-weight: bold;
-    padding: 15px 40px;
+    padding: 15px;
     text-transform: uppercase; }
   .forecast-daily .forecast-daily-card {
-    background-color: rgba(0, 0, 0, 0.05); }
+    background-color: rgba(0, 0, 0, 0.05);
+    height: 265px;
+    width: 190px; }
     .forecast-daily .forecast-daily-card .daily-icon {
       padding: 25px 20px; }
       .forecast-daily .forecast-daily-card .daily-icon img {
-        width: 70%; }
+        width: 105px; }
     .forecast-daily .forecast-daily-card p {
       font-size: 20px;
       padding: 0 20px 20px; }

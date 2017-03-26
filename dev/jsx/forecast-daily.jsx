@@ -27,8 +27,8 @@ class ForecastDaily extends React.Component {
         </div>
       );
     })
-    // Using Lodash's slice method to get only the first 5 arrays
-    .slice(0, 5);
+    // Using Lodash's slice method to get only arrays 1 - 6
+    .slice(1, 6);
 
     return cards;
   }
