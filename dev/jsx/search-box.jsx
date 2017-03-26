@@ -4,6 +4,7 @@ import React from 'react';
 import { browserHistory } from 'react-router';
 import Geosuggest from 'react-geosuggest';
 import _ from 'lodash';
+const normalize = require('normalization');
 
 // Search box for users to input city
 class SearchBox extends React.Component {
@@ -41,6 +42,7 @@ class SearchBox extends React.Component {
       // Separate strings into substrings that are divided by ' - '
       city = city.split(' - ')[0];
     }
+    city = normalize(city);
     // Check and see if city value contains spaces
     if (city.includes(' ')) {
       // Replace all spaces with underscores
@@ -48,6 +50,7 @@ class SearchBox extends React.Component {
     }
     // Convert city value to lowercase
     city = city.toLowerCase();
+    console.log(city);
 
     // GET COUNTRY VALUE
     // Get the very last substring from string
