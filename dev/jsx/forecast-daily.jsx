@@ -10,15 +10,17 @@ class ForecastDaily extends React.Component {
 
   // Renders the cards containing data for the 5 Day Forecast
   renderCards() {
+    // Loop through each array to get data, then push data into the card template below
     const cards = this.props.dailyData.map((data, index) => {
       return (
-        <div  key={index}>
+        <div className="forecast-daily-card" key={index}>
           <div>
-            <h4>{data.date.weekday_short}, {data.date.monthname_short} {data.date.day}</h4>
-          </div>
-          <div className="forecast-daily-card">
+            <h4>{data.date.weekday_short}</h4>
+            <h5>{data.date.monthname_short} {data.date.day}</h5>
             <div className="daily-icon"><img src={`http://icons.wxug.com/i/c/v4/${data.icon}.svg`}/></div>
             <p>{data.conditions}</p>
+          </div>
+          <div className="forecast-daily-card-extra-data">
             <ul className="l-flex is-hori align-hori-space-between">
               <li>{data.high.fahrenheit}° | {data.low.fahrenheit}°</li>
               <li><i className="fa fa-tint" aria-hidden="true"></i>{data.pop}%</li>

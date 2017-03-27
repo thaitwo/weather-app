@@ -489,41 +489,49 @@ form {
   font-family: "Montserrat", sans-serif;
   font-size: 60px;
   font-weight: 700;
-  margin: 100px 0 50px; }
+  margin: 100px 0 70px; }
 
 .forecast-daily {
+  border-left: 2px solid rgba(0, 0, 0, 0.8);
   color: rgba(0, 0, 0, 0.8);
   font-family: "Montserrat", sans-serif;
   font-weight: normal;
-  margin: 80px 0;
+  margin: 0 0 100px;
   width: 100%; }
-  .forecast-daily h4 {
-    background-color: #8fd3f4;
-    border-radius: 2px 2px 0 0;
-    color: #ffffff;
-    font-size: 20px;
-    font-weight: bold;
-    padding: 15px;
-    text-transform: uppercase; }
   .forecast-daily .forecast-daily-card {
-    background-color: rgba(0, 0, 0, 0.05);
-    height: 265px;
-    width: 190px; }
+    border-right: 2px solid rgba(0, 0, 0, 0.8);
+    height: 320px;
+    padding: 20px;
+    position: relative;
+    width: 200px; }
+    .forecast-daily .forecast-daily-card h4 {
+      color: rgba(0, 0, 0, 0.8);
+      font-size: 20px;
+      font-weight: 600;
+      text-transform: uppercase; }
+    .forecast-daily .forecast-daily-card h5 {
+      color: rgba(0, 0, 0, 0.7);
+      font-size: 16px;
+      font-weight: 300;
+      padding-top: 5px; }
     .forecast-daily .forecast-daily-card .daily-icon {
-      padding: 25px 20px; }
+      padding: 25px 0; }
       .forecast-daily .forecast-daily-card .daily-icon img {
         width: 105px; }
     .forecast-daily .forecast-daily-card p {
-      font-size: 20px;
-      padding: 0 20px 20px; }
-  .forecast-daily ul {
-    border-radius: 2px;
-    padding: 0 20px; }
-    .forecast-daily ul li {
-      font-size: 16px;
-      padding: 15px 0; }
-      .forecast-daily ul li i {
-        padding-right: 6px; }
+      color: rgba(0, 0, 0, 0.8);
+      font-size: 16px; }
+  .forecast-daily .forecast-daily-card-extra-data {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0 20px 20px;
+    position: absolute; }
+  .forecast-daily ul li {
+    color: rgba(0, 0, 0, 0.7);
+    font-size: 14px; }
+    .forecast-daily ul li i {
+      padding-right: 6px; }
 
 .forecast-hourly {
   font-family: "Montserrat", sans-serif;

@@ -42,6 +42,7 @@ class SearchBox extends React.Component {
       // Separate strings into substrings that are divided by ' - '
       city = city.split(' - ')[0];
     }
+    // Method from npm package that replaces diacritics with normal letters
     city = normalize(city);
     // Check and see if city value contains spaces
     if (city.includes(' ')) {
@@ -50,7 +51,6 @@ class SearchBox extends React.Component {
     }
     // Convert city value to lowercase
     city = city.toLowerCase();
-    console.log(city);
 
     // GET COUNTRY VALUE
     // Get the very last substring from string

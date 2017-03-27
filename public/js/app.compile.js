@@ -6249,6 +6249,7 @@ var SearchBox = function (_React$Component) {
         // Separate strings into substrings that are divided by ' - '
         city = city.split(' - ')[0];
       }
+      // Method from npm package that replaces diacritics with normal letters
       city = normalize(city);
       // Check and see if city value contains spaces
       if (city.includes(' ')) {
@@ -6257,7 +6258,6 @@ var SearchBox = function (_React$Component) {
       }
       // Convert city value to lowercase
       city = city.toLowerCase();
-      console.log(city);
 
       // GET COUNTRY VALUE
       // Get the very last substring from string
@@ -32305,26 +32305,26 @@ var ForecastDaily = function (_React$Component) {
   _createClass(ForecastDaily, [{
     key: 'renderCards',
     value: function renderCards() {
+      // Loop through each array to get data, then push data into the card template below
       var cards = this.props.dailyData.map(function (data, index) {
         return _react2.default.createElement(
           'div',
-          { key: index },
+          { className: 'forecast-daily-card', key: index },
           _react2.default.createElement(
             'div',
             null,
             _react2.default.createElement(
               'h4',
               null,
-              data.date.weekday_short,
-              ', ',
+              data.date.weekday_short
+            ),
+            _react2.default.createElement(
+              'h5',
+              null,
               data.date.monthname_short,
               ' ',
               data.date.day
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'forecast-daily-card' },
+            ),
             _react2.default.createElement(
               'div',
               { className: 'daily-icon' },
@@ -32334,7 +32334,11 @@ var ForecastDaily = function (_React$Component) {
               'p',
               null,
               data.conditions
-            ),
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'forecast-daily-card-extra-data' },
             _react2.default.createElement(
               'ul',
               { className: 'l-flex is-hori align-hori-space-between' },
