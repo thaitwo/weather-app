@@ -1,3 +1,8 @@
+.weather-header {
+  background-image: linear-gradient(to top, #4481eb 0%, #04befe 100%);
+  height: 520px;
+}
+
 .weather-current {
   margin: 50px 0;
 
@@ -9,14 +14,16 @@
 
 .city-name {
   color: rgba(255, 255, 255, .8);
-  font-family: $font-secondary;
-  font-size: 32px;
+  font-family: $font;
+  font-size: 30px;
+  font-weight: 600;
+  text-transform: uppercase;
 }
 
 .current-date {
   color: rgba(255, 255, 255, .5);
   font-family: $font;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 300;
   margin-top: 5px;
   text-transform: uppercase;

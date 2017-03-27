@@ -31188,24 +31188,28 @@ var Home = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: 'main' },
+        { className: 'home' },
         _react2.default.createElement(
           'div',
-          { className: 'homepage' },
-          _react2.default.createElement(
-            'h1',
-            { className: 'title' },
-            'Weathercast'
-          ),
-          _react2.default.createElement(
-            'p',
-            { className: 'tagline' },
-            'Your daily splash of live weather.'
-          ),
+          { className: 'main' },
           _react2.default.createElement(
             'div',
-            { className: 'home-search-box' },
-            _react2.default.createElement(_searchBox2.default, null)
+            { className: 'homepage' },
+            _react2.default.createElement(
+              'h1',
+              { className: 'title' },
+              'Weathercast'
+            ),
+            _react2.default.createElement(
+              'p',
+              { className: 'tagline' },
+              'Your daily splash of live weather.'
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'home-search-box' },
+              _react2.default.createElement(_searchBox2.default, null)
+            )
           )
         )
       );
@@ -31376,15 +31380,19 @@ var FetchWeather = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: 'main' },
-        _react2.default.createElement(_topBar2.default, null),
-        _react2.default.createElement(_weatherCard2.default, {
-          conditionsData: this.state.conditionsData,
-          forecastData: this.state.forecastData,
-          hourlyData: this.state.hourlyData,
-          dailyData: this.state.dailyData,
-          currentdate: this.state.currentdate
-        })
+        { className: 'weather-header' },
+        _react2.default.createElement(
+          'div',
+          { className: 'main' },
+          _react2.default.createElement(_topBar2.default, null),
+          _react2.default.createElement(_weatherCard2.default, {
+            conditionsData: this.state.conditionsData,
+            forecastData: this.state.forecastData,
+            hourlyData: this.state.hourlyData,
+            dailyData: this.state.dailyData,
+            currentdate: this.state.currentdate
+          })
+        )
       );
     }
   }]);
