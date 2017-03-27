@@ -8,7 +8,7 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div className="home">
+      <div className="home-bg">
         <div className="main">
           <div className="homepage">
             <h1 className="title">Weathercast</h1>

@@ -31188,7 +31188,7 @@ var Home = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: 'home' },
+        { className: 'home-bg' },
         _react2.default.createElement(
           'div',
           { className: 'main' },
@@ -32438,10 +32438,10 @@ var ForecastHourly = function (_React$Component) {
         { className: 'l-flex is-hori align-hori-space-between' },
         _react2.default.createElement(
           'th',
-          null,
+          { className: 'hourly-time' },
           'TIME'
         ),
-        _react2.default.createElement('th', null),
+        _react2.default.createElement('th', { className: 'hourly-icon' }),
         _react2.default.createElement(
           'th',
           null,
@@ -32471,7 +32471,7 @@ var ForecastHourly = function (_React$Component) {
           { key: index, className: 'l-flex is-hori align-hori-space-between' },
           _react2.default.createElement(
             'td',
-            null,
+            { className: 'hourly-time' },
             data.FCTTIME.civil
           ),
           _react2.default.createElement(

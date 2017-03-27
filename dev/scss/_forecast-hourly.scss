@@ -13,10 +13,18 @@
       tr {
 
         th {
-          flex-basis: 20%;
+          flex-basis: 24%;
           font-weight: 700;
           padding: 20px;
           text-align: left;
+
+          &.hourly-time {
+            flex-basis: 16%;
+          }
+
+          &.hourly-icon {
+            flex-basis: 12%;
+          }
         }
       }
     }
@@ -27,11 +35,16 @@
         border-top: 1px solid rgba(0, 0, 0, .08);
 
         td {
-          flex-basis: 20%;
+          flex-basis: 24%;
           padding: 20px;
           text-align: left;
 
+          &.hourly-time {
+            flex-basis: 15%;
+          }
+
           &.hourly-icon {
+            flex-basis: 13%;
             padding: 5px 5px 5px 15px;
           }
 
