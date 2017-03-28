@@ -6231,7 +6231,7 @@ var SearchBox = function (_React$Component) {
 
       // Check and see if search form has an input value. If yes, create a link. If not, do nothing.
       if (this.state.city && this.state.country) {
-        _reactRouter.browserHistory.push('/weather/' + this.state.country + '/' + this.state.city + '/' + this.state.state);
+        _reactRouter.browserHistory.push('/weather/' + this.state.country + '/' + this.state.city + '/' + this.state.state + '/');
       }
     }
 
@@ -6282,6 +6282,8 @@ var SearchBox = function (_React$Component) {
         state = _lodash2.default.trim(state);
         // Convert string value to lowercase
         state = state.toLowerCase();
+      } else {
+        state = 'f';
       }
 
       // Takes the data from the selected suggestion and sets the state
