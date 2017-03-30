@@ -4,6 +4,7 @@ import React from 'react';
 import { browserHistory } from 'react-router';
 import Geosuggest from 'react-geosuggest';
 import _ from 'lodash';
+const normalize = require('normalization');
 
 // Search box for users to input city
 class SearchBox extends React.Component {
@@ -26,7 +27,7 @@ class SearchBox extends React.Component {
 
     // Check and see if search form has an input value. If yes, create a link. If not, do nothing.
     if (this.state.city && this.state.country) {
-      browserHistory.push(`/weather/${this.state.country}/${this.state.city}/${this.state.state}`);
+      browserHistory.push(`/weather/${this.state.country}/${this.state.city}/${this.state.state}/`);
     }
   }
 
@@ -41,6 +42,8 @@ class SearchBox extends React.Component {
       // Separate strings into substrings that are divided by ' - '
       city = city.split(' - ')[0];
     }
+    // Method from npm package that replaces diacritics with normal letters
+    city = normalize(city);
     // Check and see if city value contains spaces
     if (city.includes(' ')) {
       // Replace all spaces with underscores
@@ -61,7 +64,7 @@ class SearchBox extends React.Component {
 
     // GET STATE VALUE
     let state;
-    // Only get the state value if the city is in the US
+    // If the city is in the U.S., then get the state value
     if (country === 'usa') {
       // Get the value for the state info (format is "City, ST, United States")
       let stateInfo = suggest.label;
@@ -72,6 +75,10 @@ class SearchBox extends React.Component {
       state = _.trim(state);
       // Convert string value to lowercase
       state = state.toLowerCase();
+    }
+    // If foreign city, then set state as letter 'f' for 'foreign'
+    else {
+      state = 'f';
     }
 
     // Takes the data from the selected suggestion and sets the state

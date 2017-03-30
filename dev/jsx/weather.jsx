@@ -114,15 +114,17 @@ class FetchWeather extends React.Component {
 
   render() {
     return (
-      <div className="main">
-        <TopBar />
-        <WeatherCard
-          conditionsData={this.state.conditionsData}
-          forecastData={this.state.forecastData}
-          hourlyData={this.state.hourlyData}
-          dailyData={this.state.dailyData}
-          currentdate={this.state.currentdate}
-        />
+      <div className="weather-header">
+        <div className="main">
+          <TopBar />
+          <WeatherCard
+            conditionsData={this.state.conditionsData}
+            forecastData={this.state.forecastData}
+            hourlyData={this.state.hourlyData}
+            dailyData={this.state.dailyData}
+            currentdate={this.state.currentdate}
+          />
+        </div>
       </div>
     );
   }
