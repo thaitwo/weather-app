@@ -13,7 +13,7 @@ class ForecastHourly extends React.Component {
       <tr className="l-flex is-hori align-hori-space-between">
         <th className="hourly-time">TIME</th>
         <th className="hourly-icon"></th>
-        <th>CONDITION</th>
+        <th className="hourly-condition">CONDITION</th>
         <th>TEMPERATURE</th>
         <th>PRECIPITATION</th>
       </tr>
@@ -27,9 +27,9 @@ class ForecastHourly extends React.Component {
         <tr key={index} className="l-flex is-hori align-hori-space-between">
           <td className="hourly-time">{data.FCTTIME.civil}</td>
           <td className="hourly-icon"><img src={`http://icons.wxug.com/i/c/v4/${data.icon}.svg`}/></td>
-          <td>{data.condition}</td>
-          <td>{data.temp.english} °F</td>
-          <td>{data.pop}%</td>
+          <td className="hourly-condition">{data.condition}</td>
+          <td className="hourly-temp">{data.temp.english} °F</td>
+          <td className="hourly-precip">{data.pop}%</td>
         </tr>
       );
     })

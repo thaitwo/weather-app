@@ -6271,7 +6271,7 @@ var SearchBox = function (_React$Component) {
 
       // GET STATE VALUE
       var state = void 0;
-      // Only get the state value if the city is in the US
+      // If the city is in the U.S., then get the state value
       if (country === 'usa') {
         // Get the value for the state info (format is "City, ST, United States")
         var stateInfo = suggest.label;
@@ -6282,9 +6282,11 @@ var SearchBox = function (_React$Component) {
         state = _lodash2.default.trim(state);
         // Convert string value to lowercase
         state = state.toLowerCase();
-      } else {
-        state = 'f';
       }
+      // If foreign city, then set state as letter 'f' for 'foreign'
+      else {
+          state = 'f';
+        }
 
       // Takes the data from the selected suggestion and sets the state
       this.setState({
@@ -32446,7 +32448,7 @@ var ForecastHourly = function (_React$Component) {
         _react2.default.createElement('th', { className: 'hourly-icon' }),
         _react2.default.createElement(
           'th',
-          null,
+          { className: 'hourly-condition' },
           'CONDITION'
         ),
         _react2.default.createElement(
@@ -32483,18 +32485,18 @@ var ForecastHourly = function (_React$Component) {
           ),
           _react2.default.createElement(
             'td',
-            null,
+            { className: 'hourly-condition' },
             data.condition
           ),
           _react2.default.createElement(
             'td',
-            null,
+            { className: 'hourly-temp' },
             data.temp.english,
             ' \xB0F'
           ),
           _react2.default.createElement(
             'td',
-            null,
+            { className: 'hourly-precip' },
             data.pop,
             '%'
           )
@@ -32672,7 +32674,7 @@ var WeatherCard = function (_React$Component) {
           _react2.default.createElement(
             'div',
             { className: 'l-flex is-hori align-hori-space-between' },
-            _react2.default.createElement('img', { className: 'current-icon', src: 'http://icons.wxug.com/i/c/v4/' + this.props.conditionsData.icon + '.svg' }),
+            _react2.default.createElement('img', { className: 'current-icon', src: 'https://icons.wxug.com/i/c/v4/' + this.props.conditionsData.icon + '.svg' }),
             _react2.default.createElement(
               'p',
               { className: 'current-temp' },

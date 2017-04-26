@@ -56,6 +56,9 @@ table {
   font-family: "Patua One", cursive;
   font-size: 32px;
   line-height: 40px; }
+  @media only screen and (max-width: 480px) {
+    .logo {
+      display: block; } }
 
 /*
 ** LAYOUT
@@ -135,6 +138,9 @@ form {
 */
 .home-search-box {
   margin-top: 100px; }
+  @media only screen and (max-width: 480px) {
+    .home-search-box {
+      margin-top: 80px; } }
 
 .geosuggest {
   float: left; }
@@ -142,7 +148,7 @@ form {
 .geosuggest__input {
   border: 0;
   border-radius: 2px;
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.08), 0px 2px 4px rgba(0, 0, 0, 0.08);
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.12), 0px 4px 8px rgba(0, 0, 0, 0.12);
   color: rgba(0, 0, 0, 0.8);
   font-family: "Montserrat", sans-serif;
   font-size: 18px;
@@ -151,19 +157,27 @@ form {
   transition: all .3s;
   width: 550px; }
   .geosuggest__input:hover {
-    box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.08), 0px 4px 12px rgba(0, 0, 0, 0.16); }
+    box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.12), 0px 8px 16px rgba(0, 0, 0, 0.24); }
   .geosuggest__input:focus {
-    box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.08), 0px 4px 12px rgba(0, 0, 0, 0.08);
+    box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.12), 0px 8px 16px rgba(0, 0, 0, 0.24);
     outline: 0; }
+  @media only screen and (max-width: 480px) {
+    .geosuggest__input {
+      font-size: 14px;
+      padding: 10px 65px 10px 10px;
+      width: 260px; } }
 
 .geosuggest__suggests-wrapper {
   position: absolute;
   width: 550px; }
+  @media only screen and (max-width: 480px) {
+    .geosuggest__suggests-wrapper {
+      width: 260px; } }
 
 .geosuggest__suggests {
   background-color: white;
   border-radius: 0 0 2px 2px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.16), 0px 4px 8px rgba(0, 0, 0, 0.16);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12), 0px 8px 12px rgba(0, 0, 0, 0.24);
   margin-top: -1px;
   max-height: 25em;
   overflow-x: hidden;
@@ -174,11 +188,15 @@ form {
     font-family: "Montserrat", sans-serif;
     font-size: 18px;
     font-weight: 300;
-    padding: 10px 0 10px 18px;
+    padding: 10px 10px 10px 18px;
     text-align: left; }
     .geosuggest__suggests li:hover {
       background-color: rgba(0, 0, 0, 0.08);
       cursor: pointer; }
+  @media only screen and (max-width: 480px) {
+    .geosuggest__suggests li {
+      font-size: 13px;
+      padding: 8px 5px 8px 10px; } }
 
 .geosuggest__suggests--hidden {
   max-height: 0;
@@ -215,6 +233,11 @@ form {
   transition: all .3s; }
   .search-button:hover {
     color: rgba(0, 0, 0, 0.3); }
+  @media only screen and (max-width: 480px) {
+    .search-button {
+      background: rgba(0, 0, 0, 0.1);
+      margin-left: -44px;
+      padding: 10px 15px; } }
 
 .top-bar {
   padding-top: 15px;
@@ -233,14 +256,25 @@ form {
   margin: auto; }
   .main a {
     text-decoration: none; }
+  @media only screen and (max-width: 800px) {
+    .main {
+      padding: 10px 50px 0;
+      width: 100%; } }
+  @media only screen and (max-width: 480px) {
+    .main {
+      padding: 10px 20px 0;
+      width: 100%; } }
 
 .home-bg {
   background-image: linear-gradient(to top, #4481eb 0%, #04befe 100%);
   height: 100%;
-  widows: 100%; }
+  width: 100%; }
 
 .homepage {
   padding: 150px 0 0 0; }
+  @media only screen and (max-width: 480px) {
+    .homepage {
+      padding: 140px 0 0 0; } }
 
 .homepage-content {
   margin-top: -200px; }
@@ -252,6 +286,9 @@ form {
   font-weight: 300;
   letter-spacing: 2px;
   margin-bottom: 0px; }
+  @media only screen and (max-width: 480px) {
+    .title {
+      font-size: 44px; } }
 
 .tagline {
   color: rgba(255, 255, 255, 0.5);
@@ -259,6 +296,10 @@ form {
   font-size: 20px;
   font-weight: 200;
   letter-spacing: 1px; }
+  @media only screen and (max-width: 480px) {
+    .tagline {
+      font-size: 15px;
+      letter-spacing: .5px; } }
 
 /*
 ** SEARCH BAR
@@ -338,6 +379,9 @@ form {
 */
 .home-search-box {
   margin-top: 100px; }
+  @media only screen and (max-width: 480px) {
+    .home-search-box {
+      margin-top: 80px; } }
 
 .geosuggest {
   float: left; }
@@ -345,7 +389,7 @@ form {
 .geosuggest__input {
   border: 0;
   border-radius: 2px;
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.08), 0px 2px 4px rgba(0, 0, 0, 0.08);
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.12), 0px 4px 8px rgba(0, 0, 0, 0.12);
   color: rgba(0, 0, 0, 0.8);
   font-family: "Montserrat", sans-serif;
   font-size: 18px;
@@ -354,19 +398,27 @@ form {
   transition: all .3s;
   width: 550px; }
   .geosuggest__input:hover {
-    box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.08), 0px 4px 12px rgba(0, 0, 0, 0.16); }
+    box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.12), 0px 8px 16px rgba(0, 0, 0, 0.24); }
   .geosuggest__input:focus {
-    box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.08), 0px 4px 12px rgba(0, 0, 0, 0.08);
+    box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.12), 0px 8px 16px rgba(0, 0, 0, 0.24);
     outline: 0; }
+  @media only screen and (max-width: 480px) {
+    .geosuggest__input {
+      font-size: 14px;
+      padding: 10px 65px 10px 10px;
+      width: 260px; } }
 
 .geosuggest__suggests-wrapper {
   position: absolute;
   width: 550px; }
+  @media only screen and (max-width: 480px) {
+    .geosuggest__suggests-wrapper {
+      width: 260px; } }
 
 .geosuggest__suggests {
   background-color: white;
   border-radius: 0 0 2px 2px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.16), 0px 4px 8px rgba(0, 0, 0, 0.16);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12), 0px 8px 12px rgba(0, 0, 0, 0.24);
   margin-top: -1px;
   max-height: 25em;
   overflow-x: hidden;
@@ -377,11 +429,15 @@ form {
     font-family: "Montserrat", sans-serif;
     font-size: 18px;
     font-weight: 300;
-    padding: 10px 0 10px 18px;
+    padding: 10px 10px 10px 18px;
     text-align: left; }
     .geosuggest__suggests li:hover {
       background-color: rgba(0, 0, 0, 0.08);
       cursor: pointer; }
+  @media only screen and (max-width: 480px) {
+    .geosuggest__suggests li {
+      font-size: 13px;
+      padding: 8px 5px 8px 10px; } }
 
 .geosuggest__suggests--hidden {
   max-height: 0;
@@ -418,6 +474,11 @@ form {
   transition: all .3s; }
   .search-button:hover {
     color: rgba(0, 0, 0, 0.3); }
+  @media only screen and (max-width: 480px) {
+    .search-button {
+      background: rgba(0, 0, 0, 0.1);
+      margin-left: -44px;
+      padding: 10px 15px; } }
 
 /*
 ** FLEX
@@ -461,12 +522,25 @@ form {
 .weather-header {
   background-image: linear-gradient(to top, #4481eb 0%, #04befe 100%);
   height: 520px; }
+  @media only screen and (max-width: 800px) {
+    .weather-header {
+      height: 490px; } }
+  @media only screen and (max-width: 480px) {
+    .weather-header {
+      height: 490px; } }
 
 .weather-current {
   margin: 50px 0; }
   .weather-current .current-icon {
     fill: white;
     width: 220px; }
+  @media only screen and (max-width: 800px) {
+    .weather-current .current-icon {
+      width: 200px; } }
+  @media only screen and (max-width: 480px) {
+    .weather-current .current-icon {
+      margin: 0 20px;
+      width: 130px; } }
 
 .city-name {
   color: rgba(255, 255, 255, 0.8);
@@ -474,6 +548,9 @@ form {
   font-size: 30px;
   font-weight: 600;
   text-transform: uppercase; }
+  @media only screen and (max-width: 480px) {
+    .city-name {
+      font-size: 20px; } }
 
 .current-date {
   color: rgba(255, 255, 255, 0.5);
@@ -482,6 +559,9 @@ form {
   font-weight: 300;
   margin-top: 5px;
   text-transform: uppercase; }
+  @media only screen and (max-width: 480px) {
+    .current-date {
+      font-size: 16px; } }
 
 .current-temp {
   color: #ffffff;
@@ -493,6 +573,12 @@ form {
   .current-temp span {
     color: rgba(255, 255, 255, 0.5);
     font-weight: 200; }
+  @media only screen and (max-width: 800px) {
+    .current-temp {
+      font-size: 110px; } }
+  @media only screen and (max-width: 800px) {
+    .current-temp {
+      font-size: 40px; } }
 
 .current-condition {
   color: #ffffff;
@@ -501,6 +587,9 @@ form {
   font-weight: 400;
   letter-spacing: 1px;
   text-transform: uppercase; }
+  @media only screen and (max-width: 800px) {
+    .current-condition {
+      font-size: 16px; } }
 
 .current-info {
   display: inline-block;
@@ -513,10 +602,20 @@ form {
     float: right; }
   .current-info li {
     float: left;
-    padding: 0 0 0 80px; }
+    padding-left: 80px; }
     .current-info li span {
       color: #ffffff;
       font-weight: 600; }
+  @media only screen and (max-width: 800px) {
+    .current-info {
+      font-size: 16px;
+      padding-top: 20px; }
+      .current-info li {
+        padding-left: 40px; } }
+  @media only screen and (max-width: 480px) {
+    .current-info li {
+      padding: 0 10px;
+      width: 100%; } }
 
 .forecast-header {
   color: rgba(0, 0, 0, 0.08);
@@ -524,6 +623,12 @@ form {
   font-size: 60px;
   font-weight: 700;
   margin: 100px 0 70px; }
+  @media only screen and (max-width: 800px) {
+    .forecast-header {
+      font-size: 56px; } }
+  @media only screen and (max-width: 480px) {
+    .forecast-header {
+      font-size: 40px; } }
 
 .forecast-daily {
   border-left: 2px solid rgba(0, 0, 0, 0.8);
@@ -566,6 +671,56 @@ form {
     font-size: 14px; }
     .forecast-daily ul li i {
       padding-right: 6px; }
+  @media only screen and (max-width: 800px) {
+    .forecast-daily .forecast-daily-card {
+      height: 300px;
+      padding: 10px; }
+      .forecast-daily .forecast-daily-card .daily-icon img {
+        width: 80px; }
+      .forecast-daily .forecast-daily-card p {
+        font-size: 14px; }
+    .forecast-daily ul li {
+      font-size: 12px; } }
+  @media only screen and (max-width: 480px) {
+    .forecast-daily {
+      border-left: none;
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
+      display: block; }
+      .forecast-daily .forecast-daily-card {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        border-right: none;
+        height: 60px;
+        width: 100%; }
+        .forecast-daily .forecast-daily-card h4 {
+          display: inline-block;
+          float: left;
+          font-size: 14px;
+          line-height: 43px;
+          padding: 0;
+          text-align: left;
+          text-transform: capitalize;
+          width: 40px; }
+        .forecast-daily .forecast-daily-card h5 {
+          display: inline-block;
+          float: left;
+          font-size: 14px;
+          line-height: 43px;
+          padding: 0 5px; }
+        .forecast-daily .forecast-daily-card .daily-icon {
+          display: inline-block;
+          float: left;
+          padding: 0 5px; }
+          .forecast-daily .forecast-daily-card .daily-icon img {
+            width: 40px; }
+        .forecast-daily .forecast-daily-card p {
+          display: none; }
+      .forecast-daily .forecast-daily-card-extra-data {
+        float: left;
+        line-height: 43px;
+        padding: 0;
+        position: relative; }
+        .forecast-daily .forecast-daily-card-extra-data ul li {
+          padding-left: 10px; } }
 
 .forecast-hourly {
   font-family: "Montserrat", sans-serif;
@@ -600,3 +755,30 @@ form {
     .forecast-hourly table li {
       float: left;
       padding: 20px 0; }
+  @media only screen and (max-width: 800px) {
+    .forecast-hourly {
+      font-size: 15px; }
+      .forecast-hourly table thead tr th.hourly-time {
+        flex-basis: 19%; }
+      .forecast-hourly table tbody tr td.hourly-time {
+        flex-basis: 18%; } }
+  @media only screen and (max-width: 480px) {
+    .forecast-hourly table thead tr {
+      display: none; }
+      .forecast-hourly table thead tr th.hourly-time {
+        flex-basis: 19%; }
+      .forecast-hourly table thead tr th.hourly-condition {
+        display: none; }
+    .forecast-hourly table tbody tr td {
+      flex-basis: 25%;
+      padding: 20px 10px; }
+      .forecast-hourly table tbody tr td.hourly-time {
+        flex-basis: 30%; }
+      .forecast-hourly table tbody tr td.hourly-icon {
+        flex-basis: 25%; }
+      .forecast-hourly table tbody tr td.hourly-condition {
+        display: none; }
+      .forecast-hourly table tbody tr td.hourly-temp {
+        flex-basis: 20%; }
+      .forecast-hourly table tbody tr td.hourly-precip {
+        flex-basis: 20%; } }
