@@ -5,12 +5,21 @@
   color: rgba(0, 0, 0, .8);
   width: 100%;
 
+  .forecast-hourly-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
   table {
     width: 100%;
 
     thead {
 
       tr {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
 
         th {
           flex-basis: 24%;
@@ -33,6 +42,9 @@
 
       tr {
         border-top: 1px solid rgba(0, 0, 0, .08);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
 
         td {
           flex-basis: 24%;
@@ -46,10 +58,10 @@
           &.hourly-icon {
             flex-basis: 13%;
             padding: 5px 5px 5px 15px;
-          }
 
-          img {
-            height: 50px;
+            img {
+              height: 50px;
+            }
           }
         }
       }
@@ -95,6 +107,7 @@
   }
 
   @media only screen and (max-width: $breakpoint-small) {
+    font-size: 14px;
 
     table {
 
@@ -119,17 +132,27 @@
       tbody {
 
         tr {
+          height: 60px;
+          padding: 10px;
 
           td {
             flex-basis: 25%;
-            padding: 20px 10px;
+            padding: 20px 5px;
 
             &.hourly-time {
               flex-basis: 30%;
+              line-height: 40px;
+              padding: 0;
             }
 
             &.hourly-icon {
               flex-basis: 25%;
+              padding: 0;
+
+              img {
+                height: 40px;
+                width: 40px;
+              }
             }
 
             &.hourly-condition {
@@ -138,10 +161,14 @@
 
             &.hourly-temp {
               flex-basis: 20%;
+              line-height: 40px;
+              padding: 0;
             }
 
             &.hourly-precip {
               flex-basis: 20%;
+              line-height: 40px;
+              padding: 0;
             }
           }
         }

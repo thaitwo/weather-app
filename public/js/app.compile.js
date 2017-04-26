@@ -32336,40 +32336,33 @@ var ForecastDaily = function (_React$Component) {
               data.date.monthname_short,
               ' ',
               data.date.day
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'daily-icon' },
-              _react2.default.createElement('img', { src: 'http://icons.wxug.com/i/c/v4/' + data.icon + '.svg' })
-            ),
-            _react2.default.createElement(
-              'p',
-              null,
-              data.conditions
             )
           ),
           _react2.default.createElement(
             'div',
-            { className: 'forecast-daily-card-extra-data' },
-            _react2.default.createElement(
-              'ul',
-              { className: 'l-flex is-hori align-hori-space-between' },
-              _react2.default.createElement(
-                'li',
-                null,
-                data.high.fahrenheit,
-                '\xB0 | ',
-                data.low.fahrenheit,
-                '\xB0'
-              ),
-              _react2.default.createElement(
-                'li',
-                null,
-                _react2.default.createElement('i', { className: 'fa fa-tint', 'aria-hidden': 'true' }),
-                data.pop,
-                '%'
-              )
-            )
+            { className: 'daily-icon' },
+            _react2.default.createElement('img', { src: 'http://icons.wxug.com/i/c/v4/' + data.icon + '.svg' })
+          ),
+          _react2.default.createElement(
+            'p',
+            { className: 'daily-conditions' },
+            data.conditions
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'daily-high-low' },
+            data.high.fahrenheit,
+            '\xB0 | ',
+            data.low.fahrenheit,
+            '\xB0'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'daily-precip' },
+            _react2.default.createElement('i', { className: 'fa fa-tint', 'aria-hidden': 'true' }),
+            ' ',
+            data.pop,
+            '%'
           )
         );
       })
@@ -32383,7 +32376,7 @@ var ForecastDaily = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: 'forecast-daily l-flex is-hori align-hori-space-between' },
+        { className: 'forecast-daily' },
         this.renderCards()
       );
     }
@@ -32439,7 +32432,7 @@ var ForecastHourly = function (_React$Component) {
     value: function renderTableHeaderRow() {
       return _react2.default.createElement(
         'tr',
-        { className: 'l-flex is-hori align-hori-space-between' },
+        null,
         _react2.default.createElement(
           'th',
           { className: 'hourly-time' },
@@ -32472,7 +32465,7 @@ var ForecastHourly = function (_React$Component) {
       var rows = this.props.hourlyData.map(function (data, index) {
         return _react2.default.createElement(
           'tr',
-          { key: index, className: 'l-flex is-hori align-hori-space-between' },
+          { key: index },
           _react2.default.createElement(
             'td',
             { className: 'hourly-time' },
@@ -32581,7 +32574,7 @@ var TopBar = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: 'top-bar l-flex is-hori align-hori-space-between' },
+        { className: 'top-bar' },
         _react2.default.createElement(
           _reactRouter.Link,
           { to: '/' },

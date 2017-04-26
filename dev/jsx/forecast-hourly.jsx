@@ -10,7 +10,7 @@ class ForecastHourly extends React.Component {
   // Renders the header row for the table containing Hourly Forecast data
   renderTableHeaderRow() {
     return (
-      <tr className="l-flex is-hori align-hori-space-between">
+      <tr>
         <th className="hourly-time">TIME</th>
         <th className="hourly-icon"></th>
         <th className="hourly-condition">CONDITION</th>
@@ -24,7 +24,7 @@ class ForecastHourly extends React.Component {
   renderTableRows() {
     const rows = this.props.hourlyData.map((data, index) => {
       return (
-        <tr key={index} className="l-flex is-hori align-hori-space-between">
+        <tr key={index}>
           <td className="hourly-time">{data.FCTTIME.civil}</td>
           <td className="hourly-icon"><img src={`http://icons.wxug.com/i/c/v4/${data.icon}.svg`}/></td>
           <td className="hourly-condition">{data.condition}</td>

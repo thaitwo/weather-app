@@ -3,11 +3,11 @@
   height: 520px;
 
   @media only screen and (max-width: $breakpoint-medium) {
-    height: 490px;
+    height: 410px;
   }
 
   @media only screen and (max-width: $breakpoint-small) {
-    height: 490px;
+    height: 520px;
   }
 }
 
@@ -29,8 +29,9 @@
   @media only screen and (max-width: $breakpoint-small) {
 
     .current-icon {
-      margin: 0 20px;
-      width: 130px;
+      margin: 30px 10px;
+      height: 80px;
+      width: 100px;
     }
   }
 }
@@ -79,6 +80,8 @@
 
   @media only screen and (max-width: $breakpoint-medium) {
     font-size: 40px;
+    line-height: 80px;
+    margin: 40px 0 20px;
   }
 }
 
@@ -92,6 +95,11 @@
 
   @media only screen and (max-width: $breakpoint-medium) {
     font-size: 16px;
+  }
+
+  @media only screen and (max-width: $breakpoint-small) {
+    float: none;
+    padding-bottom: 30px;
   }
 }
 
@@ -127,9 +135,10 @@
   }
 
   @media only screen and (max-width: $breakpoint-small) {
+    padding-top: 0;
 
     li {
-      padding: 0 10px;
+      padding: 5px 0;
       width: 100%;
     }
   }
