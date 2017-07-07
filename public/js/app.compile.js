@@ -32505,10 +32505,10 @@ var ForecastHourly = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: 'forecast-hourly' },
+        null,
         _react2.default.createElement(
           'table',
-          null,
+          { className: 'weather-table' },
           _react2.default.createElement(
             'thead',
             null,

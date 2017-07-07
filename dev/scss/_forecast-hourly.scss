@@ -1,176 +1,145 @@
-.forecast-hourly {
+.weather-table {
   font-family: $font;
   font-size: 16px;
   font-weight: normal;
   color: rgba(0, 0, 0, .8);
   width: 100%;
 
-  .forecast-hourly-card {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  thead {
+
+    tr {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    th {
+      flex-basis: 24%;
+      font-weight: 700;
+      padding: 20px;
+      text-align: left;
+
+      &.hourly-time {
+        flex-basis: 16%;
+      }
+
+      &.hourly-icon {
+        flex-basis: 12%;
+      }
+    }
   }
 
-  table {
-    width: 100%;
+  tbody {
+
+    tr {
+      border-top: 1px solid rgba(0, 0, 0, .08);
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    td {
+      flex-basis: 24%;
+      padding: 20px;
+      text-align: left;
+
+      &.hourly-time {
+        flex-basis: 15%;
+      }
+
+      &.hourly-icon {
+        flex-basis: 13%;
+        padding: 5px 5px 5px 15px;
+
+        img {
+          height: 50px;
+        }
+      }
+    }
+  }
+
+  li {
+    float: left;
+    padding: 20px 0;
+  }
+}
+
+@media only screen and (max-width: $breakpoint-medium) {
+
+  .weather-table {
+    font-size: 15px;
+
+    th.hourly-time {
+      flex-basis: 19%;
+    }
+
+    td.hourly-time {
+      flex-basis: 18%;
+    }
+  }
+}
+
+@media only screen and (max-width: $breakpoint-small) {
+
+  .weather-table {
+    font-size: 14px;
 
     thead {
 
       tr {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+        display: none;
+      }
 
-        th {
-          flex-basis: 24%;
-          font-weight: 700;
-          padding: 20px;
-          text-align: left;
+      th.hourly-time {
+        flex-basis: 19%;
+      }
 
-          &.hourly-time {
-            flex-basis: 16%;
-          }
-
-          &.hourly-icon {
-            flex-basis: 12%;
-          }
-        }
+      th.hourly-condition {
+        display: none;
       }
     }
 
     tbody {
 
       tr {
-        border-top: 1px solid rgba(0, 0, 0, .08);
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-
-        td {
-          flex-basis: 24%;
-          padding: 20px;
-          text-align: left;
-
-          &.hourly-time {
-            flex-basis: 15%;
-          }
-
-          &.hourly-icon {
-            flex-basis: 13%;
-            padding: 5px 5px 5px 15px;
-
-            img {
-              height: 50px;
-            }
-          }
-        }
-      }
-    }
-
-    li {
-      float: left;
-      padding: 20px 0;
-    }
-  }
-
-  @media only screen and (max-width: $breakpoint-medium) {
-    font-size: 15px;
-
-    table {
-
-      thead {
-
-        tr {
-
-          th {
-
-            &.hourly-time {
-              flex-basis: 19%;
-            }
-          }
-        }
+        height: 60px;
+        padding: 10px;
       }
 
-      tbody {
+      td {
+        flex-basis: 25%;
+        padding: 20px 5px;
 
-        tr {
+        &.hourly-time {
+          flex-basis: 30%;
+          line-height: 40px;
+          padding: 0;
+        }
 
-          td {
+        &.hourly-icon {
+          flex-basis: 25%;
+          padding: 0;
 
-            &.hourly-time {
-              flex-basis: 18%;
-            }
+          img {
+            height: 40px;
+            width: 40px;
           }
         }
-      }
-    }
-  }
 
-  @media only screen and (max-width: $breakpoint-small) {
-    font-size: 14px;
-
-    table {
-
-      thead {
-
-        tr {
+        &.hourly-condition {
           display: none;
-
-          th {
-
-            &.hourly-time {
-              flex-basis: 19%;
-            }
-
-            &.hourly-condition {
-              display: none;
-            }
-          }
         }
-      }
 
-      tbody {
+        &.hourly-temp {
+          flex-basis: 20%;
+          line-height: 40px;
+          padding: 0;
+        }
 
-        tr {
-          height: 60px;
-          padding: 10px;
-
-          td {
-            flex-basis: 25%;
-            padding: 20px 5px;
-
-            &.hourly-time {
-              flex-basis: 30%;
-              line-height: 40px;
-              padding: 0;
-            }
-
-            &.hourly-icon {
-              flex-basis: 25%;
-              padding: 0;
-
-              img {
-                height: 40px;
-                width: 40px;
-              }
-            }
-
-            &.hourly-condition {
-              display: none;
-            }
-
-            &.hourly-temp {
-              flex-basis: 20%;
-              line-height: 40px;
-              padding: 0;
-            }
-
-            &.hourly-precip {
-              flex-basis: 20%;
-              line-height: 40px;
-              padding: 0;
-            }
-          }
+        &.hourly-precip {
+          flex-basis: 20%;
+          line-height: 40px;
+          padding: 0;
         }
       }
     }

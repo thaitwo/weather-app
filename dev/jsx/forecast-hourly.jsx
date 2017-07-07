@@ -41,8 +41,8 @@ class ForecastHourly extends React.Component {
 
   render() {
     return (
-      <div className="forecast-hourly">
-        <table>
+      <div>
+        <table className="weather-table">
           <thead>
             {this.renderTableHeaderRow()}
           </thead>
