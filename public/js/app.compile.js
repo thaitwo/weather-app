@@ -6302,7 +6302,7 @@ var SearchBox = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'form',
-        { onSubmit: this.handleSubmit },
+        { className: 'geosuggest-form', onSubmit: this.handleSubmit },
         _react2.default.createElement(_reactGeosuggest2.default, {
           placeholder: 'Search city',
           types: ['(cities)'],
@@ -31192,22 +31192,30 @@ var Home = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: 'home-bg' },
+        { className: 'home-container' },
         _react2.default.createElement(
           'div',
-          { className: 'main' },
+          { className: 'home-header home-bg' },
           _react2.default.createElement(
             'div',
-            { className: 'homepage' },
+            { className: 'home-content-container' },
             _react2.default.createElement(
-              'h1',
-              { className: 'title' },
-              'Weathercast'
-            ),
-            _react2.default.createElement(
-              'p',
-              { className: 'tagline' },
-              'Your daily splash of live weather.'
+              'div',
+              { className: 'main' },
+              _react2.default.createElement(
+                'div',
+                { className: 'homepage-headline' },
+                _react2.default.createElement(
+                  'h1',
+                  { className: 'title' },
+                  'Weathercast'
+                ),
+                _react2.default.createElement(
+                  'p',
+                  { className: 'tagline' },
+                  'Your daily splash of live weather.'
+                )
+              )
             ),
             _react2.default.createElement(
               'div',

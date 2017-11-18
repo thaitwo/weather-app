@@ -216,23 +216,27 @@ form {
 ** Display a large version on homepage in the application.
 */
 .home-search-box {
-  margin-top: 100px; }
+  margin-bottom: 100px;
+  text-align: center; }
   @media only screen and (max-width: 480px) {
     .home-search-box {
       margin-top: 80px; } }
+
+.geosuggest-form {
+  position: relative; }
 
 .geosuggest {
   float: left; }
 
 .geosuggest__input {
-  border: 0;
+  border: none;
   border-radius: 2px;
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.12), 0px 4px 8px rgba(0, 0, 0, 0.12);
   color: rgba(0, 0, 0, 0.8);
   font-family: "Montserrat", sans-serif;
   font-size: 18px;
   font-weight: 300;
-  padding: 15px 65px 15px 20px;
+  line-height: 48px;
+  padding: 0 48px 0 20px;
   transition: all .3s;
   width: 550px; }
   .geosuggest__input:hover {
@@ -240,10 +244,13 @@ form {
   .geosuggest__input:focus {
     box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.12), 0px 8px 16px rgba(0, 0, 0, 0.24);
     outline: 0; }
+  @media only screen and (max-width: 800px) {
+    .geosuggest__input {
+      width: 380px; } }
   @media only screen and (max-width: 480px) {
     .geosuggest__input {
       font-size: 14px;
-      padding: 10px 65px 10px 10px;
+      padding: 0 48px 0 10px;
       width: 260px; } }
 
 .geosuggest__suggests-wrapper {
@@ -303,13 +310,14 @@ form {
   color: rgba(0, 0, 0, 0.15);
   cursor: pointer;
   display: inline;
-  float: right;
   font-size: 16px;
-  margin-left: -65px;
+  height: 48px;
   outline: none;
-  padding: 17px 25px;
+  padding: 0;
   position: absolute;
-  transition: all .3s; }
+  right: 0;
+  transition: all .3s;
+  width: 48px; }
   .search-button:hover {
     color: rgba(0, 0, 0, 0.3); }
   @media only screen and (max-width: 480px) {
@@ -329,6 +337,9 @@ form {
       flex-direction: column;
       padding-top: 5px; } }
 
+body {
+  background-color: #ffffff; }
+
 .container {
   bottom: 0;
   left: 0;
@@ -336,10 +347,20 @@ form {
   right: 0;
   top: 0; }
 
+.home-container {
+  background-image: url("/assets/home-image.jpg");
+  background-position: top;
+  background-size: cover;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0; }
+
 .main {
-  text-align: center;
-  width: 1000px;
-  margin: auto; }
+  margin: 0 auto 80px;
+  max-width: 1000px;
+  text-align: center; }
   .main a {
     text-decoration: none; }
   @media only screen and (max-width: 800px) {
@@ -351,19 +372,19 @@ form {
       padding: 10px 20px 0;
       width: 100%; } }
 
+.home-header {
+  display: flex; }
+
 .home-bg {
-  background-image: linear-gradient(to top, #4481eb 0%, #04befe 100%);
+  background-color: rgba(0, 0, 0, 0.7);
   height: 100%;
   width: 100%; }
 
-.homepage {
-  padding: 150px 0 0 0; }
-  @media only screen and (max-width: 480px) {
-    .homepage {
-      padding: 140px 0 0 0; } }
+.homepage-headline {
+  padding: 0; }
 
-.homepage-content {
-  margin-top: -200px; }
+.home-content-container {
+  margin: auto; }
 
 .title {
   color: #ffffff;
@@ -473,23 +494,27 @@ form {
 ** Display a large version on homepage in the application.
 */
 .home-search-box {
-  margin-top: 100px; }
+  margin-bottom: 100px;
+  text-align: center; }
   @media only screen and (max-width: 480px) {
     .home-search-box {
       margin-top: 80px; } }
+
+.geosuggest-form {
+  position: relative; }
 
 .geosuggest {
   float: left; }
 
 .geosuggest__input {
-  border: 0;
+  border: none;
   border-radius: 2px;
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.12), 0px 4px 8px rgba(0, 0, 0, 0.12);
   color: rgba(0, 0, 0, 0.8);
   font-family: "Montserrat", sans-serif;
   font-size: 18px;
   font-weight: 300;
-  padding: 15px 65px 15px 20px;
+  line-height: 48px;
+  padding: 0 48px 0 20px;
   transition: all .3s;
   width: 550px; }
   .geosuggest__input:hover {
@@ -497,10 +522,13 @@ form {
   .geosuggest__input:focus {
     box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.12), 0px 8px 16px rgba(0, 0, 0, 0.24);
     outline: 0; }
+  @media only screen and (max-width: 800px) {
+    .geosuggest__input {
+      width: 380px; } }
   @media only screen and (max-width: 480px) {
     .geosuggest__input {
       font-size: 14px;
-      padding: 10px 65px 10px 10px;
+      padding: 0 48px 0 10px;
       width: 260px; } }
 
 .geosuggest__suggests-wrapper {
@@ -560,13 +588,14 @@ form {
   color: rgba(0, 0, 0, 0.15);
   cursor: pointer;
   display: inline;
-  float: right;
   font-size: 16px;
-  margin-left: -65px;
+  height: 48px;
   outline: none;
-  padding: 17px 25px;
+  padding: 0;
   position: absolute;
-  transition: all .3s; }
+  right: 0;
+  transition: all .3s;
+  width: 48px; }
   .search-button:hover {
     color: rgba(0, 0, 0, 0.3); }
   @media only screen and (max-width: 480px) {

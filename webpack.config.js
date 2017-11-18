@@ -45,3 +45,4 @@ module.exports = {
     extractSass
   ]
 };
+process.traceDeprecation = true;
