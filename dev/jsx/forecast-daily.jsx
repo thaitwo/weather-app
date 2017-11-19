@@ -17,15 +17,11 @@ class ForecastDaily extends React.Component {
           <div>
             <h4>{data.date.weekday_short}</h4>
             <h5>{data.date.monthname_short} {data.date.day}</h5>
-            <div className="daily-icon"><img src={`http://icons.wxug.com/i/c/v4/${data.icon}.svg`}/></div>
-            <p>{data.conditions}</p>
           </div>
-          <div className="forecast-daily-card-extra-data">
-            <ul className="l-flex is-hori align-hori-space-between">
-              <li>{data.high.fahrenheit}° | {data.low.fahrenheit}°</li>
-              <li><i className="fa fa-tint" aria-hidden="true"></i>{data.pop}%</li>
-            </ul>
-          </div>
+          <div className="daily-icon"><img src={`http://icons.wxug.com/i/c/v4/${data.icon}.svg`}/></div>
+          <p className="daily-conditions">{data.conditions}</p>
+          <div className="daily-high-low">{data.high.fahrenheit}° | {data.low.fahrenheit}°</div>
+          <div className="daily-precip"><i className="fa fa-tint" aria-hidden="true"></i> {data.pop}%</div>
         </div>
       );
     })
@@ -37,7 +33,7 @@ class ForecastDaily extends React.Component {
 
   render() {
     return (
-      <div className="forecast-daily l-flex is-hori align-hori-space-between">
+      <div className="forecast-daily">
        {this.renderCards()}
       </div>
     )

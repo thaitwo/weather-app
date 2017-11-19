@@ -4,7 +4,7 @@ import React from 'react';
 import axios from 'axios';
 import _ from 'lodash';
 import SearchBox from './search-box';
-import TopBar from './top-bar';
+// import TopBar from './top-bar';
 import WeatherCard from './weather-card';
 import Geosuggest from 'react-geosuggest';
 import { API_KEY, URL_BASE } from './const';
@@ -114,17 +114,14 @@ class FetchWeather extends React.Component {
 
   render() {
     return (
-      <div className="weather-header">
-        <div className="main">
-          <TopBar />
-          <WeatherCard
-            conditionsData={this.state.conditionsData}
-            forecastData={this.state.forecastData}
-            hourlyData={this.state.hourlyData}
-            dailyData={this.state.dailyData}
-            currentdate={this.state.currentdate}
-          />
-        </div>
+      <div className="">
+        <WeatherCard
+          conditionsData={this.state.conditionsData}
+          forecastData={this.state.forecastData}
+          hourlyData={this.state.hourlyData}
+          dailyData={this.state.dailyData}
+          currentdate={this.state.currentdate}
+        />
       </div>
     );
   }

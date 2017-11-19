@@ -93,7 +93,7 @@ class SearchBox extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form className="geosuggest-form" onSubmit={this.handleSubmit}>
         <Geosuggest
           placeholder="Search city"
           types={['(cities)']}
