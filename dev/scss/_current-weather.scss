@@ -11,32 +11,20 @@
   }
 }
 
-.weather-current {
-  margin: 50px 0;
-
-  .current-icon {
-    fill: white;
-    width: 220px;
-  }
-
-  @media only screen and (max-width: $breakpoint-medium) {
-
-    .current-icon {
-      width: 200px;
-    }
-  }
+.current-wth {
+  background-image: linear-gradient(to top, #4481eb 0%, #04befe 100%);
+  margin: 0;
 
   @media only screen and (max-width: $breakpoint-small) {
-
-    .current-icon {
-      margin: 30px 10px;
-      height: 80px;
-      width: 100px;
-    }
+    margin: 0;
   }
 }
 
-.city-name {
+.current-wth__content {
+  padding-top: 24px;
+}
+
+.current-wth__city {
   color: rgba(255, 255, 255, .8);
   font-family: $font;
   font-size: 30px;
@@ -48,7 +36,7 @@
   }
 }
 
-.current-date {
+.current-wth__date {
   color: rgba(255, 255, 255, .5);
   font-family: $font;
   font-size: 18px;
@@ -61,11 +49,36 @@
   }
 }
 
-.current-temp {
+.current-wth__icon-temp-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  @media only screen and (max-width: $breakpoint-small) {
+    flex-direction: column;
+  }
+}
+
+.current-wth__icon {
+  fill: white;
+  width: 220px;
+
+  @media only screen and (max-width: $breakpoint-medium) {
+    width: 152px;
+  }
+
+  @media only screen and (max-width: $breakpoint-small) {
+    margin: 16px auto;
+    height: auto;
+    width: 160px;
+  }
+}
+
+.current-wth__temp {
   color: #ffffff;
   float: right;
   font-family: $font;
-  font-size: 160px;
+  font-size: 152px;
   font-weight: 800;
   margin: 60px 0;
 
@@ -75,17 +88,16 @@
   }
 
   @media only screen and (max-width: $breakpoint-medium) {
-    font-size: 110px;
+    font-size: 88px;
   }
 
-  @media only screen and (max-width: $breakpoint-medium) {
+  @media only screen and (max-width: $breakpoint-small) {
     font-size: 40px;
-    line-height: 80px;
-    margin: 40px 0 20px;
+    margin: 0 0 8px 0;
   }
 }
 
-.current-condition {
+.current-wth__condition {
   color: #ffffff;
   float: left;
   font-size: 20px;
@@ -103,48 +115,59 @@
   }
 }
 
-.current-info {
-  display: inline-block;
+.current-wth__data-container {
+  display: flex;
   font-family: $font;
   font-size: 20px;
   font-weight: 300;
+  justify-content: space-between;
+  padding: 24px 0;
   width: 100%;
 
-  ul {
-    color: rgba(255, 255, 255, .4);
-    float: right;
+  @media only screen and (max-width: $breakpoint-medium) {
+    font-size: 16px;
+  }
+
+  @media only screen and (max-width: $breakpoint-small) {
+    flex-direction: column;
+    padding: 0;
+  }
+}
+
+.current-wth__data-list {
+  color: rgba(255, 255, 255, .4);
+  float: right;
+
+  @media only screen and (max-width: $breakpoint-small) {
+    display: flex;
+    float: none;
+    flex-direction: column;
   }
 
   li {
     float: left;
-    padding-left: 80px;
+    padding-left: 40px;
 
-    span {
-      color: #ffffff;
-      font-weight: 600;
+    &:nth-of-type(1) {
+      padding-left: 0;
     }
-  }
 
-  @media only screen and (max-width: $breakpoint-medium) {
-    font-size: 16px;
-    padding-top: 20px;
-
-    li {
+    @media only screen and (max-width: $breakpoint-medium) {
       padding-left: 40px;
     }
+
+    @media only screen and (max-width: $breakpoint-small) {
+      padding: 4px 0;
+    }
   }
 
-  @media only screen and (max-width: $breakpoint-small) {
-    padding-top: 0;
-
-    li {
-      padding: 5px 0;
-      width: 100%;
-    }
+  span {
+    color: #ffffff;
+    font-weight: 600;
   }
 }
 
-.forecast-header {
+.forecast__header {
   color: rgba(0, 0, 0, .08);
   font-family: $font;
   font-size: 60px;
@@ -157,5 +180,6 @@
 
   @media only screen and (max-width: $breakpoint-small) {
     font-size: 40px;
+    margin: 40px 0;
   }
 }

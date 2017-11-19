@@ -59,7 +59,8 @@ table {
   @media only screen and (max-width: 480px) {
     .logo {
       display: block;
-      margin-bottom: 20px; } }
+      margin-bottom: 16px;
+      line-height: normal; } }
 
 /*
 ** LAYOUT
@@ -193,14 +194,13 @@ form {
   border-bottom-right-radius: 2px;
   color: rgba(0, 0, 0, 0.15);
   cursor: pointer;
-  display: inline;
-  float: right;
   font-family: "Avenir Next";
   font-size: 14px;
-  margin-left: -43px;
-  padding: 10.5px 15px;
+  height: 40px;
   position: absolute;
-  transition: all .3s; }
+  right: 0;
+  transition: all .3s;
+  width: 40px; }
   .small-searchbox .search-button:hover {
     color: rgba(0, 0, 0, 0.3); }
 
@@ -357,19 +357,24 @@ body {
   right: 0;
   top: 0; }
 
-.main {
-  margin: 0 auto 80px;
-  max-width: 1000px;
-  text-align: center; }
-  .main a {
+.wrapper {
+  margin: auto;
+  max-width: 1024px;
+  text-align: center;
+  width: 100%; }
+  .wrapper a {
     text-decoration: none; }
+  @media only screen and (max-width: 1024px) {
+    .wrapper {
+      padding: 0 40px;
+      width: 100%; } }
   @media only screen and (max-width: 800px) {
-    .main {
-      padding: 10px 50px 0;
+    .wrapper {
+      padding: 10px 24px 0;
       width: 100%; } }
   @media only screen and (max-width: 480px) {
-    .main {
-      padding: 10px 20px 0;
+    .wrapper {
+      padding: 0 24px;
       width: 100%; } }
 
 .home-header {
@@ -471,14 +476,13 @@ form {
   border-bottom-right-radius: 2px;
   color: rgba(0, 0, 0, 0.15);
   cursor: pointer;
-  display: inline;
-  float: right;
   font-family: "Avenir Next";
   font-size: 14px;
-  margin-left: -43px;
-  padding: 10.5px 15px;
+  height: 40px;
   position: absolute;
-  transition: all .3s; }
+  right: 0;
+  transition: all .3s;
+  width: 40px; }
   .small-searchbox .search-button:hover {
     color: rgba(0, 0, 0, 0.3); }
 
@@ -653,31 +657,27 @@ form {
     .weather-header {
       height: 520px; } }
 
-.weather-current {
-  margin: 50px 0; }
-  .weather-current .current-icon {
-    fill: white;
-    width: 220px; }
-  @media only screen and (max-width: 800px) {
-    .weather-current .current-icon {
-      width: 200px; } }
+.current-wth {
+  background-image: linear-gradient(to top, #4481eb 0%, #04befe 100%);
+  margin: 0; }
   @media only screen and (max-width: 480px) {
-    .weather-current .current-icon {
-      margin: 30px 10px;
-      height: 80px;
-      width: 100px; } }
+    .current-wth {
+      margin: 0; } }
 
-.city-name {
+.current-wth__content {
+  padding-top: 24px; }
+
+.current-wth__city {
   color: rgba(255, 255, 255, 0.8);
   font-family: "Montserrat", sans-serif;
   font-size: 30px;
   font-weight: 600;
   text-transform: uppercase; }
   @media only screen and (max-width: 480px) {
-    .city-name {
+    .current-wth__city {
       font-size: 20px; } }
 
-.current-date {
+.current-wth__date {
   color: rgba(255, 255, 255, 0.5);
   font-family: "Montserrat", sans-serif;
   font-size: 18px;
@@ -685,29 +685,48 @@ form {
   margin-top: 5px;
   text-transform: uppercase; }
   @media only screen and (max-width: 480px) {
-    .current-date {
+    .current-wth__date {
       font-size: 16px; } }
 
-.current-temp {
+.current-wth__icon-temp-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; }
+  @media only screen and (max-width: 480px) {
+    .current-wth__icon-temp-container {
+      flex-direction: column; } }
+
+.current-wth__icon {
+  fill: white;
+  width: 220px; }
+  @media only screen and (max-width: 800px) {
+    .current-wth__icon {
+      width: 152px; } }
+  @media only screen and (max-width: 480px) {
+    .current-wth__icon {
+      margin: 16px auto;
+      height: auto;
+      width: 160px; } }
+
+.current-wth__temp {
   color: #ffffff;
   float: right;
   font-family: "Montserrat", sans-serif;
-  font-size: 160px;
+  font-size: 152px;
   font-weight: 800;
   margin: 60px 0; }
-  .current-temp span {
+  .current-wth__temp span {
     color: rgba(255, 255, 255, 0.5);
     font-weight: 200; }
   @media only screen and (max-width: 800px) {
-    .current-temp {
-      font-size: 110px; } }
-  @media only screen and (max-width: 800px) {
-    .current-temp {
+    .current-wth__temp {
+      font-size: 88px; } }
+  @media only screen and (max-width: 480px) {
+    .current-wth__temp {
       font-size: 40px;
-      line-height: 80px;
-      margin: 40px 0 20px; } }
+      margin: 0 0 8px 0; } }
 
-.current-condition {
+.current-wth__condition {
   color: #ffffff;
   float: left;
   font-size: 20px;
@@ -715,53 +734,65 @@ form {
   letter-spacing: 1px;
   text-transform: uppercase; }
   @media only screen and (max-width: 800px) {
-    .current-condition {
+    .current-wth__condition {
       font-size: 16px; } }
   @media only screen and (max-width: 480px) {
-    .current-condition {
+    .current-wth__condition {
       float: none;
       padding-bottom: 30px; } }
 
-.current-info {
-  display: inline-block;
+.current-wth__data-container {
+  display: flex;
   font-family: "Montserrat", sans-serif;
   font-size: 20px;
   font-weight: 300;
+  justify-content: space-between;
+  padding: 24px 0;
   width: 100%; }
-  .current-info ul {
-    color: rgba(255, 255, 255, 0.4);
-    float: right; }
-  .current-info li {
-    float: left;
-    padding-left: 80px; }
-    .current-info li span {
-      color: #ffffff;
-      font-weight: 600; }
   @media only screen and (max-width: 800px) {
-    .current-info {
-      font-size: 16px;
-      padding-top: 20px; }
-      .current-info li {
-        padding-left: 40px; } }
+    .current-wth__data-container {
+      font-size: 16px; } }
   @media only screen and (max-width: 480px) {
-    .current-info {
-      padding-top: 0; }
-      .current-info li {
-        padding: 5px 0;
-        width: 100%; } }
+    .current-wth__data-container {
+      flex-direction: column;
+      padding: 0; } }
 
-.forecast-header {
+.current-wth__data-list {
+  color: rgba(255, 255, 255, 0.4);
+  float: right; }
+  @media only screen and (max-width: 480px) {
+    .current-wth__data-list {
+      display: flex;
+      float: none;
+      flex-direction: column; } }
+  .current-wth__data-list li {
+    float: left;
+    padding-left: 40px; }
+    .current-wth__data-list li:nth-of-type(1) {
+      padding-left: 0; }
+    @media only screen and (max-width: 800px) {
+      .current-wth__data-list li {
+        padding-left: 40px; } }
+    @media only screen and (max-width: 480px) {
+      .current-wth__data-list li {
+        padding: 4px 0; } }
+  .current-wth__data-list span {
+    color: #ffffff;
+    font-weight: 600; }
+
+.forecast__header {
   color: rgba(0, 0, 0, 0.08);
   font-family: "Montserrat", sans-serif;
   font-size: 60px;
   font-weight: 700;
   margin: 100px 0 70px; }
   @media only screen and (max-width: 800px) {
-    .forecast-header {
+    .forecast__header {
       font-size: 56px; } }
   @media only screen and (max-width: 480px) {
-    .forecast-header {
-      font-size: 40px; } }
+    .forecast__header {
+      font-size: 40px;
+      margin: 40px 0; } }
 
 .forecast-daily {
   border-left: 2px solid rgba(0, 0, 0, 0.8);
@@ -892,8 +923,11 @@ form {
   .weather-table thead th {
     flex-basis: 24%;
     font-weight: 700;
-    padding: 20px;
+    padding: 20px 16px;
     text-align: left; }
+    @media only screen and (max-width: 800px) {
+      .weather-table thead th {
+        padding: 16px; } }
     .weather-table thead th.hourly-time {
       flex-basis: 16%; }
     .weather-table thead th.hourly-icon {

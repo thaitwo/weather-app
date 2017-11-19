@@ -14,7 +14,7 @@ class ForecastHourly extends React.Component {
         <th className="hourly-time">TIME</th>
         <th className="hourly-icon"></th>
         <th className="hourly-condition">CONDITION</th>
-        <th>TEMPERATURE</th>
+        <th>TEMP</th>
         <th>PRECIPITATION</th>
       </tr>
     );

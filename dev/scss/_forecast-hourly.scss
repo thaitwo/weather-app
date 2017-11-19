@@ -16,8 +16,12 @@
     th {
       flex-basis: 24%;
       font-weight: 700;
-      padding: 20px;
+      padding: 20px 16px;
       text-align: left;
+
+      @media only screen and (max-width: $breakpoint-medium) {
+        padding: 16px;
+      }
 
       &.hourly-time {
         flex-basis: 16%;
