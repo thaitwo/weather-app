@@ -31201,7 +31201,7 @@ var Home = function (_React$Component) {
             { className: 'home-content-container' },
             _react2.default.createElement(
               'div',
-              { className: 'main' },
+              { className: 'wrapper' },
               _react2.default.createElement(
                 'div',
                 { className: 'homepage-headline' },

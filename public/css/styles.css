@@ -220,7 +220,7 @@ form {
   text-align: center; }
   @media only screen and (max-width: 480px) {
     .home-search-box {
-      margin-top: 80px; } }
+      margin-top: 0; } }
 
 .geosuggest-form {
   position: relative; }
@@ -374,7 +374,7 @@ body {
       width: 100%; } }
   @media only screen and (max-width: 480px) {
     .wrapper {
-      padding: 0 24px;
+      padding: 16px 24px;
       width: 100%; } }
 
 .home-header {
@@ -386,7 +386,13 @@ body {
   width: 100%; }
 
 .homepage-headline {
-  padding: 0; }
+  padding: 0 0 56px 0; }
+  @media only screen and (max-width: 800px) {
+    .homepage-headline {
+      padding: 0 0 40px 0; } }
+  @media only screen and (max-width: 480px) {
+    .homepage-headline {
+      padding: 0 0 16px 0; } }
 
 .home-content-container {
   margin: auto; }
@@ -502,7 +508,7 @@ form {
   text-align: center; }
   @media only screen and (max-width: 480px) {
     .home-search-box {
-      margin-top: 80px; } }
+      margin-top: 0; } }
 
 .geosuggest-form {
   position: relative; }

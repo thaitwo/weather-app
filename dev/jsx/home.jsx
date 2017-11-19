@@ -11,7 +11,7 @@ class Home extends React.Component {
       <div className="home-container">
         <div className="home-header home-bg">
           <div className="home-content-container">
-            <div className="main">
+            <div className="wrapper">
               <div className="homepage-headline">
                 <h1 className="title">Weathercast</h1>
                 <p className="tagline">Your daily splash of live weather.</p>
