@@ -11,7 +11,7 @@ class TopBar extends React.Component {
 
   render() {
     return (
-      <div className="top-bar l-flex is-hori align-hori-space-between">
+      <div className="top-bar">
         <Link to="/"><h1 className="logo">Weathercast</h1></Link>
         <div className="small-searchbox">
           <SearchBox />

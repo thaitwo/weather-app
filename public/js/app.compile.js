@@ -6302,7 +6302,7 @@ var SearchBox = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'form',
-        { onSubmit: this.handleSubmit },
+        { className: 'geosuggest-form', onSubmit: this.handleSubmit },
         _react2.default.createElement(_reactGeosuggest2.default, {
           placeholder: 'Search city',
           types: ['(cities)'],
@@ -31192,22 +31192,30 @@ var Home = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: 'home-bg' },
+        { className: 'home-container' },
         _react2.default.createElement(
           'div',
-          { className: 'main' },
+          { className: 'home-header home-bg' },
           _react2.default.createElement(
             'div',
-            { className: 'homepage' },
+            { className: 'home-content-container' },
             _react2.default.createElement(
-              'h1',
-              { className: 'title' },
-              'Weathercast'
-            ),
-            _react2.default.createElement(
-              'p',
-              { className: 'tagline' },
-              'Your daily splash of live weather.'
+              'div',
+              { className: 'wrapper' },
+              _react2.default.createElement(
+                'div',
+                { className: 'homepage-headline' },
+                _react2.default.createElement(
+                  'h1',
+                  { className: 'title' },
+                  'Weathercast'
+                ),
+                _react2.default.createElement(
+                  'p',
+                  { className: 'tagline' },
+                  'Your daily splash of live weather.'
+                )
+              )
             ),
             _react2.default.createElement(
               'div',
@@ -31254,10 +31262,6 @@ var _searchBox = __webpack_require__(48);
 
 var _searchBox2 = _interopRequireDefault(_searchBox);
 
-var _topBar = __webpack_require__(158);
-
-var _topBar2 = _interopRequireDefault(_topBar);
-
 var _weatherCard = __webpack_require__(159);
 
 var _weatherCard2 = _interopRequireDefault(_weatherCard);
@@ -31275,6 +31279,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // ./jsx/weather.jsx
+
+// import TopBar from './top-bar';
+
 
 var FetchWeather = function (_React$Component) {
   _inherits(FetchWeather, _React$Component);
@@ -31384,19 +31391,14 @@ var FetchWeather = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: 'weather-header' },
-        _react2.default.createElement(
-          'div',
-          { className: 'main' },
-          _react2.default.createElement(_topBar2.default, null),
-          _react2.default.createElement(_weatherCard2.default, {
-            conditionsData: this.state.conditionsData,
-            forecastData: this.state.forecastData,
-            hourlyData: this.state.hourlyData,
-            dailyData: this.state.dailyData,
-            currentdate: this.state.currentdate
-          })
-        )
+        { className: '' },
+        _react2.default.createElement(_weatherCard2.default, {
+          conditionsData: this.state.conditionsData,
+          forecastData: this.state.forecastData,
+          hourlyData: this.state.hourlyData,
+          dailyData: this.state.dailyData,
+          currentdate: this.state.currentdate
+        })
       );
     }
   }]);
@@ -32336,40 +32338,33 @@ var ForecastDaily = function (_React$Component) {
               data.date.monthname_short,
               ' ',
               data.date.day
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'daily-icon' },
-              _react2.default.createElement('img', { src: 'http://icons.wxug.com/i/c/v4/' + data.icon + '.svg' })
-            ),
-            _react2.default.createElement(
-              'p',
-              null,
-              data.conditions
             )
           ),
           _react2.default.createElement(
             'div',
-            { className: 'forecast-daily-card-extra-data' },
-            _react2.default.createElement(
-              'ul',
-              { className: 'l-flex is-hori align-hori-space-between' },
-              _react2.default.createElement(
-                'li',
-                null,
-                data.high.fahrenheit,
-                '\xB0 | ',
-                data.low.fahrenheit,
-                '\xB0'
-              ),
-              _react2.default.createElement(
-                'li',
-                null,
-                _react2.default.createElement('i', { className: 'fa fa-tint', 'aria-hidden': 'true' }),
-                data.pop,
-                '%'
-              )
-            )
+            { className: 'daily-icon' },
+            _react2.default.createElement('img', { src: 'http://icons.wxug.com/i/c/v4/' + data.icon + '.svg' })
+          ),
+          _react2.default.createElement(
+            'p',
+            { className: 'daily-conditions' },
+            data.conditions
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'daily-high-low' },
+            data.high.fahrenheit,
+            '\xB0 | ',
+            data.low.fahrenheit,
+            '\xB0'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'daily-precip' },
+            _react2.default.createElement('i', { className: 'fa fa-tint', 'aria-hidden': 'true' }),
+            ' ',
+            data.pop,
+            '%'
           )
         );
       })
@@ -32383,7 +32378,7 @@ var ForecastDaily = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: 'forecast-daily l-flex is-hori align-hori-space-between' },
+        { className: 'forecast-daily' },
         this.renderCards()
       );
     }
@@ -32439,7 +32434,7 @@ var ForecastHourly = function (_React$Component) {
     value: function renderTableHeaderRow() {
       return _react2.default.createElement(
         'tr',
-        { className: 'l-flex is-hori align-hori-space-between' },
+        null,
         _react2.default.createElement(
           'th',
           { className: 'hourly-time' },
@@ -32448,13 +32443,13 @@ var ForecastHourly = function (_React$Component) {
         _react2.default.createElement('th', { className: 'hourly-icon' }),
         _react2.default.createElement(
           'th',
-          null,
+          { className: 'hourly-condition' },
           'CONDITION'
         ),
         _react2.default.createElement(
           'th',
           null,
-          'TEMPERATURE'
+          'TEMP'
         ),
         _react2.default.createElement(
           'th',
@@ -32472,7 +32467,7 @@ var ForecastHourly = function (_React$Component) {
       var rows = this.props.hourlyData.map(function (data, index) {
         return _react2.default.createElement(
           'tr',
-          { key: index, className: 'l-flex is-hori align-hori-space-between' },
+          { key: index },
           _react2.default.createElement(
             'td',
             { className: 'hourly-time' },
@@ -32485,18 +32480,18 @@ var ForecastHourly = function (_React$Component) {
           ),
           _react2.default.createElement(
             'td',
-            null,
+            { className: 'hourly-condition' },
             data.condition
           ),
           _react2.default.createElement(
             'td',
-            null,
+            { className: 'hourly-temp' },
             data.temp.english,
             ' \xB0F'
           ),
           _react2.default.createElement(
             'td',
-            null,
+            { className: 'hourly-precip' },
             data.pop,
             '%'
           )
@@ -32512,10 +32507,10 @@ var ForecastHourly = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: 'forecast-hourly' },
+        null,
         _react2.default.createElement(
           'table',
-          null,
+          { className: 'weather-table' },
           _react2.default.createElement(
             'thead',
             null,
@@ -32581,7 +32576,7 @@ var TopBar = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: 'top-bar l-flex is-hori align-hori-space-between' },
+        { className: 'top-bar' },
         _react2.default.createElement(
           _reactRouter.Link,
           { to: '/' },
@@ -32622,6 +32617,10 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _topBar = __webpack_require__(158);
+
+var _topBar2 = _interopRequireDefault(_topBar);
+
 var _forecastHourly = __webpack_require__(157);
 
 var _forecastHourly2 = _interopRequireDefault(_forecastHourly);
@@ -32660,24 +32659,24 @@ var WeatherCard = function (_React$Component) {
       if (this.props.conditionsData) {
         weathercard = _react2.default.createElement(
           'div',
-          { className: 'weather-current' },
+          { className: 'current-wth__content' },
           _react2.default.createElement(
             'h2',
-            { className: 'city-name' },
+            { className: 'current-wth__city' },
             this.props.conditionsData.display_location.full
           ),
           _react2.default.createElement(
             'p',
-            { className: 'current-date' },
+            { className: 'current-wth__date' },
             this.props.currentdate
           ),
           _react2.default.createElement(
             'div',
-            { className: 'l-flex is-hori align-hori-space-between' },
-            _react2.default.createElement('img', { className: 'current-icon', src: 'http://icons.wxug.com/i/c/v4/' + this.props.conditionsData.icon + '.svg' }),
+            { className: 'current-wth__icon-temp-container' },
+            _react2.default.createElement('img', { className: 'current-wth__icon', src: 'https://icons.wxug.com/i/c/v4/' + this.props.conditionsData.icon + '.svg' }),
             _react2.default.createElement(
               'p',
-              { className: 'current-temp' },
+              { className: 'current-wth__temp' },
               this.props.conditionsData.temp_f,
               ' ',
               _react2.default.createElement(
@@ -32689,15 +32688,15 @@ var WeatherCard = function (_React$Component) {
           ),
           _react2.default.createElement(
             'div',
-            { className: 'current-info' },
+            { className: 'current-wth__data-container' },
             _react2.default.createElement(
               'h4',
-              { className: 'current-condition' },
+              { className: 'current-wth__condition' },
               this.props.conditionsData.weather
             ),
             _react2.default.createElement(
               'ul',
-              { className: 'current-data' },
+              { className: 'current-wth__data-list' },
               _react2.default.createElement(
                 'li',
                 null,
@@ -32743,19 +32742,32 @@ var WeatherCard = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         null,
-        this.renderCurrentWeatherCard(),
         _react2.default.createElement(
-          'h1',
-          { className: 'forecast-header' },
-          'HOURLY FORECAST'
+          'div',
+          { className: 'current-wth' },
+          _react2.default.createElement(
+            'div',
+            { className: 'wrapper' },
+            _react2.default.createElement(_topBar2.default, null),
+            this.renderCurrentWeatherCard()
+          )
         ),
-        _react2.default.createElement(_forecastHourly2.default, this.props),
         _react2.default.createElement(
-          'h1',
-          { className: 'forecast-header' },
-          '5 DAY FORECAST'
-        ),
-        _react2.default.createElement(_forecastDaily2.default, this.props)
+          'div',
+          { className: 'wrapper' },
+          _react2.default.createElement(
+            'h1',
+            { className: 'forecast__header' },
+            'HOURLY FORECAST'
+          ),
+          _react2.default.createElement(_forecastHourly2.default, this.props),
+          _react2.default.createElement(
+            'h1',
+            { className: 'forecast__header' },
+            '5 DAY FORECAST'
+          ),
+          _react2.default.createElement(_forecastDaily2.default, this.props)
+        )
       );
     }
   }]);

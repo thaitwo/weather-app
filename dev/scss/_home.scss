@@ -1,3 +1,7 @@
+body {
+  background-color: #ffffff;
+}
+
 .container {
   bottom: 0;
   left: 0;
@@ -6,28 +10,67 @@
   top: 0;
 }
 
-.main {
-  text-align: center;
-  width: 1000px;
+.home-container {
+  background-image: url('/assets/home-image.jpg');
+  background-position: top;
+  background-size: cover;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.wrapper {
   margin: auto;
+  max-width: 1024px;
+  text-align: center;
+  width: 100%;
 
   a {
     text-decoration: none;
   }
+
+  @media only screen and (max-width: $breakpoint-large) {
+    padding: 0 40px ;
+    width: 100%;
+  }
+
+  @media only screen and (max-width: $breakpoint-medium) {
+    padding: 10px 24px 0;
+    width: 100%;
+  }
+
+  @media only screen and (max-width: $breakpoint-small) {
+    padding: 16px 24px;
+    width: 100%;
+  }
+}
+
+.home-header {
+  display: flex;
 }
 
 .home-bg {
-  background-image: linear-gradient(to top, #4481eb 0%, #04befe 100%);
+  background-color: rgba($black,.7);
   height: 100%;
-  widows: 100%;
+  width: 100%;
 }
 
-.homepage {
-  padding: 150px 0 0 0;
+.homepage-headline {
+  padding: 0 0 56px 0;
+
+  @media only screen and (max-width: $breakpoint-medium) {
+    padding: 0 0 40px 0;
+  }
+
+  @media only screen and (max-width: $breakpoint-small) {
+    padding: 0 0 16px 0;
+  }
 }
 
-.homepage-content {
-  margin-top: -200px;
+.home-content-container {
+  margin: auto;
 }
 
 .title {
@@ -37,6 +80,10 @@
   font-weight: 300;
   letter-spacing: 2px;
   margin-bottom: 0px;
+
+  @media only screen and (max-width: $breakpoint-small) {
+    font-size: 44px;
+  }
 }
 
 .tagline {
@@ -45,4 +92,9 @@
   font-size: 20px;
   font-weight: 200;
   letter-spacing: 1px;
+
+  @media only screen and (max-width: $breakpoint-small) {
+    font-size: 15px;
+    letter-spacing: .5px;
+  }
 }
