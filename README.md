@@ -6,4 +6,12 @@ A weather application that connects with Google Maps API and Weather Underground
 
 Live Application: [View Project](https://weathercastapp.herokuapp.com/ "Weathercast")
 
-[![Weathercast](https://raw.githubusercontent.com/thaitwo/weather-app/master/public/assets/weathercast-screenshot.png)](https://weathercastapp.herokuapp.com/)
+[![Weathercast](https://raw.githubusercontent.com/thaitwo/weather-app/master/public/assets/weathercast-screenshot.jpg)](https://weathercastapp.herokuapp.com/)
+
+### Run Locally
+```
+npm start
+```
+```
+webpack --watch
+```

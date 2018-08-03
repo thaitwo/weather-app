@@ -6271,7 +6271,7 @@ var SearchBox = function (_React$Component) {
 
       // GET STATE VALUE
       var state = void 0;
-      // Only get the state value if the city is in the US
+      // If the city is in the U.S., then get the state value
       if (country === 'usa') {
         // Get the value for the state info (format is "City, ST, United States")
         var stateInfo = suggest.label;
@@ -6282,9 +6282,11 @@ var SearchBox = function (_React$Component) {
         state = _lodash2.default.trim(state);
         // Convert string value to lowercase
         state = state.toLowerCase();
-      } else {
-        state = 'f';
       }
+      // If foreign city, then set state as letter 'f' for 'foreign'
+      else {
+          state = 'f';
+        }
 
       // Takes the data from the selected suggestion and sets the state
       this.setState({
