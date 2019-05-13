@@ -10,15 +10,15 @@ Visit app: [https://weathercastapp.herokuapp.com](https://weathercastapp.herokua
 
 ## Technologies Used
 
-- React.js
-- Weather Underground API (originally used but was retired in 2018)
-- OpenWeather API (currently implementing as replacement)
-- Geosuggest
-- Axios
-- Lodash
-- Webpack
-- Babel
-- Sass
+- [React.js](https://reactjs.org/)
+- [Weather Underground API (originally used but was retired in 2018)](https://apicommunity.wunderground.com/weatherapi/topics/end-of-service-for-the-weather-underground-api)
+- [OpenWeather API (currently implementing as replacement)](https://openweathermap.org/api)
+- [Geosuggest](https://github.com/ubilabs/react-geosuggest)
+- [Axios](https://github.com/axios/axios)
+- [Lodash](https://lodash.com/)
+- [Webpack](https://webpack.js.org/)
+- [Babel](https://babeljs.io/)
+- [Sass](https://sass-lang.com/)
 
 ## Local Environment
 
@@ -26,8 +26,8 @@ To run app locally, run:
 
 ```
 npm start
-
 ```
+
 To compile code changes, run:
 
 ```
