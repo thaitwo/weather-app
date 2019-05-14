@@ -59,6 +59,11 @@
   }
 }
 
+.current-wth__icon-container {
+  display: flex;
+  align-items: center;
+}
+
 .current-wth__icon {
   fill: white;
   width: 220px;

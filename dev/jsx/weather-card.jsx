@@ -9,28 +9,31 @@ import ForecastDaily from './forecast-daily.jsx';
 
 class WeatherCard extends React.Component {
   constructor(props) {
-    super(props);
+    super(props);    
   }
 
   // Renders the template for the current weather data
   renderCurrentWeatherCard() {
     let weathercard = null;
 
-    if (this.props.conditionsData) {
+    if (this.props.currentData) {
+
       weathercard = (
         <div className="current-wth__content">
-          <h2 className="current-wth__city">{this.props.conditionsData.display_location.full}</h2>
+          <h2 className="current-wth__city">{this.props.currentData.name}, {this.props.currentData.sys.country}</h2>
           <p className="current-wth__date">{this.props.currentdate}</p>
           <div className="current-wth__icon-temp-container">
-            <img className="current-wth__icon" src={`https://icons.wxug.com/i/c/v4/${this.props.conditionsData.icon}.svg`}/>
-            <p className="current-wth__temp">{this.props.conditionsData.temp_f} <span>°F</span></p>
+            <div className="current-wth__icon-container">
+              <img className="current-wth__icon" src={`http://openweathermap.org/img/w/${this.props.currentData.weather[0].icon}.png`}/>
+            </div>
+            <p className="current-wth__temp">{this.props.currentData.main.temp} <span>°F</span></p>
           </div>
           <div className="current-wth__data-container">
-            <h4 className="current-wth__condition">{this.props.conditionsData.weather}</h4>
+            <h4 className="current-wth__condition">{this.props.currentData.weather[0].main}</h4>
             <ul className="current-wth__data-list">
-              <li>Precipitation <span>{this.props.forecastData[0].pop}%</span></li>
-              <li>Wind <span>{this.props.conditionsData.wind_gust_mph} mph</span></li>
-              <li>Humidity <span>{this.props.conditionsData.relative_humidity}</span></li>
+              <li>Precipitation <span>{this.props.currentRain} mm</span></li>
+              <li>Wind <span>{this.props.currentData.wind.speed} mph</span></li>
+              <li>Humidity <span>{this.props.currentData.main.humidity} %</span></li>
             </ul>
           </div>
         </div>
@@ -51,9 +54,9 @@ class WeatherCard extends React.Component {
         </div>
         <div className="wrapper">
           <h1 className="forecast__header">HOURLY FORECAST</h1>
-          <ForecastHourly {...this.props}/>
+          {/* <ForecastHourly {...this.props}/> */}
           <h1 className="forecast__header">5 DAY FORECAST</h1>
-          <ForecastDaily {...this.props}/>
+          {/* <ForecastDaily {...this.props}/> */}
         </div>
       </div>
     );

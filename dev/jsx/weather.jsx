@@ -14,20 +14,53 @@ class FetchWeather extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      conditionsData: null,
+      currentData: null,
       forecastData: [ ],
-      hourlyData: [ ],
-      dailyData: [ ],
+      currentRain: '',
+      // hourlyData: [ ],
+      // dailyData: [ ],
       currentdate: '',
     };
   }
 
   // Fetch data for weather Conditions, Forecast, Hourly, and 10 Day from Weather Channel API
   getWeatherData() {
+
+    // If city and country value exists, make Ajax call to get weather data
+    if (this.props.params.city && this.props.params.country) {
+      axios.all([
+        axios.get(`${URL_BASE}/weather?q=${this.props.params.city},${this.props.params.country}&APPID=${API_KEY}`),
+        axios.get(`${URL_BASE}/forecast?q=${this.props.params.city},${this.props.params.country}&APPID=${API_KEY}`)
+      ])
+      .then(axios.spread((current, forecast) => {
+        console.log('current', current);
+        // console.log('forecast', forecast);
+        let fullDate = current.data.dt;
+        fullDate = new Date(fullDate * 1000);
+        fullDate = fullDate.toString().split(' ');
+
+        const date = fullDate[0]; // ex: Mon
+        const month = fullDate[1]; // January
+        const day = fullDate[2]; // 12
+        const displayDate = `${date}, ${month} ${day}`;
+
+        this.setState({
+          currentData: current.data,
+          forecastData: forecast.data,
+          currentRain: current.data.rain || 0,
+          currentdate: displayDate,
+        });
+      }))
+      .catch(function (erorr) {
+        console.log(error);
+      })
+    }
+  /*
     // Check to see if the country value is equal to 'usa'. If yes, then make Ajax call to get weather info
     // This URL syntax is specific to cities only in the US
-    if (this.props.params.country === 'usa') {
+    if (this.props.params.country === 'usaa') {
       axios.all([
+        // axios.get(`${URL_BASE}q=${this.props.params.city},${this.props.params.country}`),
         axios.get(`${URL_BASE}/conditions/q/${this.props.params.state}/${this.props.params.city}.json`),
         axios.get(`${URL_BASE}/forecast/q/${this.props.params.state}/${this.props.params.city}.json`),
         axios.get(`${URL_BASE}/hourly/q/${this.props.params.state}/${this.props.params.city}.json`),
@@ -55,8 +88,10 @@ class FetchWeather extends React.Component {
       // an ID which we can use to get the weather data, we have to get the ID first.
 
       // If the inputted city is outside of the US, then make this Ajax call to get ID for this city
-      axios.get(`${URL_BASE}/geolookup/q/${this.props.params.country}/${this.props.params.city}.json`)
+      // axios.get(`${URL_BASE}/geolookup/q/${this.props.params.country}/${this.props.params.city}.json`)
+      axios.get(`${URL_BASE}/weather?q=${this.props.params.city},${this.props.params.country}&APPID=${API_KEY}`)
       .then(res => {
+        console.log('RES', res);
         // For this API, there are two ways to get the 'l'(ID) key
         // Check to see if the inputted city can get the key using this route
         let cityId = _.get(res, 'data.response.results[0].l');
@@ -93,6 +128,7 @@ class FetchWeather extends React.Component {
         console.log(error);
       });
     }
+  */
   }
 
   // Make the initial Ajax request to display the weather data
@@ -116,10 +152,11 @@ class FetchWeather extends React.Component {
     return (
       <div className="">
         <WeatherCard
-          conditionsData={this.state.conditionsData}
+          currentData={this.state.currentData}
           forecastData={this.state.forecastData}
-          hourlyData={this.state.hourlyData}
-          dailyData={this.state.dailyData}
+          currentRain={this.state.currentRain}
+          // hourlyData={this.state.hourlyData}
+          // dailyData={this.state.dailyData}
           currentdate={this.state.currentdate}
         />
       </div>

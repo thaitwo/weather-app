@@ -6254,7 +6254,7 @@ var SearchBox = function (_React$Component) {
       // Check and see if city value contains spaces
       if (city.includes(' ')) {
         // Replace all spaces with underscores
-        city = city.replace(/ /g, "_");
+        city = city.replace(/ /g, "+");
       }
       // Convert city value to lowercase
       city = city.toLowerCase();
@@ -6265,9 +6265,15 @@ var SearchBox = function (_React$Component) {
       // Remove all spaces before and after string
       country = country.trim();
       // Replaces all spaces with underscores
-      country = country.replace(/ /g, "_");
+      country = country.replace(/ /g, "+");
       // Convert string value to lowercase
       country = country.toLowerCase();
+
+      // Check to see if country is valid because response can occasionally provide area code instead of country
+      if (!isNaN(country)) {
+        country = suggest.gmaps.formatted_address.split(',');
+        country = country[country.length - 2]; // get second to last element in array
+      }
 
       // GET STATE VALUE
       var state = void 0;
@@ -31292,10 +31298,11 @@ var FetchWeather = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (FetchWeather.__proto__ || Object.getPrototypeOf(FetchWeather)).call(this, props));
 
     _this.state = {
-      conditionsData: null,
+      currentData: null,
       forecastData: [],
-      hourlyData: [],
-      dailyData: [],
+      currentRain: '',
+      // hourlyData: [ ],
+      // dailyData: [ ],
       currentdate: ''
     };
     return _this;
@@ -31309,59 +31316,99 @@ var FetchWeather = function (_React$Component) {
     value: function getWeatherData() {
       var _this2 = this;
 
-      // Check to see if the country value is equal to 'usa'. If yes, then make Ajax call to get weather info
-      // This URL syntax is specific to cities only in the US
-      if (this.props.params.country === 'usa') {
-        _axios2.default.all([_axios2.default.get(_const.URL_BASE + '/conditions/q/' + this.props.params.state + '/' + this.props.params.city + '.json'), _axios2.default.get(_const.URL_BASE + '/forecast/q/' + this.props.params.state + '/' + this.props.params.city + '.json'), _axios2.default.get(_const.URL_BASE + '/hourly/q/' + this.props.params.state + '/' + this.props.params.city + '.json'), _axios2.default.get(_const.URL_BASE + '/forecast10day/q/' + this.props.params.state + '/' + this.props.params.city + '.json')]).then(_axios2.default.spread(function (conditions, forecast, hourly, daily) {
-          // Divide date string into substrings and get the first 3 strings (Mon, 06 Mar)
-          var date = conditions.data.current_observation.observation_time_rfc822;
-          date = date.split(/\s+/).slice(0, 3).join(' ');
+      // If city and country value exists, make Ajax call to get weather data
+      if (this.props.params.city && this.props.params.country) {
+        _axios2.default.all([_axios2.default.get(_const.URL_BASE + '/weather?q=' + this.props.params.city + ',' + this.props.params.country + '&APPID=' + _const.API_KEY), _axios2.default.get(_const.URL_BASE + '/forecast?q=' + this.props.params.city + ',' + this.props.params.country + '&APPID=' + _const.API_KEY)]).then(_axios2.default.spread(function (current, forecast) {
+          console.log('current', current);
+          // console.log('forecast', forecast);
+          var fullDate = current.data.dt;
+          fullDate = new Date(fullDate * 1000);
+          fullDate = fullDate.toString().split(' ');
+
+          var date = fullDate[0]; // ex: Mon
+          var month = fullDate[1]; // January
+          var day = fullDate[2]; // 12
+          var displayDate = date + ', ' + month + ' ' + day;
 
           _this2.setState({
-            conditionsData: conditions.data.current_observation,
-            forecastData: forecast.data.forecast.simpleforecast.forecastday,
-            hourlyData: hourly.data.hourly_forecast,
-            dailyData: daily.data.forecast.simpleforecast.forecastday,
-            currentdate: date
+            currentData: current.data,
+            forecastData: forecast.data,
+            currentRain: current.data.rain || 0,
+            currentdate: displayDate
           });
-        })).catch(function (error) {
-          console.log(error);
-        });
-      } else {
-        // Because certain foreign cities won't return weather data when requested but they all do return
-        // an ID which we can use to get the weather data, we have to get the ID first.
-
-        // If the inputted city is outside of the US, then make this Ajax call to get ID for this city
-        _axios2.default.get(_const.URL_BASE + '/geolookup/q/' + this.props.params.country + '/' + this.props.params.city + '.json').then(function (res) {
-          // For this API, there are two ways to get the 'l'(ID) key
-          // Check to see if the inputted city can get the key using this route
-          var cityId = _lodash2.default.get(res, 'data.response.results[0].l');
-
-          // If it can't, then get the key using this route
-          if (!cityId) {
-            cityId = _lodash2.default.get(res, 'data.location.l');
-          }
-
-          // If an ID exist, then make this Ajax call to get weather info for city
-          if (cityId) {
-            _axios2.default.all([_axios2.default.get(_const.URL_BASE + '/conditions/' + cityId + '.json'), _axios2.default.get(_const.URL_BASE + '/forecast/' + cityId + '.json'), _axios2.default.get(_const.URL_BASE + '/hourly/' + cityId + '.json'), _axios2.default.get(_const.URL_BASE + '/forecast10day/' + cityId + '.json')]).then(_axios2.default.spread(function (conditions, forecast, hourly, daily) {
-              // Divide date string into substrings and get the first 3 strings (Mon, 06 Mar)
-              var date = conditions.data.current_observation.observation_time_rfc822;
-              date = date.split(/\s+/).slice(0, 3).join(' ');
-
-              _this2.setState({
-                conditionsData: conditions.data.current_observation,
-                forecastData: forecast.data.forecast.simpleforecast.forecastday,
-                hourlyData: hourly.data.hourly_forecast,
-                dailyData: daily.data.forecast.simpleforecast.forecastday,
-                currentdate: date
-              });
-            }));
-          }
-        }).catch(function (error) {
+        })).catch(function (erorr) {
           console.log(error);
         });
       }
+      /*
+        // Check to see if the country value is equal to 'usa'. If yes, then make Ajax call to get weather info
+        // This URL syntax is specific to cities only in the US
+        if (this.props.params.country === 'usaa') {
+          axios.all([
+            // axios.get(`${URL_BASE}q=${this.props.params.city},${this.props.params.country}`),
+            axios.get(`${URL_BASE}/conditions/q/${this.props.params.state}/${this.props.params.city}.json`),
+            axios.get(`${URL_BASE}/forecast/q/${this.props.params.state}/${this.props.params.city}.json`),
+            axios.get(`${URL_BASE}/hourly/q/${this.props.params.state}/${this.props.params.city}.json`),
+            axios.get(`${URL_BASE}/forecast10day/q/${this.props.params.state}/${this.props.params.city}.json`)
+          ])
+          .then(axios.spread((conditions, forecast, hourly, daily) => {
+            // Divide date string into substrings and get the first 3 strings (Mon, 06 Mar)
+            let date = conditions.data.current_observation.observation_time_rfc822;
+            date = date.split(/\s+/).slice(0,3).join(' ');
+             this.setState({
+              conditionsData: conditions.data.current_observation,
+              forecastData: forecast.data.forecast.simpleforecast.forecastday,
+              hourlyData: hourly.data.hourly_forecast,
+              dailyData: daily.data.forecast.simpleforecast.forecastday,
+              currentdate: date,
+            });
+          }))
+          .catch(function (error) {
+            console.log(error);
+          });
+        }
+        else {
+          // Because certain foreign cities won't return weather data when requested but they all do return
+          // an ID which we can use to get the weather data, we have to get the ID first.
+           // If the inputted city is outside of the US, then make this Ajax call to get ID for this city
+          // axios.get(`${URL_BASE}/geolookup/q/${this.props.params.country}/${this.props.params.city}.json`)
+          axios.get(`${URL_BASE}/weather?q=${this.props.params.city},${this.props.params.country}&APPID=${API_KEY}`)
+          .then(res => {
+            console.log('RES', res);
+            // For this API, there are two ways to get the 'l'(ID) key
+            // Check to see if the inputted city can get the key using this route
+            let cityId = _.get(res, 'data.response.results[0].l');
+             // If it can't, then get the key using this route
+            if (!cityId) {
+              cityId = _.get(res, 'data.location.l');
+            }
+             // If an ID exist, then make this Ajax call to get weather info for city
+            if (cityId) {
+              axios.all([
+                axios.get(`${URL_BASE}/conditions/${cityId}.json`),
+                axios.get(`${URL_BASE}/forecast/${cityId}.json`),
+                axios.get(`${URL_BASE}/hourly/${cityId}.json`),
+                axios.get(`${URL_BASE}/forecast10day/${cityId}.json`)
+              ])
+              .then(axios.spread((conditions, forecast, hourly, daily) => {
+                // Divide date string into substrings and get the first 3 strings (Mon, 06 Mar)
+                let date = conditions.data.current_observation.observation_time_rfc822;
+                date = date.split(/\s+/).slice(0,3).join(' ');
+                 this.setState({
+                  conditionsData: conditions.data.current_observation,
+                  forecastData: forecast.data.forecast.simpleforecast.forecastday,
+                  hourlyData: hourly.data.hourly_forecast,
+                  dailyData: daily.data.forecast.simpleforecast.forecastday,
+                  currentdate: date,
+                });
+              }))
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+        }
+      */
     }
 
     // Make the initial Ajax request to display the weather data
@@ -31393,11 +31440,12 @@ var FetchWeather = function (_React$Component) {
         'div',
         { className: '' },
         _react2.default.createElement(_weatherCard2.default, {
-          conditionsData: this.state.conditionsData,
+          currentData: this.state.currentData,
           forecastData: this.state.forecastData,
-          hourlyData: this.state.hourlyData,
-          dailyData: this.state.dailyData,
-          currentdate: this.state.currentdate
+          currentRain: this.state.currentRain
+          // hourlyData={this.state.hourlyData}
+          // dailyData={this.state.dailyData}
+          , currentdate: this.state.currentdate
         })
       );
     }
@@ -32269,8 +32317,11 @@ module.exports = function spread(callback) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var API_KEY = '5332856fca0fe1e7';
-var URL_BASE = 'https://api.wunderground.com/api/' + API_KEY;
+// const API_KEY = '5332856fca0fe1e7';
+// const URL_BASE = `https://api.wunderground.com/api/${API_KEY}`
+
+var API_KEY = '43242c81b8e03521a6f5365cc4f34a00';
+var URL_BASE = 'http://api.openweathermap.org/data/2.5';
 
 exports.API_KEY = API_KEY;
 exports.URL_BASE = URL_BASE;
@@ -32656,14 +32707,17 @@ var WeatherCard = function (_React$Component) {
     value: function renderCurrentWeatherCard() {
       var weathercard = null;
 
-      if (this.props.conditionsData) {
+      if (this.props.currentData) {
+
         weathercard = _react2.default.createElement(
           'div',
           { className: 'current-wth__content' },
           _react2.default.createElement(
             'h2',
             { className: 'current-wth__city' },
-            this.props.conditionsData.display_location.full
+            this.props.currentData.name,
+            ', ',
+            this.props.currentData.sys.country
           ),
           _react2.default.createElement(
             'p',
@@ -32673,11 +32727,15 @@ var WeatherCard = function (_React$Component) {
           _react2.default.createElement(
             'div',
             { className: 'current-wth__icon-temp-container' },
-            _react2.default.createElement('img', { className: 'current-wth__icon', src: 'https://icons.wxug.com/i/c/v4/' + this.props.conditionsData.icon + '.svg' }),
+            _react2.default.createElement(
+              'div',
+              { className: 'current-wth__icon-container' },
+              _react2.default.createElement('img', { className: 'current-wth__icon', src: 'http://openweathermap.org/img/w/' + this.props.currentData.weather[0].icon + '.png' })
+            ),
             _react2.default.createElement(
               'p',
               { className: 'current-wth__temp' },
-              this.props.conditionsData.temp_f,
+              this.props.currentData.main.temp,
               ' ',
               _react2.default.createElement(
                 'span',
@@ -32692,7 +32750,7 @@ var WeatherCard = function (_React$Component) {
             _react2.default.createElement(
               'h4',
               { className: 'current-wth__condition' },
-              this.props.conditionsData.weather
+              this.props.currentData.weather[0].main
             ),
             _react2.default.createElement(
               'ul',
@@ -32704,8 +32762,8 @@ var WeatherCard = function (_React$Component) {
                 _react2.default.createElement(
                   'span',
                   null,
-                  this.props.forecastData[0].pop,
-                  '%'
+                  this.props.currentRain,
+                  ' mm'
                 )
               ),
               _react2.default.createElement(
@@ -32715,7 +32773,7 @@ var WeatherCard = function (_React$Component) {
                 _react2.default.createElement(
                   'span',
                   null,
-                  this.props.conditionsData.wind_gust_mph,
+                  this.props.currentData.wind.speed,
                   ' mph'
                 )
               ),
@@ -32726,7 +32784,8 @@ var WeatherCard = function (_React$Component) {
                 _react2.default.createElement(
                   'span',
                   null,
-                  this.props.conditionsData.relative_humidity
+                  this.props.currentData.main.humidity,
+                  ' %'
                 )
               )
             )
@@ -32760,13 +32819,11 @@ var WeatherCard = function (_React$Component) {
             { className: 'forecast__header' },
             'HOURLY FORECAST'
           ),
-          _react2.default.createElement(_forecastHourly2.default, this.props),
           _react2.default.createElement(
             'h1',
             { className: 'forecast__header' },
             '5 DAY FORECAST'
-          ),
-          _react2.default.createElement(_forecastDaily2.default, this.props)
+          )
         )
       );
     }
