@@ -7,6 +7,7 @@ class ForecastHourly extends React.Component {
   constructor(props) {
     super(props);
   }
+  
   // Renders the header row for the table containing Hourly Forecast data
   renderTableHeaderRow() {
     return (

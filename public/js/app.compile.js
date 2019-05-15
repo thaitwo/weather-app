@@ -31301,8 +31301,6 @@ var FetchWeather = function (_React$Component) {
       currentData: null,
       forecastData: [],
       currentRain: '',
-      // hourlyData: [ ],
-      // dailyData: [ ],
       currentdate: ''
     };
     return _this;
@@ -31319,6 +31317,7 @@ var FetchWeather = function (_React$Component) {
       // If city and country value exists, make Ajax call to get weather data
       if (this.props.params.city && this.props.params.country) {
         _axios2.default.all([_axios2.default.get(_const.URL_BASE + '/weather?q=' + this.props.params.city + ',' + this.props.params.country + '&APPID=' + _const.API_KEY), _axios2.default.get(_const.URL_BASE + '/forecast?q=' + this.props.params.city + ',' + this.props.params.country + '&APPID=' + _const.API_KEY)]).then(_axios2.default.spread(function (current, forecast) {
+          console.log('current', current);
           console.log('forecast', forecast);
           var fullDate = current.data.dt;
           fullDate = new Date(fullDate * 1000);
@@ -31329,85 +31328,18 @@ var FetchWeather = function (_React$Component) {
           var day = fullDate[2]; // 12
           var displayDate = date + ', ' + month + ' ' + day;
 
+          var rainLevel = !_lodash2.default.isEmpty(current.data.rain) ? current.data.rain['1h'] : 0;
+
           _this2.setState({
             currentData: current.data,
             forecastData: forecast.data.list,
-            currentRain: current.data.rain || 0,
+            currentRain: rainLevel,
             currentdate: displayDate
           });
         })).catch(function (erorr) {
           console.log(error);
         });
       }
-      /*
-        // Check to see if the country value is equal to 'usa'. If yes, then make Ajax call to get weather info
-        // This URL syntax is specific to cities only in the US
-        if (this.props.params.country === 'usaa') {
-          axios.all([
-            // axios.get(`${URL_BASE}q=${this.props.params.city},${this.props.params.country}`),
-            axios.get(`${URL_BASE}/conditions/q/${this.props.params.state}/${this.props.params.city}.json`),
-            axios.get(`${URL_BASE}/forecast/q/${this.props.params.state}/${this.props.params.city}.json`),
-            axios.get(`${URL_BASE}/hourly/q/${this.props.params.state}/${this.props.params.city}.json`),
-            axios.get(`${URL_BASE}/forecast10day/q/${this.props.params.state}/${this.props.params.city}.json`)
-          ])
-          .then(axios.spread((conditions, forecast, hourly, daily) => {
-            // Divide date string into substrings and get the first 3 strings (Mon, 06 Mar)
-            let date = conditions.data.current_observation.observation_time_rfc822;
-            date = date.split(/\s+/).slice(0,3).join(' ');
-             this.setState({
-              conditionsData: conditions.data.current_observation,
-              forecastData: forecast.data.forecast.simpleforecast.forecastday,
-              hourlyData: hourly.data.hourly_forecast,
-              dailyData: daily.data.forecast.simpleforecast.forecastday,
-              currentdate: date,
-            });
-          }))
-          .catch(function (error) {
-            console.log(error);
-          });
-        }
-        else {
-          // Because certain foreign cities won't return weather data when requested but they all do return
-          // an ID which we can use to get the weather data, we have to get the ID first.
-           // If the inputted city is outside of the US, then make this Ajax call to get ID for this city
-          // axios.get(`${URL_BASE}/geolookup/q/${this.props.params.country}/${this.props.params.city}.json`)
-          axios.get(`${URL_BASE}/weather?q=${this.props.params.city},${this.props.params.country}&APPID=${API_KEY}`)
-          .then(res => {
-            console.log('RES', res);
-            // For this API, there are two ways to get the 'l'(ID) key
-            // Check to see if the inputted city can get the key using this route
-            let cityId = _.get(res, 'data.response.results[0].l');
-             // If it can't, then get the key using this route
-            if (!cityId) {
-              cityId = _.get(res, 'data.location.l');
-            }
-             // If an ID exist, then make this Ajax call to get weather info for city
-            if (cityId) {
-              axios.all([
-                axios.get(`${URL_BASE}/conditions/${cityId}.json`),
-                axios.get(`${URL_BASE}/forecast/${cityId}.json`),
-                axios.get(`${URL_BASE}/hourly/${cityId}.json`),
-                axios.get(`${URL_BASE}/forecast10day/${cityId}.json`)
-              ])
-              .then(axios.spread((conditions, forecast, hourly, daily) => {
-                // Divide date string into substrings and get the first 3 strings (Mon, 06 Mar)
-                let date = conditions.data.current_observation.observation_time_rfc822;
-                date = date.split(/\s+/).slice(0,3).join(' ');
-                 this.setState({
-                  conditionsData: conditions.data.current_observation,
-                  forecastData: forecast.data.forecast.simpleforecast.forecastday,
-                  hourlyData: hourly.data.hourly_forecast,
-                  dailyData: daily.data.forecast.simpleforecast.forecastday,
-                  currentdate: date,
-                });
-              }))
-            }
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-        }
-      */
     }
 
     // Make the initial Ajax request to display the weather data
@@ -31441,10 +31373,8 @@ var FetchWeather = function (_React$Component) {
         _react2.default.createElement(_weatherCard2.default, {
           currentData: this.state.currentData,
           forecastData: this.state.forecastData,
-          currentRain: this.state.currentRain
-          // hourlyData={this.state.hourlyData}
-          // dailyData={this.state.dailyData}
-          , currentdate: this.state.currentdate
+          currentRain: this.state.currentRain,
+          currentdate: this.state.currentdate
         })
       );
     }
@@ -32342,9 +32272,9 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _slice = __webpack_require__(91);
+var _isempty = __webpack_require__(339);
 
-var _slice2 = _interopRequireDefault(_slice);
+var _isempty2 = _interopRequireDefault(_isempty);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -32363,81 +32293,164 @@ var ForecastDaily = function (_React$Component) {
     return _possibleConstructorReturn(this, (ForecastDaily.__proto__ || Object.getPrototypeOf(ForecastDaily)).call(this, props));
   }
 
-  // Renders the cards containing data for the 5 Day Forecast
+  // Renders the header row for the table containing Hourly Forecast data
 
 
   _createClass(ForecastDaily, [{
-    key: 'renderCards',
-    value: function renderCards() {
+    key: 'renderTableHeaderRow',
+    value: function renderTableHeaderRow() {
+      return _react2.default.createElement(
+        'tr',
+        null,
+        _react2.default.createElement(
+          'th',
+          null,
+          'Time'
+        ),
+        _react2.default.createElement('th', null),
+        _react2.default.createElement(
+          'th',
+          null,
+          'Condition'
+        ),
+        _react2.default.createElement(
+          'th',
+          null,
+          'Temp'
+        ),
+        _react2.default.createElement(
+          'th',
+          null,
+          'Precip'
+        ),
+        _react2.default.createElement(
+          'th',
+          null,
+          'Humidity'
+        ),
+        _react2.default.createElement(
+          'th',
+          null,
+          'Wind'
+        )
+      );
+    }
+
+    // Renders the cards containing data for the 5 Day Forecast
+
+  }, {
+    key: 'renderTableRows',
+    value: function renderTableRows() {
       // Loop through each array to get data, then push data into the card template below
       var cards = this.props.forecastData.map(function (data, index) {
         var fullDate = new Date(data.dt * 1000);
+        /** Time Begin
+        Keep this directly after Date instance before it gets manipulated
+        **/
+        var options = {
+          hour: 'numeric',
+          minute: 'numeric',
+          hour12: true
+        };
+        var time = fullDate.toLocaleString('en-US', options);
+        /** Time End **/
+
         fullDate = fullDate.toString().split(' ');
-        var date = fullDate[0];
+        var day = fullDate[0];
         var month = fullDate[1];
-        var day = fullDate[2];
+        var date = fullDate[2];
+
+        // Condition Description
+        var condition = data.weather[0].main;
+        // Temperature
+        var tempKelvin = data.main.temp;
+        var tempFahrenheit = Math.floor((tempKelvin - 273) * (9 / 5) + 32);
+        // Icon Code
+        var iconCode = data.weather[0].icon;
+        // Rain Level
+        var rainLevelIsProvided = !_.isEmpty(data.rain); // check if rain data is provided
+        var rainLevel = rainLevelIsProvided ? data.rain['3h'] : 0;
+        // Humidity
+        var humidity = data.main.humidity;
+        // Wind
+        var wind = Math.round(data.wind.speed);
 
         return _react2.default.createElement(
-          'div',
-          { className: 'forecast-daily-card', key: index },
+          'tr',
+          { key: index },
           _react2.default.createElement(
-            'div',
-            null,
+            'td',
+            { className: 'forecast-time-container' },
             _react2.default.createElement(
-              'h4',
-              null,
-              date
+              'div',
+              { className: 'forecast-time' },
+              time
             ),
             _react2.default.createElement(
-              'h5',
-              null,
-              month,
-              ' ',
+              'div',
+              { className: 'forecast-day' },
               day
             )
           ),
           _react2.default.createElement(
-            'div',
-            { className: 'daily-icon' },
-            _react2.default.createElement('img', { src: 'http://openweathermap.org/img/w/' + data.weather[0].icon + '.png' })
+            'td',
+            { className: 'forecast-icon' },
+            _react2.default.createElement('img', { src: 'http://openweathermap.org/img/w/' + iconCode + '.png' })
           ),
           _react2.default.createElement(
-            'p',
-            { className: 'daily-conditions' },
-            data.weather[0].main
+            'td',
+            { className: 'forecast-condition' },
+            condition
           ),
           _react2.default.createElement(
-            'div',
-            { className: 'daily-high-low' },
-            data.main.temp_max,
-            '\xB0 | ',
-            data.main.temp_min,
-            '\xB0'
+            'td',
+            { className: 'forecast-temp' },
+            tempFahrenheit,
+            ' \xB0F'
+          ),
+          _react2.default.createElement(
+            'td',
+            { className: 'forecast-precip' },
+            rainLevel,
+            ' mm'
+          ),
+          _react2.default.createElement(
+            'td',
+            null,
+            humidity,
+            '%'
+          ),
+          _react2.default.createElement(
+            'td',
+            null,
+            wind,
+            ' mph'
           )
         );
       });
 
-      // Loop through forecast array and return 5 items for the 5-day forecase
-      // Data array consist of 40 object with each object representing every 3 hour
-      // Therefore, we loop through and get every 8th object in the array
-      // For loop is used here instead of filter to prevent looping through every item if array were to be too long
-      var forecastCards = [];
-      var maxVal = 5;
-      var delta = Math.floor(cards.length / maxVal);
-
-      for (var i = 0; i < cards.length; i = i + delta) {
-        forecastCards.push(cards[i]);
-      }
-
-      return forecastCards;
+      return cards;
     }
   }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: 'forecast-daily' },
-        this.renderCards()
+        null,
+        _react2.default.createElement(
+          'table',
+          { className: 'forecast-table' },
+          _react2.default.createElement(
+            'thead',
+            null,
+            this.renderTableHeaderRow()
+          ),
+          _react2.default.createElement(
+            'tbody',
+            null,
+            this.renderTableRows()
+          )
+        )
       );
     }
   }]);
@@ -32484,6 +32497,7 @@ var ForecastHourly = function (_React$Component) {
 
     return _possibleConstructorReturn(this, (ForecastHourly.__proto__ || Object.getPrototypeOf(ForecastHourly)).call(this, props));
   }
+
   // Renders the header row for the table containing Hourly Forecast data
 
 
@@ -32715,6 +32729,8 @@ var WeatherCard = function (_React$Component) {
       var weathercard = null;
 
       if (this.props.currentData) {
+        var tempKelvin = this.props.currentData.main.temp;
+        var tempFahrenheit = Math.floor((tempKelvin - 273) * (9 / 5) + 32);
 
         weathercard = _react2.default.createElement(
           'div',
@@ -32742,7 +32758,7 @@ var WeatherCard = function (_React$Component) {
             _react2.default.createElement(
               'p',
               { className: 'current-wth__temp' },
-              this.props.currentData.main.temp,
+              tempFahrenheit,
               ' ',
               _react2.default.createElement(
                 'span',
@@ -32824,7 +32840,7 @@ var WeatherCard = function (_React$Component) {
           _react2.default.createElement(
             'h1',
             { className: 'forecast__header' },
-            '5 DAY FORECAST'
+            'FORECAST'
           ),
           _react2.default.createElement(_forecastDaily2.default, this.props)
         )
@@ -49237,6 +49253,794 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 ), document.getElementById('root'));
 
 // Import custom components
+
+/***/ }),
+/* 312 */,
+/* 313 */,
+/* 314 */,
+/* 315 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseIsNative = __webpack_require__(324),
+    getValue = __webpack_require__(330);
+
+/**
+ * Gets the native function at `key` of `object`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @param {string} key The key of the method to get.
+ * @returns {*} Returns the function if it's native, else `undefined`.
+ */
+function getNative(object, key) {
+  var value = getValue(object, key);
+  return baseIsNative(value) ? value : undefined;
+}
+
+module.exports = getNative;
+
+
+/***/ }),
+/* 316 */
+/***/ (function(module, exports) {
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/**
+ * Checks if `value` is likely a prototype object.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a prototype, else `false`.
+ */
+function isPrototype(value) {
+  var Ctor = value && value.constructor,
+      proto = (typeof Ctor == 'function' && Ctor.prototype) || objectProto;
+
+  return value === proto;
+}
+
+module.exports = isPrototype;
+
+
+/***/ }),
+/* 317 */
+/***/ (function(module, exports) {
+
+/** Used for built-in method references. */
+var funcProto = Function.prototype;
+
+/** Used to resolve the decompiled source of functions. */
+var funcToString = funcProto.toString;
+
+/**
+ * Converts `func` to its source code.
+ *
+ * @private
+ * @param {Function} func The function to convert.
+ * @returns {string} Returns the source code.
+ */
+function toSource(func) {
+  if (func != null) {
+    try {
+      return funcToString.call(func);
+    } catch (e) {}
+    try {
+      return (func + '');
+    } catch (e) {}
+  }
+  return '';
+}
+
+module.exports = toSource;
+
+
+/***/ }),
+/* 318 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getNative = __webpack_require__(315),
+    root = __webpack_require__(167);
+
+/* Built-in method references that are verified to be native. */
+var DataView = getNative(root, 'DataView');
+
+module.exports = DataView;
+
+
+/***/ }),
+/* 319 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getNative = __webpack_require__(315),
+    root = __webpack_require__(167);
+
+/* Built-in method references that are verified to be native. */
+var Map = getNative(root, 'Map');
+
+module.exports = Map;
+
+
+/***/ }),
+/* 320 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getNative = __webpack_require__(315),
+    root = __webpack_require__(167);
+
+/* Built-in method references that are verified to be native. */
+var Promise = getNative(root, 'Promise');
+
+module.exports = Promise;
+
+
+/***/ }),
+/* 321 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getNative = __webpack_require__(315),
+    root = __webpack_require__(167);
+
+/* Built-in method references that are verified to be native. */
+var Set = getNative(root, 'Set');
+
+module.exports = Set;
+
+
+/***/ }),
+/* 322 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getNative = __webpack_require__(315),
+    root = __webpack_require__(167);
+
+/* Built-in method references that are verified to be native. */
+var WeakMap = getNative(root, 'WeakMap');
+
+module.exports = WeakMap;
+
+
+/***/ }),
+/* 323 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseGetTag = __webpack_require__(89),
+    isObjectLike = __webpack_require__(172);
+
+/** `Object#toString` result references. */
+var argsTag = '[object Arguments]';
+
+/**
+ * The base implementation of `_.isArguments`.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an `arguments` object,
+ */
+function baseIsArguments(value) {
+  return isObjectLike(value) && baseGetTag(value) == argsTag;
+}
+
+module.exports = baseIsArguments;
+
+
+/***/ }),
+/* 324 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var isFunction = __webpack_require__(170),
+    isMasked = __webpack_require__(331),
+    isObject = __webpack_require__(49),
+    toSource = __webpack_require__(317);
+
+/**
+ * Used to match `RegExp`
+ * [syntax characters](http://ecma-international.org/ecma-262/7.0/#sec-patterns).
+ */
+var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
+
+/** Used to detect host constructors (Safari). */
+var reIsHostCtor = /^\[object .+?Constructor\]$/;
+
+/** Used for built-in method references. */
+var funcProto = Function.prototype,
+    objectProto = Object.prototype;
+
+/** Used to resolve the decompiled source of functions. */
+var funcToString = funcProto.toString;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/** Used to detect if a method is native. */
+var reIsNative = RegExp('^' +
+  funcToString.call(hasOwnProperty).replace(reRegExpChar, '\\$&')
+  .replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
+);
+
+/**
+ * The base implementation of `_.isNative` without bad shim checks.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a native function,
+ *  else `false`.
+ */
+function baseIsNative(value) {
+  if (!isObject(value) || isMasked(value)) {
+    return false;
+  }
+  var pattern = isFunction(value) ? reIsNative : reIsHostCtor;
+  return pattern.test(toSource(value));
+}
+
+module.exports = baseIsNative;
+
+
+/***/ }),
+/* 325 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseGetTag = __webpack_require__(89),
+    isLength = __webpack_require__(171),
+    isObjectLike = __webpack_require__(172);
+
+/** `Object#toString` result references. */
+var argsTag = '[object Arguments]',
+    arrayTag = '[object Array]',
+    boolTag = '[object Boolean]',
+    dateTag = '[object Date]',
+    errorTag = '[object Error]',
+    funcTag = '[object Function]',
+    mapTag = '[object Map]',
+    numberTag = '[object Number]',
+    objectTag = '[object Object]',
+    regexpTag = '[object RegExp]',
+    setTag = '[object Set]',
+    stringTag = '[object String]',
+    weakMapTag = '[object WeakMap]';
+
+var arrayBufferTag = '[object ArrayBuffer]',
+    dataViewTag = '[object DataView]',
+    float32Tag = '[object Float32Array]',
+    float64Tag = '[object Float64Array]',
+    int8Tag = '[object Int8Array]',
+    int16Tag = '[object Int16Array]',
+    int32Tag = '[object Int32Array]',
+    uint8Tag = '[object Uint8Array]',
+    uint8ClampedTag = '[object Uint8ClampedArray]',
+    uint16Tag = '[object Uint16Array]',
+    uint32Tag = '[object Uint32Array]';
+
+/** Used to identify `toStringTag` values of typed arrays. */
+var typedArrayTags = {};
+typedArrayTags[float32Tag] = typedArrayTags[float64Tag] =
+typedArrayTags[int8Tag] = typedArrayTags[int16Tag] =
+typedArrayTags[int32Tag] = typedArrayTags[uint8Tag] =
+typedArrayTags[uint8ClampedTag] = typedArrayTags[uint16Tag] =
+typedArrayTags[uint32Tag] = true;
+typedArrayTags[argsTag] = typedArrayTags[arrayTag] =
+typedArrayTags[arrayBufferTag] = typedArrayTags[boolTag] =
+typedArrayTags[dataViewTag] = typedArrayTags[dateTag] =
+typedArrayTags[errorTag] = typedArrayTags[funcTag] =
+typedArrayTags[mapTag] = typedArrayTags[numberTag] =
+typedArrayTags[objectTag] = typedArrayTags[regexpTag] =
+typedArrayTags[setTag] = typedArrayTags[stringTag] =
+typedArrayTags[weakMapTag] = false;
+
+/**
+ * The base implementation of `_.isTypedArray` without Node.js optimizations.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a typed array, else `false`.
+ */
+function baseIsTypedArray(value) {
+  return isObjectLike(value) &&
+    isLength(value.length) && !!typedArrayTags[baseGetTag(value)];
+}
+
+module.exports = baseIsTypedArray;
+
+
+/***/ }),
+/* 326 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var isPrototype = __webpack_require__(316),
+    nativeKeys = __webpack_require__(332);
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * The base implementation of `_.keys` which doesn't treat sparse arrays as dense.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of property names.
+ */
+function baseKeys(object) {
+  if (!isPrototype(object)) {
+    return nativeKeys(object);
+  }
+  var result = [];
+  for (var key in Object(object)) {
+    if (hasOwnProperty.call(object, key) && key != 'constructor') {
+      result.push(key);
+    }
+  }
+  return result;
+}
+
+module.exports = baseKeys;
+
+
+/***/ }),
+/* 327 */
+/***/ (function(module, exports) {
+
+/**
+ * The base implementation of `_.unary` without support for storing metadata.
+ *
+ * @private
+ * @param {Function} func The function to cap arguments for.
+ * @returns {Function} Returns the new capped function.
+ */
+function baseUnary(func) {
+  return function(value) {
+    return func(value);
+  };
+}
+
+module.exports = baseUnary;
+
+
+/***/ }),
+/* 328 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var root = __webpack_require__(167);
+
+/** Used to detect overreaching core-js shims. */
+var coreJsData = root['__core-js_shared__'];
+
+module.exports = coreJsData;
+
+
+/***/ }),
+/* 329 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var DataView = __webpack_require__(318),
+    Map = __webpack_require__(319),
+    Promise = __webpack_require__(320),
+    Set = __webpack_require__(321),
+    WeakMap = __webpack_require__(322),
+    baseGetTag = __webpack_require__(89),
+    toSource = __webpack_require__(317);
+
+/** `Object#toString` result references. */
+var mapTag = '[object Map]',
+    objectTag = '[object Object]',
+    promiseTag = '[object Promise]',
+    setTag = '[object Set]',
+    weakMapTag = '[object WeakMap]';
+
+var dataViewTag = '[object DataView]';
+
+/** Used to detect maps, sets, and weakmaps. */
+var dataViewCtorString = toSource(DataView),
+    mapCtorString = toSource(Map),
+    promiseCtorString = toSource(Promise),
+    setCtorString = toSource(Set),
+    weakMapCtorString = toSource(WeakMap);
+
+/**
+ * Gets the `toStringTag` of `value`.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @returns {string} Returns the `toStringTag`.
+ */
+var getTag = baseGetTag;
+
+// Fallback for data views, maps, sets, and weak maps in IE 11 and promises in Node.js < 6.
+if ((DataView && getTag(new DataView(new ArrayBuffer(1))) != dataViewTag) ||
+    (Map && getTag(new Map) != mapTag) ||
+    (Promise && getTag(Promise.resolve()) != promiseTag) ||
+    (Set && getTag(new Set) != setTag) ||
+    (WeakMap && getTag(new WeakMap) != weakMapTag)) {
+  getTag = function(value) {
+    var result = baseGetTag(value),
+        Ctor = result == objectTag ? value.constructor : undefined,
+        ctorString = Ctor ? toSource(Ctor) : '';
+
+    if (ctorString) {
+      switch (ctorString) {
+        case dataViewCtorString: return dataViewTag;
+        case mapCtorString: return mapTag;
+        case promiseCtorString: return promiseTag;
+        case setCtorString: return setTag;
+        case weakMapCtorString: return weakMapTag;
+      }
+    }
+    return result;
+  };
+}
+
+module.exports = getTag;
+
+
+/***/ }),
+/* 330 */
+/***/ (function(module, exports) {
+
+/**
+ * Gets the value at `key` of `object`.
+ *
+ * @private
+ * @param {Object} [object] The object to query.
+ * @param {string} key The key of the property to get.
+ * @returns {*} Returns the property value.
+ */
+function getValue(object, key) {
+  return object == null ? undefined : object[key];
+}
+
+module.exports = getValue;
+
+
+/***/ }),
+/* 331 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var coreJsData = __webpack_require__(328);
+
+/** Used to detect methods masquerading as native. */
+var maskSrcKey = (function() {
+  var uid = /[^.]+$/.exec(coreJsData && coreJsData.keys && coreJsData.keys.IE_PROTO || '');
+  return uid ? ('Symbol(src)_1.' + uid) : '';
+}());
+
+/**
+ * Checks if `func` has its source masked.
+ *
+ * @private
+ * @param {Function} func The function to check.
+ * @returns {boolean} Returns `true` if `func` is masked, else `false`.
+ */
+function isMasked(func) {
+  return !!maskSrcKey && (maskSrcKey in func);
+}
+
+module.exports = isMasked;
+
+
+/***/ }),
+/* 332 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var overArg = __webpack_require__(334);
+
+/* Built-in method references for those with the same name as other `lodash` methods. */
+var nativeKeys = overArg(Object.keys, Object);
+
+module.exports = nativeKeys;
+
+
+/***/ }),
+/* 333 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(module) {var freeGlobal = __webpack_require__(162);
+
+/** Detect free variable `exports`. */
+var freeExports = typeof exports == 'object' && exports && !exports.nodeType && exports;
+
+/** Detect free variable `module`. */
+var freeModule = freeExports && typeof module == 'object' && module && !module.nodeType && module;
+
+/** Detect the popular CommonJS extension `module.exports`. */
+var moduleExports = freeModule && freeModule.exports === freeExports;
+
+/** Detect free variable `process` from Node.js. */
+var freeProcess = moduleExports && freeGlobal.process;
+
+/** Used to access faster Node.js helpers. */
+var nodeUtil = (function() {
+  try {
+    return freeProcess && freeProcess.binding && freeProcess.binding('util');
+  } catch (e) {}
+}());
+
+module.exports = nodeUtil;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(310)(module)))
+
+/***/ }),
+/* 334 */
+/***/ (function(module, exports) {
+
+/**
+ * Creates a unary function that invokes `func` with its argument transformed.
+ *
+ * @private
+ * @param {Function} func The function to wrap.
+ * @param {Function} transform The argument transform.
+ * @returns {Function} Returns the new function.
+ */
+function overArg(func, transform) {
+  return function(arg) {
+    return func(transform(arg));
+  };
+}
+
+module.exports = overArg;
+
+
+/***/ }),
+/* 335 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseIsArguments = __webpack_require__(323),
+    isObjectLike = __webpack_require__(172);
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/** Built-in value references. */
+var propertyIsEnumerable = objectProto.propertyIsEnumerable;
+
+/**
+ * Checks if `value` is likely an `arguments` object.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an `arguments` object,
+ *  else `false`.
+ * @example
+ *
+ * _.isArguments(function() { return arguments; }());
+ * // => true
+ *
+ * _.isArguments([1, 2, 3]);
+ * // => false
+ */
+var isArguments = baseIsArguments(function() { return arguments; }()) ? baseIsArguments : function(value) {
+  return isObjectLike(value) && hasOwnProperty.call(value, 'callee') &&
+    !propertyIsEnumerable.call(value, 'callee');
+};
+
+module.exports = isArguments;
+
+
+/***/ }),
+/* 336 */
+/***/ (function(module, exports) {
+
+/**
+ * Checks if `value` is classified as an `Array` object.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an array, else `false`.
+ * @example
+ *
+ * _.isArray([1, 2, 3]);
+ * // => true
+ *
+ * _.isArray(document.body.children);
+ * // => false
+ *
+ * _.isArray('abc');
+ * // => false
+ *
+ * _.isArray(_.noop);
+ * // => false
+ */
+var isArray = Array.isArray;
+
+module.exports = isArray;
+
+
+/***/ }),
+/* 337 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(module) {var root = __webpack_require__(167),
+    stubFalse = __webpack_require__(340);
+
+/** Detect free variable `exports`. */
+var freeExports = typeof exports == 'object' && exports && !exports.nodeType && exports;
+
+/** Detect free variable `module`. */
+var freeModule = freeExports && typeof module == 'object' && module && !module.nodeType && module;
+
+/** Detect the popular CommonJS extension `module.exports`. */
+var moduleExports = freeModule && freeModule.exports === freeExports;
+
+/** Built-in value references. */
+var Buffer = moduleExports ? root.Buffer : undefined;
+
+/* Built-in method references for those with the same name as other `lodash` methods. */
+var nativeIsBuffer = Buffer ? Buffer.isBuffer : undefined;
+
+/**
+ * Checks if `value` is a buffer.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.3.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a buffer, else `false`.
+ * @example
+ *
+ * _.isBuffer(new Buffer(2));
+ * // => true
+ *
+ * _.isBuffer(new Uint8Array(2));
+ * // => false
+ */
+var isBuffer = nativeIsBuffer || stubFalse;
+
+module.exports = isBuffer;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(310)(module)))
+
+/***/ }),
+/* 338 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseIsTypedArray = __webpack_require__(325),
+    baseUnary = __webpack_require__(327),
+    nodeUtil = __webpack_require__(333);
+
+/* Node.js helper references. */
+var nodeIsTypedArray = nodeUtil && nodeUtil.isTypedArray;
+
+/**
+ * Checks if `value` is classified as a typed array.
+ *
+ * @static
+ * @memberOf _
+ * @since 3.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a typed array, else `false`.
+ * @example
+ *
+ * _.isTypedArray(new Uint8Array);
+ * // => true
+ *
+ * _.isTypedArray([]);
+ * // => false
+ */
+var isTypedArray = nodeIsTypedArray ? baseUnary(nodeIsTypedArray) : baseIsTypedArray;
+
+module.exports = isTypedArray;
+
+
+/***/ }),
+/* 339 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseKeys = __webpack_require__(326),
+    getTag = __webpack_require__(329),
+    isArguments = __webpack_require__(335),
+    isArray = __webpack_require__(336),
+    isArrayLike = __webpack_require__(169),
+    isBuffer = __webpack_require__(337),
+    isPrototype = __webpack_require__(316),
+    isTypedArray = __webpack_require__(338);
+
+/** `Object#toString` result references. */
+var mapTag = '[object Map]',
+    setTag = '[object Set]';
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * Checks if `value` is an empty object, collection, map, or set.
+ *
+ * Objects are considered empty if they have no own enumerable string keyed
+ * properties.
+ *
+ * Array-like values such as `arguments` objects, arrays, buffers, strings, or
+ * jQuery-like collections are considered empty if they have a `length` of `0`.
+ * Similarly, maps and sets are considered empty if they have a `size` of `0`.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is empty, else `false`.
+ * @example
+ *
+ * _.isEmpty(null);
+ * // => true
+ *
+ * _.isEmpty(true);
+ * // => true
+ *
+ * _.isEmpty(1);
+ * // => true
+ *
+ * _.isEmpty([1, 2, 3]);
+ * // => false
+ *
+ * _.isEmpty({ 'a': 1 });
+ * // => false
+ */
+function isEmpty(value) {
+  if (value == null) {
+    return true;
+  }
+  if (isArrayLike(value) &&
+      (isArray(value) || typeof value == 'string' || typeof value.splice == 'function' ||
+        isBuffer(value) || isTypedArray(value) || isArguments(value))) {
+    return !value.length;
+  }
+  var tag = getTag(value);
+  if (tag == mapTag || tag == setTag) {
+    return !value.size;
+  }
+  if (isPrototype(value)) {
+    return !baseKeys(value).length;
+  }
+  for (var key in value) {
+    if (hasOwnProperty.call(value, key)) {
+      return false;
+    }
+  }
+  return true;
+}
+
+module.exports = isEmpty;
+
+
+/***/ }),
+/* 340 */
+/***/ (function(module, exports) {
+
+/**
+ * This method returns `false`.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.13.0
+ * @category Util
+ * @returns {boolean} Returns `false`.
+ * @example
+ *
+ * _.times(2, _.stubFalse);
+ * // => [false, false]
+ */
+function stubFalse() {
+  return false;
+}
+
+module.exports = stubFalse;
+
 
 /***/ })
 /******/ ]);

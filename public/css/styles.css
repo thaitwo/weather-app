@@ -232,7 +232,7 @@ form {
   border: none;
   border-radius: 2px;
   color: rgba(0, 0, 0, 0.8);
-  font-family: "Montserrat", sans-serif;
+  font-family: "Mukta", sans-serif;
   font-size: 18px;
   font-weight: 300;
   line-height: 48px;
@@ -271,7 +271,7 @@ form {
   transition: max-height 0.4s; }
   .geosuggest__suggests li {
     color: rgba(0, 0, 0, 0.8);
-    font-family: "Montserrat", sans-serif;
+    font-family: "Mukta", sans-serif;
     font-size: 18px;
     font-weight: 300;
     padding: 10px 10px 10px 18px;
@@ -410,7 +410,7 @@ body {
 
 .tagline {
   color: rgba(255, 255, 255, 0.5);
-  font-family: "Montserrat", sans-serif;
+  font-family: "Mukta", sans-serif;
   font-size: 20px;
   font-weight: 200;
   letter-spacing: 1px; }
@@ -520,7 +520,7 @@ form {
   border: none;
   border-radius: 2px;
   color: rgba(0, 0, 0, 0.8);
-  font-family: "Montserrat", sans-serif;
+  font-family: "Mukta", sans-serif;
   font-size: 18px;
   font-weight: 300;
   line-height: 48px;
@@ -559,7 +559,7 @@ form {
   transition: max-height 0.4s; }
   .geosuggest__suggests li {
     color: rgba(0, 0, 0, 0.8);
-    font-family: "Montserrat", sans-serif;
+    font-family: "Mukta", sans-serif;
     font-size: 18px;
     font-weight: 300;
     padding: 10px 10px 10px 18px;
@@ -675,7 +675,7 @@ form {
 
 .current-wth__city {
   color: rgba(255, 255, 255, 0.8);
-  font-family: "Montserrat", sans-serif;
+  font-family: "Mukta", sans-serif;
   font-size: 30px;
   font-weight: 600;
   text-transform: uppercase; }
@@ -685,7 +685,7 @@ form {
 
 .current-wth__date {
   color: rgba(255, 255, 255, 0.5);
-  font-family: "Montserrat", sans-serif;
+  font-family: "Mukta", sans-serif;
   font-size: 18px;
   font-weight: 300;
   margin-top: 5px;
@@ -721,7 +721,7 @@ form {
 .current-wth__temp {
   color: #ffffff;
   float: right;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Mukta", sans-serif;
   font-size: 152px;
   font-weight: 800;
   margin: 60px 0; }
@@ -753,7 +753,7 @@ form {
 
 .current-wth__data-container {
   display: flex;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Mukta", sans-serif;
   font-size: 20px;
   font-weight: 300;
   justify-content: space-between;
@@ -792,9 +792,9 @@ form {
 
 .forecast__header {
   color: rgba(0, 0, 0, 0.08);
-  font-family: "Montserrat", sans-serif;
+  font-family: "Mukta", sans-serif;
   font-size: 60px;
-  font-weight: 700;
+  font-weight: 800;
   margin: 100px 0 70px; }
   @media only screen and (max-width: 800px) {
     .forecast__header {
@@ -804,12 +804,33 @@ form {
       font-size: 40px;
       margin: 40px 0; } }
 
+.forecast-table {
+  font-family: 'Mukta', sans-serif;
+  margin-bottom: 6rem;
+  text-align: left;
+  width: 100%; }
+  .forecast-table thead tr {
+    border-bottom: 1px solid gray;
+    font-weight: 700;
+    line-height: 64px; }
+    .forecast-table thead tr th {
+      text-transform: uppercase; }
+  .forecast-table tbody tr {
+    border-bottom: 1px solid lightgray; }
+  .forecast-table tbody td {
+    vertical-align: middle; }
+  .forecast-table .forecast-time {
+    font-weight: 600; }
+  .forecast-table .forecast-day {
+    color: lightgray;
+    text-transform: uppercase; }
+
 .forecast-daily {
   border-left: 2px solid rgba(0, 0, 0, 0.8);
   color: rgba(0, 0, 0, 0.8);
   display: flex;
   flex-direction: row;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Mukta", sans-serif;
   font-weight: normal;
   margin: 0 0 100px;
   width: 100%; }
@@ -921,7 +942,7 @@ form {
           width: 50px; } }
 
 .weather-table {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Mukta", sans-serif;
   font-size: 16px;
   font-weight: normal;
   color: rgba(0, 0, 0, 0.8);

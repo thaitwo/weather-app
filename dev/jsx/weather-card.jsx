@@ -17,6 +17,8 @@ class WeatherCard extends React.Component {
     let weathercard = null;
 
     if (this.props.currentData) {
+      const tempKelvin = this.props.currentData.main.temp;
+      const tempFahrenheit = Math.floor((tempKelvin - 273) * (9/5) + 32);
 
       weathercard = (
         <div className="current-wth__content">
@@ -26,7 +28,7 @@ class WeatherCard extends React.Component {
             <div className="current-wth__icon-container">
               <img className="current-wth__icon" src={`http://openweathermap.org/img/w/${this.props.currentData.weather[0].icon}.png`}/>
             </div>
-            <p className="current-wth__temp">{this.props.currentData.main.temp} <span>°F</span></p>
+            <p className="current-wth__temp">{tempFahrenheit} <span>°F</span></p>
           </div>
           <div className="current-wth__data-container">
             <h4 className="current-wth__condition">{this.props.currentData.weather[0].main}</h4>
@@ -53,9 +55,7 @@ class WeatherCard extends React.Component {
           </div>
         </div>
         <div className="wrapper">
-          {/* <h1 className="forecast__header">HOURLY FORECAST</h1> */}
-          {/* <ForecastHourly {...this.props}/> */}
-          <h1 className="forecast__header">5 DAY FORECAST</h1>
+          <h1 className="forecast__header">FORECAST</h1>
           <ForecastDaily {...this.props}/>
         </div>
       </div>
