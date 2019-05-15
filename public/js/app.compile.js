@@ -31319,8 +31319,7 @@ var FetchWeather = function (_React$Component) {
       // If city and country value exists, make Ajax call to get weather data
       if (this.props.params.city && this.props.params.country) {
         _axios2.default.all([_axios2.default.get(_const.URL_BASE + '/weather?q=' + this.props.params.city + ',' + this.props.params.country + '&APPID=' + _const.API_KEY), _axios2.default.get(_const.URL_BASE + '/forecast?q=' + this.props.params.city + ',' + this.props.params.country + '&APPID=' + _const.API_KEY)]).then(_axios2.default.spread(function (current, forecast) {
-          console.log('current', current);
-          // console.log('forecast', forecast);
+          console.log('forecast', forecast);
           var fullDate = current.data.dt;
           fullDate = new Date(fullDate * 1000);
           fullDate = fullDate.toString().split(' ');
@@ -31332,7 +31331,7 @@ var FetchWeather = function (_React$Component) {
 
           _this2.setState({
             currentData: current.data,
-            forecastData: forecast.data,
+            forecastData: forecast.data.list,
             currentRain: current.data.rain || 0,
             currentdate: displayDate
           });
@@ -32371,7 +32370,13 @@ var ForecastDaily = function (_React$Component) {
     key: 'renderCards',
     value: function renderCards() {
       // Loop through each array to get data, then push data into the card template below
-      var cards = this.props.dailyData.map(function (data, index) {
+      var cards = this.props.forecastData.map(function (data, index) {
+        var fullDate = new Date(data.dt * 1000);
+        fullDate = fullDate.toString().split(' ');
+        var date = fullDate[0];
+        var month = fullDate[1];
+        var day = fullDate[2];
+
         return _react2.default.createElement(
           'div',
           { className: 'forecast-daily-card', key: index },
@@ -32381,48 +32386,50 @@ var ForecastDaily = function (_React$Component) {
             _react2.default.createElement(
               'h4',
               null,
-              data.date.weekday_short
+              date
             ),
             _react2.default.createElement(
               'h5',
               null,
-              data.date.monthname_short,
+              month,
               ' ',
-              data.date.day
+              day
             )
           ),
           _react2.default.createElement(
             'div',
             { className: 'daily-icon' },
-            _react2.default.createElement('img', { src: 'http://icons.wxug.com/i/c/v4/' + data.icon + '.svg' })
+            _react2.default.createElement('img', { src: 'http://openweathermap.org/img/w/' + data.weather[0].icon + '.png' })
           ),
           _react2.default.createElement(
             'p',
             { className: 'daily-conditions' },
-            data.conditions
+            data.weather[0].main
           ),
           _react2.default.createElement(
             'div',
             { className: 'daily-high-low' },
-            data.high.fahrenheit,
+            data.main.temp_max,
             '\xB0 | ',
-            data.low.fahrenheit,
+            data.main.temp_min,
             '\xB0'
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'daily-precip' },
-            _react2.default.createElement('i', { className: 'fa fa-tint', 'aria-hidden': 'true' }),
-            ' ',
-            data.pop,
-            '%'
           )
         );
-      })
-      // Using Lodash's slice method to get only arrays 1 - 6
-      .slice(1, 6);
+      });
 
-      return cards;
+      // Loop through forecast array and return 5 items for the 5-day forecase
+      // Data array consist of 40 object with each object representing every 3 hour
+      // Therefore, we loop through and get every 8th object in the array
+      // For loop is used here instead of filter to prevent looping through every item if array were to be too long
+      var forecastCards = [];
+      var maxVal = 5;
+      var delta = Math.floor(cards.length / maxVal);
+
+      for (var i = 0; i < cards.length; i = i + delta) {
+        forecastCards.push(cards[i]);
+      }
+
+      return forecastCards;
     }
   }, {
     key: 'render',
@@ -32817,13 +32824,9 @@ var WeatherCard = function (_React$Component) {
           _react2.default.createElement(
             'h1',
             { className: 'forecast__header' },
-            'HOURLY FORECAST'
-          ),
-          _react2.default.createElement(
-            'h1',
-            { className: 'forecast__header' },
             '5 DAY FORECAST'
-          )
+          ),
+          _react2.default.createElement(_forecastDaily2.default, this.props)
         )
       );
     }

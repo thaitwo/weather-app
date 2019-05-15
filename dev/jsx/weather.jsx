@@ -33,8 +33,7 @@ class FetchWeather extends React.Component {
         axios.get(`${URL_BASE}/forecast?q=${this.props.params.city},${this.props.params.country}&APPID=${API_KEY}`)
       ])
       .then(axios.spread((current, forecast) => {
-        console.log('current', current);
-        // console.log('forecast', forecast);
+        console.log('forecast', forecast);
         let fullDate = current.data.dt;
         fullDate = new Date(fullDate * 1000);
         fullDate = fullDate.toString().split(' ');
@@ -46,7 +45,7 @@ class FetchWeather extends React.Component {
 
         this.setState({
           currentData: current.data,
-          forecastData: forecast.data,
+          forecastData: forecast.data.list,
           currentRain: current.data.rain || 0,
           currentdate: displayDate,
         });
