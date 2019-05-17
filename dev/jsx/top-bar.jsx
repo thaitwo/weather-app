@@ -11,10 +11,14 @@ class TopBar extends React.Component {
 
   render() {
     return (
-      <div className="top-bar">
-        <Link to="/"><h1 className="logo">Weathercast</h1></Link>
-        <div className="small-searchbox">
-          <SearchBox />
+      <div className="top-bar-container">
+        <div className="wrapper">
+          <div className="top-bar">
+            <Link to="/"><h1 className="logo">Weathercast</h1></Link>
+            <div className="small-searchbox">
+              <SearchBox />
+            </div>
+          </div>
         </div>
       </div>
     )

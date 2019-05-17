@@ -21,13 +21,13 @@
 }
 
 .current-wth__content {
-  padding-top: 24px;
+  padding-top: 48px;
 }
 
 .current-wth__city {
-  color: rgba(255, 255, 255, .8);
+  color: $white;
   font-family: $font;
-  font-size: 30px;
+  font-size: 24px;
   font-weight: 600;
   text-transform: uppercase;
 
@@ -51,8 +51,7 @@
 
 .current-wth__icon-temp-container {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
 
   @media only screen and (max-width: $breakpoint-small) {
     flex-direction: column;
@@ -60,13 +59,12 @@
 }
 
 .current-wth__icon-container {
-  display: flex;
-  align-items: center;
+  
 }
 
 .current-wth__icon {
   fill: white;
-  width: 220px;
+  width: 128px;
 
   @media only screen and (max-width: $breakpoint-medium) {
     width: 152px;
@@ -81,15 +79,20 @@
 
 .current-wth__temp {
   color: #ffffff;
-  float: right;
-  font-family: $font;
-  font-size: 152px;
-  font-weight: 800;
-  margin: 60px 0;
+  display: flex;
+  justify-content: center;
+  margin: 16px 0 60px;
+
+  p {
+    font-size: 80px;
+    font-weight: 700;
+  }
 
   span {
     color: rgba(#FFF, .5);
-    font-weight: 200;
+    font-size: 2rem;
+    font-weight: 400;
+    margin-top: 8px;
   }
 
   @media only screen and (max-width: $breakpoint-medium) {
@@ -121,13 +124,15 @@
 }
 
 .current-wth__data-container {
-  display: flex;
+  background-color: rgba(0, 0, 0, .12);
+  border-radius: 6px;
+  display: inline-flex;
   font-family: $font;
   font-size: 20px;
   font-weight: 300;
   justify-content: space-between;
-  padding: 24px 0;
-  width: 100%;
+  margin-bottom: 32px;
+  padding: 16px 24px;
 
   @media only screen and (max-width: $breakpoint-medium) {
     font-size: 16px;
@@ -141,11 +146,9 @@
 
 .current-wth__data-list {
   color: rgba(255, 255, 255, .4);
-  float: right;
 
   @media only screen and (max-width: $breakpoint-small) {
     display: flex;
-    float: none;
     flex-direction: column;
   }
 

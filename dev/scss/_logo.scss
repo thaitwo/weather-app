@@ -1,7 +1,8 @@
 .logo {
   color: #ffffff;
-  font-family: $font-secondary;
-  font-size: 32px;
+  font-family: $font;
+  font-size: 28px;
+  font-weight: 800;
   line-height: 40px;
 
   @media only screen and (max-width: $breakpoint-small) {

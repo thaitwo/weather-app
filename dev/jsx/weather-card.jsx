@@ -28,10 +28,15 @@ class WeatherCard extends React.Component {
             <div className="current-wth__icon-container">
               <img className="current-wth__icon" src={`http://openweathermap.org/img/w/${this.props.currentData.weather[0].icon}.png`}/>
             </div>
-            <p className="current-wth__temp">{tempFahrenheit} <span>°F</span></p>
+            <h4 className="current-wth__condition">{this.props.currentData.weather[0].main}</h4>
+            <div className="current-wth__temp">
+              <p>{tempFahrenheit}</p>
+              <span>°F</span>
+            </div>
+            
           </div>
           <div className="current-wth__data-container">
-            <h4 className="current-wth__condition">{this.props.currentData.weather[0].main}</h4>
+            
             <ul className="current-wth__data-list">
               <li>Precipitation <span>{this.props.currentRain} mm</span></li>
               <li>Wind <span>{this.props.currentData.wind.speed} mph</span></li>
@@ -49,8 +54,8 @@ class WeatherCard extends React.Component {
     return (
       <div>
         <div className="current-wth">
+          <TopBar />
           <div className="wrapper">
-            <TopBar />
             {this.renderCurrentWeatherCard()}
           </div>
         </div>

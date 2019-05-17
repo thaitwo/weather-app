@@ -5,7 +5,7 @@
   width: 100%;
 
   thead tr {
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid $bluegrey-400;
     font-weight: 700;
     line-height: 64px;
 
@@ -17,7 +17,7 @@
   tbody {
 
     tr {
-      border-bottom: 1px solid lightgray;
+      border-bottom: 1px solid $bluegrey-50;
     }
 
     td {
