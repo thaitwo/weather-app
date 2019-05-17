@@ -32495,7 +32495,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var API_KEY = '43242c81b8e03521a6f5365cc4f34a00';
-var URL_BASE = 'http://api.openweathermap.org/data/2.5';
+var URL_BASE = 'https://api.openweathermap.org/data/2.5';
 
 exports.API_KEY = API_KEY;
 exports.URL_BASE = URL_BASE;
