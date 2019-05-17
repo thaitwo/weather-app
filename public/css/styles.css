@@ -53,8 +53,9 @@ table {
 
 .logo {
   color: #ffffff;
-  font-family: "Patua One", cursive;
-  font-size: 32px;
+  font-family: "Mukta", sans-serif;
+  font-size: 28px;
+  font-weight: 800;
   line-height: 40px; }
   @media only screen and (max-width: 480px) {
     .logo {
@@ -144,7 +145,7 @@ form {
 ** Display a smaller version on sub pages in the application.
 */
 .small-searchbox input {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
   padding-right: 50px;
   transition: all .4s; }
   .small-searchbox input:hover, .small-searchbox input:focus {
@@ -232,7 +233,7 @@ form {
   border: none;
   border-radius: 2px;
   color: rgba(0, 0, 0, 0.8);
-  font-family: "Montserrat", sans-serif;
+  font-family: "Mukta", sans-serif;
   font-size: 18px;
   font-weight: 300;
   line-height: 48px;
@@ -271,7 +272,7 @@ form {
   transition: max-height 0.4s; }
   .geosuggest__suggests li {
     color: rgba(0, 0, 0, 0.8);
-    font-family: "Montserrat", sans-serif;
+    font-family: "Mukta", sans-serif;
     font-size: 18px;
     font-weight: 300;
     padding: 10px 10px 10px 18px;
@@ -326,19 +327,22 @@ form {
       margin-left: -44px;
       padding: 10px 15px; } }
 
+.top-bar-container {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 12px 0; }
+
 .top-bar {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  padding-top: 15px;
-  top: 0; }
+  justify-content: space-between; }
   @media only screen and (max-width: 480px) {
     .top-bar {
       flex-direction: column;
       padding-top: 5px; } }
 
 body {
-  background-color: #ffffff; }
+  background-color: #ffffff;
+  font-family: "Mukta", sans-serif; }
 
 .container {
   bottom: 0;
@@ -410,7 +414,7 @@ body {
 
 .tagline {
   color: rgba(255, 255, 255, 0.5);
-  font-family: "Montserrat", sans-serif;
+  font-family: "Mukta", sans-serif;
   font-size: 20px;
   font-weight: 200;
   letter-spacing: 1px; }
@@ -432,7 +436,7 @@ form {
 ** Display a smaller version on sub pages in the application.
 */
 .small-searchbox input {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
   padding-right: 50px;
   transition: all .4s; }
   .small-searchbox input:hover, .small-searchbox input:focus {
@@ -520,7 +524,7 @@ form {
   border: none;
   border-radius: 2px;
   color: rgba(0, 0, 0, 0.8);
-  font-family: "Montserrat", sans-serif;
+  font-family: "Mukta", sans-serif;
   font-size: 18px;
   font-weight: 300;
   line-height: 48px;
@@ -559,7 +563,7 @@ form {
   transition: max-height 0.4s; }
   .geosuggest__suggests li {
     color: rgba(0, 0, 0, 0.8);
-    font-family: "Montserrat", sans-serif;
+    font-family: "Mukta", sans-serif;
     font-size: 18px;
     font-weight: 300;
     padding: 10px 10px 10px 18px;
@@ -671,12 +675,12 @@ form {
       margin: 0; } }
 
 .current-wth__content {
-  padding-top: 24px; }
+  padding-top: 48px; }
 
 .current-wth__city {
-  color: rgba(255, 255, 255, 0.8);
-  font-family: "Montserrat", sans-serif;
-  font-size: 30px;
+  color: #ffffff;
+  font-family: "Mukta", sans-serif;
+  font-size: 24px;
   font-weight: 600;
   text-transform: uppercase; }
   @media only screen and (max-width: 480px) {
@@ -685,7 +689,7 @@ form {
 
 .current-wth__date {
   color: rgba(255, 255, 255, 0.5);
-  font-family: "Montserrat", sans-serif;
+  font-family: "Mukta", sans-serif;
   font-size: 18px;
   font-weight: 300;
   margin-top: 5px;
@@ -696,15 +700,14 @@ form {
 
 .current-wth__icon-temp-container {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between; }
+  flex-direction: column; }
   @media only screen and (max-width: 480px) {
     .current-wth__icon-temp-container {
       flex-direction: column; } }
 
 .current-wth__icon {
   fill: white;
-  width: 220px; }
+  width: 128px; }
   @media only screen and (max-width: 800px) {
     .current-wth__icon {
       width: 152px; } }
@@ -716,14 +719,17 @@ form {
 
 .current-wth__temp {
   color: #ffffff;
-  float: right;
-  font-family: "Montserrat", sans-serif;
-  font-size: 152px;
-  font-weight: 800;
-  margin: 60px 0; }
+  display: flex;
+  justify-content: center;
+  margin: 16px 0 60px; }
+  .current-wth__temp p {
+    font-size: 80px;
+    font-weight: 700; }
   .current-wth__temp span {
     color: rgba(255, 255, 255, 0.5);
-    font-weight: 200; }
+    font-size: 2rem;
+    font-weight: 400;
+    margin-top: 8px; }
   @media only screen and (max-width: 800px) {
     .current-wth__temp {
       font-size: 88px; } }
@@ -748,13 +754,15 @@ form {
       padding-bottom: 30px; } }
 
 .current-wth__data-container {
-  display: flex;
-  font-family: "Montserrat", sans-serif;
+  background-color: rgba(0, 0, 0, 0.12);
+  border-radius: 6px;
+  display: inline-flex;
+  font-family: "Mukta", sans-serif;
   font-size: 20px;
   font-weight: 300;
   justify-content: space-between;
-  padding: 24px 0;
-  width: 100%; }
+  margin-bottom: 32px;
+  padding: 16px 24px; }
   @media only screen and (max-width: 800px) {
     .current-wth__data-container {
       font-size: 16px; } }
@@ -764,12 +772,10 @@ form {
       padding: 0; } }
 
 .current-wth__data-list {
-  color: rgba(255, 255, 255, 0.4);
-  float: right; }
+  color: rgba(255, 255, 255, 0.4); }
   @media only screen and (max-width: 480px) {
     .current-wth__data-list {
       display: flex;
-      float: none;
       flex-direction: column; } }
   .current-wth__data-list li {
     float: left;
@@ -788,9 +794,9 @@ form {
 
 .forecast__header {
   color: rgba(0, 0, 0, 0.08);
-  font-family: "Montserrat", sans-serif;
+  font-family: "Mukta", sans-serif;
   font-size: 60px;
-  font-weight: 700;
+  font-weight: 800;
   margin: 100px 0 70px; }
   @media only screen and (max-width: 800px) {
     .forecast__header {
@@ -800,12 +806,33 @@ form {
       font-size: 40px;
       margin: 40px 0; } }
 
+.forecast-table {
+  font-family: 'Mukta', sans-serif;
+  margin-bottom: 6rem;
+  text-align: left;
+  width: 100%; }
+  .forecast-table thead tr {
+    border-bottom: 1px solid #78909C;
+    font-weight: 700;
+    line-height: 64px; }
+    .forecast-table thead tr th {
+      text-transform: uppercase; }
+  .forecast-table tbody tr {
+    border-bottom: 1px solid #ECEFF1; }
+  .forecast-table tbody td {
+    vertical-align: middle; }
+  .forecast-table .forecast-time {
+    font-weight: 600; }
+  .forecast-table .forecast-day {
+    color: lightgray;
+    text-transform: uppercase; }
+
 .forecast-daily {
   border-left: 2px solid rgba(0, 0, 0, 0.8);
   color: rgba(0, 0, 0, 0.8);
   display: flex;
   flex-direction: row;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Mukta", sans-serif;
   font-weight: normal;
   margin: 0 0 100px;
   width: 100%; }
@@ -917,7 +944,7 @@ form {
           width: 50px; } }
 
 .weather-table {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Mukta", sans-serif;
   font-size: 16px;
   font-weight: normal;
   color: rgba(0, 0, 0, 0.8);

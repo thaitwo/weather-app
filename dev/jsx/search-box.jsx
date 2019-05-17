@@ -47,7 +47,7 @@ class SearchBox extends React.Component {
     // Check and see if city value contains spaces
     if (city.includes(' ')) {
       // Replace all spaces with underscores
-      city = city.replace(/ /g,"_");
+      city = city.replace(/ /g,"+");
     }
     // Convert city value to lowercase
     city = city.toLowerCase();
@@ -58,9 +58,15 @@ class SearchBox extends React.Component {
     // Remove all spaces before and after string
     country = country.trim();
     // Replaces all spaces with underscores
-    country = country.replace(/ /g,"_");
+    country = country.replace(/ /g,"+");
     // Convert string value to lowercase
     country = country.toLowerCase();
+
+    // Check to see if country is valid because response can occasionally provide area code instead of country
+    if (!isNaN(country)) {
+      country = suggest.gmaps.formatted_address.split(',');
+      country = country[country.length - 2]; // get second to last element in array
+    }
 
     // GET STATE VALUE
     let state;

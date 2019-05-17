@@ -1,3 +1,40 @@
+.forecast-table {
+  font-family: 'Mukta', sans-serif;
+  margin-bottom: 6rem;
+  text-align: left;
+  width: 100%;
+
+  thead tr {
+    border-bottom: 1px solid $bluegrey-400;
+    font-weight: 700;
+    line-height: 64px;
+
+    th {
+      text-transform: uppercase;
+    }
+  }
+
+  tbody {
+
+    tr {
+      border-bottom: 1px solid $bluegrey-50;
+    }
+
+    td {
+      vertical-align: middle;
+    }
+  }
+
+  .forecast-time {
+    font-weight: 600;
+  }
+
+  .forecast-day {
+    color: lightgray;
+    text-transform: uppercase;
+  }
+}
+
 .forecast-daily {
   border-left: 2px solid rgba(#000, .8);
   color: rgba(0, 0, 0, .8);
